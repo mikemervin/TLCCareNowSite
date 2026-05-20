@@ -12,7 +12,8 @@ const headerNavLinkClass = [
   "hover:border-tlc-primary/45 hover:bg-tlc-green-light/50 hover:shadow-[0_2px_8px_rgb(40_101_43/12%)]",
   "active:scale-[0.98]",
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tlc-primary",
-  "px-3 py-2 text-[13px] sm:px-4 sm:py-2.5 sm:text-sm",
+  "px-2.5 py-2 text-xs min-[480px]:px-3 min-[480px]:py-2 min-[480px]:text-[13px]",
+  "sm:px-4 sm:py-2.5 sm:text-sm",
 ].join(" ");
 
 export function Header() {
@@ -20,11 +21,19 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full">
       <div className="w-full border-b border-tlc-border/80 bg-white/90 shadow-[0_1px_0_rgb(45_45_45/4%),0_4px_24px_rgb(45_45_45/4%)] backdrop-blur-lg backdrop-saturate-150">
         <div className="tlc-header-container h-[68px] sm:h-[76px]">
-          <BrandMark compact />
+          <BrandMark compact className="tlc-header-brand" />
 
-          <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
+          <nav
+            className="tlc-header-actions"
+            aria-label="Primary actions"
+          >
             <Link href="/campus-care" className={headerNavLinkClass}>
-              <span className="whitespace-nowrap sm:hidden">Campus Care</span>
+              <span className="whitespace-nowrap min-[480px]:hidden">
+                Campus
+              </span>
+              <span className="hidden whitespace-nowrap min-[480px]:inline sm:hidden">
+                Campus Care
+              </span>
               <span className="hidden whitespace-nowrap sm:inline">
                 TeamLife Campus Care
               </span>
@@ -34,7 +43,7 @@ export function Header() {
               icon="book"
               external
               size="sm"
-              className="max-sm:px-3 max-sm:py-2 max-sm:text-[13px]"
+              compact
             >
               Book CareNow
             </OutlineCtaLink>
@@ -43,11 +52,11 @@ export function Header() {
               icon="phone"
               tabularNums
               size="sm"
-              className="max-sm:px-3 max-sm:py-2 max-sm:text-[13px]"
+              compact
             >
               {site.phoneHeader}
             </OutlineCtaLink>
-          </div>
+          </nav>
         </div>
       </div>
     </header>

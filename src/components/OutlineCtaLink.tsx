@@ -73,6 +73,8 @@ type OutlineCtaLinkProps = {
   external?: boolean;
   onClick?: () => void;
   tabularNums?: boolean;
+  /** Icon-only layout for narrow headers; keeps label for screen readers. */
+  compact?: boolean;
 };
 
 export function OutlineCtaLink({
@@ -84,15 +86,32 @@ export function OutlineCtaLink({
   external = false,
   onClick,
   tabularNums = false,
+  compact = false,
 }: OutlineCtaLinkProps) {
-  const classes = `${outlineCtaBase} ${sizes[size]} ${tabularNums ? "tabular-nums" : ""} ${className}`;
+  const classes = [
+    outlineCtaBase,
+    sizes[size],
+    tabularNums ? "tabular-nums" : "",
+    compact ? "outline-cta--compact" : "",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   const content = (
     <>
       <CtaIconBadge>
         {icon === "book" ? <BookIcon /> : <PhoneIcon />}
       </CtaIconBadge>
-      <span className="whitespace-nowrap">{children}</span>
+      <span
+        className={
+          compact
+            ? "outline-cta-label sr-only"
+            : "outline-cta-label whitespace-nowrap"
+        }
+      >
+        {children}
+      </span>
     </>
   );
 

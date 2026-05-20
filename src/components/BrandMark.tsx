@@ -11,14 +11,18 @@ import {
 type BrandMarkProps = {
   showTeamLifeLink?: boolean;
   compact?: boolean;
+  className?: string;
 };
 
 export function BrandMark({
   showTeamLifeLink = false,
   compact = false,
+  className = "",
 }: BrandMarkProps) {
   return (
-    <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+    <div
+      className={`flex min-w-0 items-center gap-2.5 sm:gap-3 ${className}`.trim()}
+    >
       <Link
         href="/"
         className="group shrink-0 rounded-lg p-0.5 transition-colors hover:bg-tlc-green-light/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tlc-green"
@@ -41,7 +45,7 @@ export function BrandMark({
         <Link
           href="/"
           className={`${APP_BRAND_HEADER_TITLE_CLASS} ${
-            compact ? "text-lg sm:text-xl" : ""
+            compact ? "truncate text-lg sm:max-w-none sm:text-xl" : ""
           } transition-colors hover:text-[#2d6b2f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tlc-green`}
         >
           {APP_BRAND_DISPLAY_NAME}
