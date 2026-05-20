@@ -28,17 +28,17 @@ export const navLinks = [
 export const socialLinks = [
   {
     label: "Instagram",
-    href: "https://www.instagram.com/",
+    href: "https://www.instagram.com/teamlifecares/",
     icon: "instagram",
   },
   {
     label: "Facebook",
-    href: "https://www.facebook.com/",
+    href: "https://www.facebook.com/teamlifehealthgroup/",
     icon: "facebook",
   },
   {
     label: "TikTok",
-    href: "https://www.tiktok.com/",
+    href: "https://www.tiktok.com/@teamlifecares",
     icon: "tiktok",
   },
 ] as const;

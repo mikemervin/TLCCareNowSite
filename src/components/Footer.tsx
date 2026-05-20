@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { APP_BRAND_POWERED_BY } from "@/lib/app-brand";
 import { SocialLinks } from "@/components/SocialLinks";
+import { footerLegalLinks } from "@/lib/legal";
 import { site } from "@/lib/site";
 
 const contactItems = [
@@ -49,6 +51,21 @@ export function Footer() {
         </nav>
 
         <div className="site-footer-divider" aria-hidden />
+
+        <nav className="site-footer-legal" aria-label="Legal">
+          {footerLegalLinks.map((link, index) => (
+            <span key={link.href} className="site-footer-legal-item">
+              {index > 0 ? (
+                <span className="site-footer-legal-sep" aria-hidden>
+                  ·
+                </span>
+              ) : null}
+              <Link href={link.href} className="site-footer-legal-link">
+                {link.label}
+              </Link>
+            </span>
+          ))}
+        </nav>
 
         <a
           href={site.teamLifeUrl}

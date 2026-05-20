@@ -29,9 +29,6 @@ export function Header() {
                 TeamLife Campus Care
               </span>
             </Link>
-            <Link href="/blog" className={headerNavLinkClass}>
-              Blog
-            </Link>
             <OutlineCtaLink
               href={site.appLoginUrl}
               icon="book"

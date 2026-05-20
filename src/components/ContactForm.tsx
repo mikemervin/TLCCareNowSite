@@ -26,6 +26,16 @@ const fields = [
     required: false,
     placeholder: "Optional",
     autoComplete: "tel",
+    optional: true,
+  },
+  {
+    name: "state",
+    label: "State",
+    type: "text" as const,
+    required: false,
+    placeholder: "e.g. IL",
+    autoComplete: "address-level1",
+    optional: true,
   },
   {
     name: "subject",
@@ -35,6 +45,7 @@ const fields = [
     placeholder: "How can we help?",
     autoComplete: "off",
     fullWidth: true,
+    optional: true,
   },
 ] as const;
 
@@ -47,38 +58,63 @@ export function ContactForm() {
       }}
     >
       <div className="contact-form-grid">
-        {fields.map((field) => (
-          <label
-            key={field.name}
-            className={`contact-form-field${"fullWidth" in field && field.fullWidth ? " contact-form-field--full" : ""}`}
-          >
-            <span className="contact-form-label">{field.label}</span>
-            <input
-              type={field.type}
-              name={field.name}
-              required={field.required}
-              placeholder={field.placeholder}
-              autoComplete={field.autoComplete}
-              className="tlc-input"
-            />
-          </label>
-        ))}
+        {fields.map((field) => {
+          const inputId = `contact-${field.name}`;
+
+          return (
+            <label
+              key={field.name}
+              htmlFor={inputId}
+              className={`contact-form-field${"fullWidth" in field && field.fullWidth ? " contact-form-field--full" : ""}`}
+            >
+              <span className="contact-form-label">
+                {field.label}
+                {field.required ? (
+                  <span className="contact-form-required" aria-hidden>
+                    *
+                  </span>
+                ) : null}
+                {"optional" in field && field.optional ? (
+                  <span className="contact-form-optional">Optional</span>
+                ) : null}
+              </span>
+              <input
+                id={inputId}
+                type={field.type}
+                name={field.name}
+                required={field.required}
+                placeholder={field.placeholder}
+                autoComplete={field.autoComplete}
+                className="contact-form-input"
+              />
+            </label>
+          );
+        })}
       </div>
 
-      <label className="contact-form-field contact-form-field--full">
-        <span className="contact-form-label">Message</span>
+      <label htmlFor="contact-message" className="contact-form-field">
+        <span className="contact-form-label">
+          Message
+          <span className="contact-form-optional">Optional</span>
+        </span>
         <textarea
+          id="contact-message"
           name="message"
           rows={5}
           placeholder="Type your message here..."
-          className="tlc-input tlc-input--textarea"
+          className="contact-form-input contact-form-input--textarea"
         />
       </label>
 
-      <div className="contact-form-actions">
-        <Button type="submit" size="md">
-          Submit
-        </Button>
+      <div className="contact-form-footer">
+        <p className="get-in-touch-note">
+          We look forward to hearing from you!
+        </p>
+        <div className="contact-form-actions">
+          <Button type="submit" size="md" className="contact-form-submit">
+            Submit
+          </Button>
+        </div>
       </div>
     </form>
   );
