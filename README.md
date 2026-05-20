@@ -29,7 +29,13 @@ Open [http://localhost:3000](http://localhost:3000).
 | `/contact` | Contact form |
 | `/about` | About TLC CareNow |
 
-## Notes
+## Contact form email
 
-- Images are loaded from the original Wix CDN for visual fidelity. For production, download assets into `public/` and update `src/lib/images.ts`.
-- The contact form is UI-only; wire it to your email/API service when ready.
+Submissions POST to `/api/contact` and are sent with [Resend](https://resend.com) to `info@teamlifecares.com` (or `CONTACT_TO_EMAIL`).
+
+1. Copy `.env.example` to `.env.local`.
+2. Create a Resend API key and add `RESEND_API_KEY`.
+3. In Resend, verify your domain (e.g. `teamlifecares.com`) and set `CONTACT_FROM_EMAIL` to an address on that domain.
+4. In Vercel → Project → Settings → Environment Variables, add the same variables for Production.
+
+Until `RESEND_API_KEY` is set, the form shows a friendly error and suggests emailing directly.
