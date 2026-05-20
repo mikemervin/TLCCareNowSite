@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/BrandMark";
+import { HeaderMobileMenu } from "@/components/HeaderMobileMenu";
 import { OutlineCtaLink } from "@/components/OutlineCtaLink";
 import { site } from "@/lib/site";
 
@@ -27,16 +28,11 @@ export function Header() {
             className="tlc-header-actions"
             aria-label="Primary actions"
           >
-            <Link href="/campus-care" className={headerNavLinkClass}>
-              <span className="whitespace-nowrap min-[480px]:hidden">
-                Campus
-              </span>
-              <span className="hidden whitespace-nowrap min-[480px]:inline sm:hidden">
-                Campus Care
-              </span>
-              <span className="hidden whitespace-nowrap sm:inline">
-                TeamLife Campus Care
-              </span>
+            <Link
+              href="/campus-care"
+              className={`${headerNavLinkClass} header-campus-link`}
+            >
+              TeamLife Campus Care
             </Link>
             <OutlineCtaLink
               href={site.appLoginUrl}
@@ -56,6 +52,7 @@ export function Header() {
             >
               {site.phoneHeader}
             </OutlineCtaLink>
+            <HeaderMobileMenu linkClassName={headerNavLinkClass} />
           </nav>
         </div>
       </div>

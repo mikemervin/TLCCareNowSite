@@ -103,15 +103,7 @@ export function OutlineCtaLink({
       <CtaIconBadge>
         {icon === "book" ? <BookIcon /> : <PhoneIcon />}
       </CtaIconBadge>
-      <span
-        className={
-          compact
-            ? "outline-cta-label sr-only"
-            : "outline-cta-label whitespace-nowrap"
-        }
-      >
-        {children}
-      </span>
+      <span className="outline-cta-label whitespace-nowrap">{children}</span>
     </>
   );
 
