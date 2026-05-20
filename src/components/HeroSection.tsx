@@ -15,12 +15,13 @@ export function HeroSection() {
 
         <div className="hero-prose">
           <p className="hero-lead">
-            Care built for independent living—schedule the visits you need, when
-            you need them, without a full-day agency minimum.
+            Care built for independent living—schedule the visits you need,
+            when you need them, without a full-day agency minimum.
           </p>
           <p className="hero-body">
-            Book same-day or short-term help through the TLC CareNow app. Our team
-            is <strong>on site 24/7</strong> to support residents and families.
+            Book same-day or short-term help through the TLC CareNow app. Our
+            team is <strong>on site 24/7</strong> to support residents and
+            families.
           </p>
         </div>
 
@@ -44,10 +45,7 @@ export function HeroSection() {
           className="object-cover object-[center_25%] sm:object-[65%_30%] lg:object-[72%_28%]"
           sizes="(max-width: 1024px) 100vw, 55vw"
         />
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent lg:bg-gradient-to-l lg:from-tlc-cream/90 lg:via-tlc-cream/15 lg:to-transparent"
-          aria-hidden
-        />
+        <div className="hero-media-overlay" aria-hidden />
       </div>
     </section>
   );

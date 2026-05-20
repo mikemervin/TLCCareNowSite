@@ -41,7 +41,11 @@ export function CampusCarePageContent() {
             book and pay for scheduled care visits.
           </p>
           <div className="campus-care-hero-actions">
-            <ButtonLink href="/contact" size="md">
+            <ButtonLink
+              href="/contact"
+              size="md"
+              className="campus-care-contact-btn"
+            >
               Contact us
             </ButtonLink>
             <a
