@@ -4,6 +4,7 @@ import {
   buildContactEmailText,
   contactFromAddress,
   contactRecipientEmail,
+  messageFromResendError,
   parseContactForm,
 } from "@/lib/contact";
 
@@ -55,7 +56,7 @@ export async function POST(request: Request) {
   if (error) {
     console.error("Resend error:", error);
     return Response.json(
-      { error: "We could not send your message. Please try again or email us directly." },
+      { error: messageFromResendError(error) },
       { status: 502 },
     );
   }

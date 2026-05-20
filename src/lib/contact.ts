@@ -61,10 +61,49 @@ export function contactRecipientEmail(): string {
 }
 
 export function contactFromAddress(): string {
-  return (
-    process.env.CONTACT_FROM_EMAIL?.trim() ||
-    `TLC CareNow <onboarding@resend.dev>`
-  );
+  const configured = process.env.CONTACT_FROM_EMAIL?.trim();
+  if (configured) return configured;
+
+  // Resend test sender — works without domain verification (see Resend docs).
+  return "TLC CareNow <onboarding@resend.dev>";
+}
+
+/** Turn Resend API errors into text we can show in the contact form. */
+export function messageFromResendError(error: unknown): string {
+  const raw =
+    typeof error === "object" &&
+    error !== null &&
+    "message" in error &&
+    typeof (error as { message: unknown }).message === "string"
+      ? (error as { message: string }).message
+      : "";
+
+  const lower = raw.toLowerCase();
+
+  if (lower.includes("api key") || lower.includes("unauthorized")) {
+    return "Email service is misconfigured (invalid API key). Please email us directly.";
+  }
+
+  if (
+    lower.includes("verify") &&
+    (lower.includes("domain") || lower.includes("from"))
+  ) {
+    return "Sending domain is not verified in Resend yet. Verify teamlifecares.com in Resend, or set CONTACT_FROM_EMAIL to onboarding@resend.dev for testing.";
+  }
+
+  if (lower.includes("only send") || lower.includes("testing")) {
+    return "Resend test mode only allows sending to your Resend account email. Verify your domain in Resend, or test with that address as CONTACT_TO_EMAIL.";
+  }
+
+  if (lower.includes("from") && lower.includes("invalid")) {
+    return "The sender address (CONTACT_FROM_EMAIL) is invalid. Use Name <email@verified-domain.com> or onboarding@resend.dev for testing.";
+  }
+
+  if (raw) {
+    return `Email could not be sent: ${raw}`;
+  }
+
+  return "We could not send your message. Please try again or email us directly.";
 }
 
 export function buildContactEmailHtml(data: ContactFormPayload): string {
