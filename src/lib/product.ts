@@ -7,6 +7,8 @@ export const howItWorksSteps: ReadonlyArray<{
   title: string;
   description: string;
   icon: HowItWorksIcon;
+  image?: string;
+  imageAlt?: string;
 }> = [
   {
     step: "1",
@@ -14,6 +16,8 @@ export const howItWorksSteps: ReadonlyArray<{
     title: "Sign in",
     description:
       "Log in with your phone and a secure code. New users set up a short profile for their community.",
+    image: "/how-it-works-sign-in.png",
+    imageAlt: "TLC CareNow sign-in screen showing phone number login",
   },
   {
     step: "2",
@@ -21,6 +25,9 @@ export const howItWorksSteps: ReadonlyArray<{
     title: "Book a visit",
     description:
       "Choose the care you need, pick a date and time, and add visits to your cart.",
+    image: "/how-it-works-book.png",
+    imageAlt:
+      "TLC CareNow services screen showing wellness and care service options",
   },
   {
     step: "3",
@@ -28,6 +35,8 @@ export const howItWorksSteps: ReadonlyArray<{
     title: "Pay securely",
     description:
       "Check out in the app and save a payment method for future visits.",
+    image: "/how-it-works-pay.png",
+    imageAlt: "TLC CareNow secure card checkout screen powered by Stripe",
   },
   {
     step: "4",
@@ -35,6 +44,9 @@ export const howItWorksSteps: ReadonlyArray<{
     title: "Stay updated",
     description:
       "See upcoming and past visits on your home screen.",
+    image: "/how-it-works-updates.png",
+    imageAlt:
+      "TLC CareNow home screen showing upcoming services and visit schedule",
   },
 ];
 
