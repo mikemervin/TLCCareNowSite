@@ -1335,61 +1335,105 @@ a {
 }
 
 .features-carousel-labels {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  gap: 0.5rem;
-  margin: 1.25rem -0.25rem 0;
-  padding: 0.25rem 0.25rem 0.125rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.625rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
   list-style: none;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  scroll-snap-type: x proximity;
 }
 
-.features-carousel-labels::-webkit-scrollbar {
-  display: none;
-}
-
-@media (min-width: 640px) {
-  .features-carousel-labels {
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-left: 0;
-    margin-right: 0;
-    overflow-x: visible;
-    scroll-snap-type: none;
-  }
+.features-carousel-labels li {
+  display: flex;
+  min-width: 0;
 }
 
 .features-carousel-label {
+  display: flex;
+  width: 100%;
+  min-height: 3rem;
   flex-shrink: 0;
-  padding: 0.5rem 0.875rem;
-  border-radius: 999px;
-  border: 1px solid var(--tlc-border);
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgb(40 101 43 / 12%);
   background: #fff;
   font-size: 0.8125rem;
   font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
   color: var(--tlc-text-muted);
   cursor: pointer;
-  scroll-snap-align: start;
+  box-shadow: 0 1px 2px rgb(28 67 29 / 5%);
   transition:
     border-color 0.2s ease,
     background 0.2s ease,
-    color 0.2s ease;
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
 }
 
-.features-carousel-label.is-active,
-.features-carousel-label:hover {
-  border-color: rgb(40 101 43 / 25%);
+.features-carousel-label.is-active {
+  border-color: rgb(40 101 43 / 28%);
   background: var(--tlc-green-light);
   color: var(--tlc-brand);
+  box-shadow:
+    0 1px 2px rgb(28 67 29 / 6%),
+    0 4px 14px rgb(40 101 43 / 14%);
+}
+
+@media (hover: hover) {
+  .features-carousel-label:not(.is-active):hover {
+    border-color: rgb(40 101 43 / 22%);
+    background: var(--tlc-cream);
+    color: var(--tlc-brand);
+    box-shadow: 0 2px 8px rgb(28 67 29 / 8%);
+  }
+}
+
+.features-carousel-label:active {
+  transform: scale(0.98);
 }
 
 .features-carousel-label:focus-visible {
   outline: 2px solid var(--tlc-primary);
   outline-offset: 2px;
+}
+
+@media (min-width: 640px) {
+  .features-carousel-labels {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .features-carousel-labels li {
+    display: block;
+    min-width: auto;
+  }
+
+  .features-carousel-label {
+    width: auto;
+    min-height: 0;
+    padding: 0.5rem 0.875rem;
+    border-radius: 999px;
+    box-shadow: none;
+  }
+
+  .features-carousel-label.is-active {
+    box-shadow: none;
+  }
+}
+
+@media (min-width: 640px) and (hover: hover) {
+  .features-carousel-label.is-active,
+  .features-carousel-label:hover {
+    border-color: rgb(40 101 43 / 25%);
+    background: var(--tlc-green-light);
+    color: var(--tlc-brand);
+  }
 }
 
 /* Communities & care teams */
