@@ -173,18 +173,18 @@ export function EnterprisePageContent() {
       <section className="enterprise-hero">
         <div className="enterprise-hero-copy">
           <p className="enterprise-eyebrow">
-            Designed for owners, admins, and care teams
+            Designed for residents, owners, admins, and care teams
           </p>
           <h1 className="enterprise-title">
             Run your community&apos;s care from one place
           </h1>
           <span className="tlc-accent-line enterprise-accent" aria-hidden />
           <p className="enterprise-lead">
-            TLC CareNow is operator software built for the people who use it
-            every day—not a complicated system your team has to work around.
-            Supervisors, admins, and owners get clear dashboards to book care,
-            run the day, handle payroll, and stay on the tools that match their
-            role.
+            TLC CareNow is transparent operator software built for everyday
+            use—straightforward to learn, with clear visibility into care, not a
+            complicated platform your community has to work around. Residents,
+            supervisors, admins, and owners each get a role-based dashboard so
+            bookings, schedules, and payroll are easy to see and easy to trust.
           </p>
           <div className="enterprise-hero-actions">
             <ButtonLink
