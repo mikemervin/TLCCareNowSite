@@ -3,16 +3,12 @@
 import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 
-type HeaderMobileMenuProps = {
-  linkClassName: string;
-};
-
 function MenuIcon({ open }: { open: boolean }) {
   if (open) {
     return (
       <svg
         viewBox="0 0 20 20"
-        className="h-5 w-5"
+        className="h-4 w-4"
         aria-hidden
         fill="none"
         stroke="currentColor"
@@ -26,7 +22,7 @@ function MenuIcon({ open }: { open: boolean }) {
   return (
     <svg
       viewBox="0 0 20 20"
-      className="h-5 w-5"
+      className="h-4 w-4"
       aria-hidden
       fill="none"
       stroke="currentColor"
@@ -37,7 +33,7 @@ function MenuIcon({ open }: { open: boolean }) {
   );
 }
 
-export function HeaderMobileMenu({ linkClassName }: HeaderMobileMenuProps) {
+export function HeaderMobileMenu() {
   const [open, setOpen] = useState(false);
   const menuId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
@@ -79,9 +75,7 @@ export function HeaderMobileMenu({ linkClassName }: HeaderMobileMenuProps) {
         aria-label={open ? "Close menu" : "Open menu"}
         onClick={() => setOpen((current) => !current)}
       >
-        <span className="header-menu-trigger-icon" aria-hidden>
-          <MenuIcon open={open} />
-        </span>
+        <MenuIcon open={open} />
       </button>
 
       {open ? (
@@ -94,7 +88,7 @@ export function HeaderMobileMenu({ linkClassName }: HeaderMobileMenuProps) {
           <Link
             href="/enterprise"
             role="menuitem"
-            className={`${linkClassName} header-menu-link`}
+            className="header-menu-link"
             onClick={close}
           >
             Enterprise Solutions
@@ -102,7 +96,7 @@ export function HeaderMobileMenu({ linkClassName }: HeaderMobileMenuProps) {
           <Link
             href="/campus-care"
             role="menuitem"
-            className={`${linkClassName} header-menu-link`}
+            className="header-menu-link"
             onClick={close}
           >
             TeamLife Campus Care
