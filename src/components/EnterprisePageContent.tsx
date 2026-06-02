@@ -11,7 +11,7 @@ const bookingHighlights = {
   eyebrow: "Supervisors & front desk",
   title: "Book for any resident in seconds",
   summary:
-    "Book and rebook on behalf of anyone—fill a day or a full week in minutes, then pay later when it works for the resident.",
+    "Book and rebook on behalf of anyone—fill a day or a full week in minutes, then pay now or pay later when it works for the resident.",
   points: [
     {
       title: "Book on behalf",
@@ -26,8 +26,9 @@ const bookingHighlights = {
       description: "Stack as many bookings as you need, any day.",
     },
     {
-      title: "Pay later",
-      description: "Lock in the schedule; pay when it works for the resident.",
+      title: "Pay now or pay later",
+      description:
+        "Lock in the schedule—charge when you book, or pay later when it works for the resident.",
     },
   ],
 } as const;
@@ -151,10 +152,11 @@ const carePlans = {
   ],
 } as const;
 
-const adminModules = {
-  title: "Edit in detail from the admin dashboard",
+const adminSetup = {
+  title: "Configure your community",
   summary:
-    "Admins update your community setup in one place—each area below can be managed in full detail.",
+    "Admins manage setup, branding, and day-to-day controls from one place—no separate tools for each job.",
+  modulesTitle: "Admin dashboard modules",
   modules: [
     "Communities",
     "Products",
@@ -178,15 +180,14 @@ export function EnterprisePageContent() {
           </h1>
           <span className="tlc-accent-line enterprise-accent" aria-hidden />
           <p className="enterprise-lead">
-            Book and rebook for any resident in seconds, fill a week&apos;s
-            schedule in minutes, and use pay later when it works for the
-            resident—all in one platform.
+            One platform for supervisors, admins, and owners—book care, run the
+            day, handle payroll, and keep every role on the right dashboard.
           </p>
           <div className="enterprise-hero-actions">
             <ButtonLink
               href="/contact"
               size="md"
-              className="enterprise-contact-btn"
+              className="enterprise-contact-btn !text-white"
             >
               Request a free tutorial
             </ButtonLink>
@@ -215,15 +216,15 @@ export function EnterprisePageContent() {
       <section className="enterprise-main tlc-section">
         <div className="tlc-container enterprise-main-inner">
           <p className="enterprise-intro">
-            Residents book on their phones—or your team books for them at the
-            desk. Visits flow into one workbasket for supervisors to assign;
-            owners and admins run the community from dashboards built for their
-            role.{" "}
+            Your team runs operations in {site.name}; residents and families use
+            the same platform to book and stay informed.{" "}
             <Link href="/" className="enterprise-inline-link">
               See the home page
             </Link>{" "}
-            for how residents and families use {site.name}.
+            for the resident experience.
           </p>
+
+          <EnterpriseScreenshots />
 
           <section
             className="enterprise-booking-power"
@@ -254,6 +255,40 @@ export function EnterprisePageContent() {
                       {item.description}
                     </p>
                   </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section
+            className="enterprise-platform"
+            aria-labelledby="enterprise-platform-heading"
+          >
+            <header className="enterprise-block-header">
+              <h2
+                id="enterprise-platform-heading"
+                className="enterprise-block-title"
+              >
+                Platform tools
+              </h2>
+              <span className="tlc-accent-line" aria-hidden />
+              <p className="enterprise-block-lead">
+                Workbasket, schedules, messaging, and reporting—built in, not
+                bolted on.
+              </p>
+            </header>
+            <ul className="enterprise-platform-grid">
+              {communityFeatures.map((feature) => (
+                <li key={feature.title} className="enterprise-platform-card">
+                  <span className="enterprise-platform-icon" aria-hidden>
+                    <CommunityFeatureIcon icon={feature.icon} />
+                  </span>
+                  <h3 className="enterprise-platform-card-title">
+                    {feature.title}
+                  </h3>
+                  <p className="enterprise-platform-card-text">
+                    {feature.description}
+                  </p>
                 </li>
               ))}
             </ul>
@@ -304,48 +339,7 @@ export function EnterprisePageContent() {
             </ul>
           </section>
 
-          <section
-            className="enterprise-branding"
-            aria-labelledby="enterprise-branding-heading"
-          >
-            <h2
-              id="enterprise-branding-heading"
-              className="enterprise-branding-title"
-            >
-              Manage your own branding
-            </h2>
-            <span className="tlc-accent-line enterprise-branding-accent" aria-hidden />
-            <p className="enterprise-branding-text">
-              Your community&apos;s app experience can reflect your brand—not a
-              generic template. Admins configure how {site.name} looks and feels
-              so the platform matches your company&apos;s branding for residents
-              and staff.
-            </p>
-          </section>
-
-          <section
-            className="enterprise-admin-modules"
-            aria-labelledby="enterprise-admin-modules-heading"
-          >
-            <header className="enterprise-block-header">
-              <h2
-                id="enterprise-admin-modules-heading"
-                className="enterprise-block-title"
-              >
-                {adminModules.title}
-              </h2>
-              <span className="tlc-accent-line" aria-hidden />
-              <p className="enterprise-block-lead">{adminModules.summary}</p>
-            </header>
-            <ul className="enterprise-admin-modules-grid">
-              {adminModules.modules.map((module) => (
-                <li key={module} className="enterprise-admin-modules-item">
-                  {module}
-                </li>
-              ))}
-            </ul>
-          </section>
-
+          <div className="enterprise-ops-stack">
           <section
             className="enterprise-care-plans"
             aria-labelledby="enterprise-care-plans-heading"
@@ -401,42 +395,49 @@ export function EnterprisePageContent() {
               ))}
             </ol>
           </section>
+          </div>
 
           <section
-            className="enterprise-platform"
-            aria-labelledby="enterprise-platform-heading"
+            className="enterprise-admin-setup"
+            aria-labelledby="enterprise-admin-setup-heading"
           >
             <header className="enterprise-block-header">
               <h2
-                id="enterprise-platform-heading"
+                id="enterprise-admin-setup-heading"
                 className="enterprise-block-title"
               >
-                Platform tools
+                {adminSetup.title}
               </h2>
               <span className="tlc-accent-line" aria-hidden />
-              <p className="enterprise-block-lead">
-                Workbasket, schedules, messaging, and reporting—built in, not
-                bolted on.
-              </p>
+              <p className="enterprise-block-lead">{adminSetup.summary}</p>
             </header>
-            <ul className="enterprise-platform-grid">
-              {communityFeatures.map((feature) => (
-                <li key={feature.title} className="enterprise-platform-card">
-                  <span className="enterprise-platform-icon" aria-hidden>
-                    <CommunityFeatureIcon icon={feature.icon} />
-                  </span>
-                  <h3 className="enterprise-platform-card-title">
-                    {feature.title}
-                  </h3>
-                  <p className="enterprise-platform-card-text">
-                    {feature.description}
-                  </p>
+            <h3 className="enterprise-admin-setup-modules-title">
+              {adminSetup.modulesTitle}
+            </h3>
+            <ul className="enterprise-admin-modules-grid">
+              {adminSetup.modules.map((module) => (
+                <li key={module} className="enterprise-admin-modules-item">
+                  {module}
                 </li>
               ))}
             </ul>
+            <div
+              className="enterprise-branding enterprise-branding--nested"
+              aria-labelledby="enterprise-branding-heading"
+            >
+              <h3
+                id="enterprise-branding-heading"
+                className="enterprise-branding-title"
+              >
+                Manage your own branding
+              </h3>
+              <p className="enterprise-branding-text">
+                Your community&apos;s app experience can reflect your brand—not a
+                generic template. Admins configure how {site.name} looks and feels
+                for residents and staff.
+              </p>
+            </div>
           </section>
-
-          <EnterpriseScreenshots />
 
           <section
             className="enterprise-closing"
@@ -456,7 +457,11 @@ export function EnterprisePageContent() {
               <li>Custom pricing for single sites and multi-site groups</li>
             </ul>
             <div className="enterprise-closing-actions">
-              <ButtonLink href="/contact" size="md">
+              <ButtonLink
+                href="/contact"
+                size="md"
+                className="enterprise-contact-btn !text-white"
+              >
                 Request a free tutorial
               </ButtonLink>
               <ButtonLink href="/contact" variant="secondary" size="md">

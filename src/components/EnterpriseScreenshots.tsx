@@ -65,8 +65,8 @@ export function EnterpriseScreenshots() {
         </h2>
         <span className="tlc-accent-line" aria-hidden />
         <p className="enterprise-block-lead">
-          Example screens from the {site.name} admin experience. Use the arrows
-          or dots to browse.
+          Real screens from the {site.name} admin experience—use the arrows or
+          dots to browse.
         </p>
       </header>
 

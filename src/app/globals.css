@@ -2430,12 +2430,12 @@ a {
 }
 
 .enterprise-contact-btn {
-  color: #fff;
+  color: #fff !important;
 }
 
 .enterprise-contact-btn:hover,
 .enterprise-contact-btn:focus-visible {
-  color: #fff;
+  color: #fff !important;
 }
 
 .enterprise-hero-link {
@@ -2567,6 +2567,20 @@ a {
   font-size: 0.875rem;
   line-height: 1.5;
   color: var(--tlc-text-muted);
+}
+
+.enterprise-roles {
+  padding: 2rem 1.5rem;
+  border-radius: 1.25rem;
+  background: #fff;
+  border: 1px solid rgb(40 101 43 / 10%);
+  box-shadow: 0 1px 3px rgb(28 67 29 / 6%);
+}
+
+@media (min-width: 640px) {
+  .enterprise-roles {
+    padding: 2.5rem 2.5rem;
+  }
 }
 
 .enterprise-roles-list {
@@ -2721,6 +2735,12 @@ a {
   opacity: 0.75;
 }
 
+.enterprise-ops-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .enterprise-branding {
   padding: 2rem 1.5rem;
   border-radius: 1.25rem;
@@ -2734,9 +2754,20 @@ a {
   box-shadow: 0 12px 32px rgb(28 67 29 / 16%);
 }
 
+.enterprise-branding--nested {
+  margin-top: 1.75rem;
+  padding: 1.75rem 1.5rem;
+  border-radius: 1rem;
+  box-shadow: none;
+}
+
 @media (min-width: 640px) {
   .enterprise-branding {
     padding: 2.5rem 3rem;
+  }
+
+  .enterprise-branding--nested {
+    padding: 2rem 2.25rem;
   }
 }
 
@@ -2760,7 +2791,7 @@ a {
   color: rgb(255 255 255 / 92%);
 }
 
-.enterprise-admin-modules {
+.enterprise-admin-setup {
   padding: 2rem 1.5rem;
   border-radius: 1.25rem;
   background: var(--tlc-cream);
@@ -2768,16 +2799,26 @@ a {
 }
 
 @media (min-width: 640px) {
-  .enterprise-admin-modules {
+  .enterprise-admin-setup {
     padding: 2.5rem 2.5rem;
   }
+}
+
+.enterprise-admin-setup-modules-title {
+  margin: 1.75rem 0 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--tlc-primary);
 }
 
 .enterprise-admin-modules-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.625rem;
-  margin: 1.75rem 0 0;
+  margin: 1rem 0 0;
   padding: 0;
   list-style: none;
 }
@@ -2898,6 +2939,14 @@ a {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.125rem;
   }
+
+  .enterprise-care-notes-step:nth-child(4) {
+    grid-column: 1 / span 2;
+  }
+
+  .enterprise-care-notes-step:nth-child(5) {
+    grid-column: 3;
+  }
 }
 
 .enterprise-care-notes-step {
@@ -2932,6 +2981,20 @@ a {
   font-size: 0.875rem;
   line-height: 1.55;
   color: var(--tlc-text-muted);
+}
+
+.enterprise-platform {
+  padding: 2rem 1.5rem;
+  border-radius: 1.25rem;
+  background: #fff;
+  border: 1px solid rgb(40 101 43 / 10%);
+  box-shadow: 0 1px 3px rgb(28 67 29 / 6%);
+}
+
+@media (min-width: 640px) {
+  .enterprise-platform {
+    padding: 2.5rem 2.5rem;
+  }
 }
 
 .enterprise-platform-grid {
