@@ -148,31 +148,31 @@ export type CommunityFeatureIcon =
 
 export const communityFeatures: ReadonlyArray<{
   title: string;
-  description: string;
+  summary: string;
   icon: CommunityFeatureIcon;
 }> = [
   {
     icon: "workbasket",
-    title: "Workbasket & assignments",
-    description:
-      "Resident bookings flow into one live queue. Supervisors assign care professionals and manage visit details without spreadsheets or phone tag.",
+    title: "Workbasket",
+    summary:
+      "Every resident booking in one queue. Assign visits without spreadsheets or phone tag.",
   },
   {
     icon: "schedule",
     title: "Schedules & punch",
-    description:
-      "Calendar views, shift scheduling, punch in/out, and location verification keep field teams organized and accountable.",
+    summary:
+      "Calendars, shifts, punch in/out, and location checks keep field teams on track.",
   },
   {
     icon: "messages",
-    title: "Messages & reminders",
-    description:
-      "Staff and care teams communicate in the app, with scheduled reminders so handoffs and follow-ups do not get missed.",
+    title: "Messages",
+    summary:
+      "Team chat and scheduled reminders so handoffs are not missed.",
   },
   {
     icon: "insights",
-    title: "Executive insights",
-    description:
-      "Dashboards, community snapshot reports, payroll tools, and pricing controls give operators a clear view across locations.",
+    title: "Reports & insights",
+    summary:
+      "Dashboards, community snapshots, payroll, and pricing in one view.",
   },
 ];

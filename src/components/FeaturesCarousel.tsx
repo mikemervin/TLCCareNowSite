@@ -6,6 +6,27 @@ import { featureHighlights } from "@/lib/product";
 
 const total = featureHighlights.length;
 
+function CarouselChevron({ direction }: { direction: "prev" | "next" }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+      className="features-carousel-arrow-icon"
+    >
+      {direction === "prev" ? (
+        <path d="M15 6l-6 6 6 6" />
+      ) : (
+        <path d="M9 6l6 6-6 6" />
+      )}
+    </svg>
+  );
+}
+
 export function FeaturesCarousel() {
   const [index, setIndex] = useState(0);
   const slide = featureHighlights[index];
@@ -32,21 +53,50 @@ export function FeaturesCarousel() {
       className="features-carousel"
       role="region"
       aria-roledescription="carousel"
-      aria-label="Why TLC CareNow"
+      aria-label="App highlights"
     >
       <div className="features-carousel-card" id="features-carousel-panel">
-        <p className="features-carousel-count" aria-live="polite">
-          <span className="sr-only">
-            Feature {index + 1} of {total}:{" "}
-          </span>
-          {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-        </p>
+        <div
+          className="features-carousel-tabs"
+          role="tablist"
+          aria-label="Feature topics"
+        >
+          {featureHighlights.map((item, i) => (
+            <button
+              key={item.title}
+              type="button"
+              role="tab"
+              aria-selected={i === index}
+              aria-controls="features-carousel-panel"
+              id={`feature-tab-${i}`}
+              onClick={() => goTo(i)}
+              className={`features-carousel-tab${i === index ? " is-active" : ""}`}
+            >
+              {item.shortLabel}
+            </button>
+          ))}
+        </div>
+
+        <div
+          className="features-carousel-progress"
+          role="progressbar"
+          aria-valuenow={index + 1}
+          aria-valuemin={1}
+          aria-valuemax={total}
+          aria-label={`Highlight ${index + 1} of ${total}`}
+        >
+          <span
+            className="features-carousel-progress-fill"
+            style={{ width: `${((index + 1) / total) * 100}%` }}
+          />
+        </div>
 
         <div key={slide.title} className="features-carousel-slide" aria-live="polite">
           <span className="features-carousel-icon" aria-hidden>
             <FeatureIcon icon={slide.icon} />
           </span>
-          <h3 className="features-carousel-title">{slide.title}</h3>
+          <h3 className="features-carousel-title">{slide.shortLabel}</h3>
+          <p className="features-carousel-eyebrow">{slide.title}</p>
           <p className="features-carousel-text">{slide.description}</p>
         </div>
 
@@ -55,59 +105,28 @@ export function FeaturesCarousel() {
             type="button"
             onClick={() => go(-1)}
             className="features-carousel-arrow"
-            aria-label={`Previous: ${
-              featureHighlights[(index - 1 + total) % total].title
-            }`}
+            aria-label={`Previous: ${slide.shortLabel}`}
           >
-            <span aria-hidden>‹</span>
+            <CarouselChevron direction="prev" />
           </button>
 
-          <div
-            className="features-carousel-dots"
-            role="tablist"
-            aria-label="Choose a topic"
-          >
-            {featureHighlights.map((item, i) => (
-              <button
-                key={item.title}
-                type="button"
-                role="tab"
-                aria-selected={i === index}
-                aria-controls="features-carousel-panel"
-                id={`feature-tab-${i}`}
-                onClick={() => goTo(i)}
-                className={`features-carousel-dot${i === index ? " is-active" : ""}`}
-              >
-                <span className="sr-only">{item.title}</span>
-              </button>
-            ))}
-          </div>
+          <p className="features-carousel-counter" aria-live="polite">
+            <span className="sr-only">Highlight </span>
+            {index + 1} of {total}
+          </p>
 
           <button
             type="button"
             onClick={() => go(1)}
             className="features-carousel-arrow"
-            aria-label={`Next: ${featureHighlights[(index + 1) % total].title}`}
+            aria-label={`Next: ${
+              featureHighlights[(index + 1) % total].shortLabel
+            }`}
           >
-            <span aria-hidden>›</span>
+            <CarouselChevron direction="next" />
           </button>
         </div>
       </div>
-
-      <ul className="features-carousel-labels">
-        {featureHighlights.map((item, i) => (
-          <li key={item.title}>
-            <button
-              type="button"
-              onClick={() => goTo(i)}
-              className={`features-carousel-label${i === index ? " is-active" : ""}`}
-              aria-current={i === index ? "true" : undefined}
-            >
-              {item.shortLabel}
-            </button>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

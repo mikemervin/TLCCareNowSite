@@ -303,7 +303,7 @@ export function EnterprisePageContent() {
                     {feature.title}
                   </h3>
                   <p className="enterprise-platform-card-text">
-                    {feature.description}
+                    {feature.summary}
                   </p>
                 </li>
               ))}
