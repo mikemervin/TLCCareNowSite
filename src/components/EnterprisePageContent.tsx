@@ -510,15 +510,6 @@ export function EnterprisePageContent() {
                 {site.email}
               </a>
             </p>
-            <p className="enterprise-closing-links">
-              <Link href="/" className="enterprise-inline-link">
-                TLC CareNow
-              </Link>
-              {" · "}
-              <Link href="/campus-care" className="enterprise-inline-link">
-                TeamLife Campus Care
-              </Link>
-            </p>
           </section>
         </div>
       </section>

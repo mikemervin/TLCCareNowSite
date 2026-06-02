@@ -27,7 +27,7 @@ const contactItems = [
 export function Footer() {
   return (
     <footer className="site-footer mt-auto">
-      <div className="tlc-header-container site-footer-inner">
+      <div className="site-footer-inner">
         <nav className="site-footer-grid" aria-label="Contact and social">
           {contactItems.map((item) => (
             <div key={item.label} className="site-footer-col">
@@ -44,7 +44,7 @@ export function Footer() {
             </div>
           ))}
 
-          <div className="site-footer-col">
+          <div className="site-footer-col site-footer-col-follow">
             <span className="site-footer-label">Follow</span>
             <SocialLinks className="site-footer-social" size="compact" />
           </div>
