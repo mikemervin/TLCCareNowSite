@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/BrandMark";
 import { HeaderMobileMenu } from "@/components/HeaderMobileMenu";
-import { OutlineCtaLink } from "@/components/OutlineCtaLink";
+import { BookIcon } from "@/components/OutlineCtaLink";
 import { site } from "@/lib/site";
 
 type HeaderPillLinkProps = {
@@ -46,16 +46,19 @@ export function Header() {
                 fullLabel="Enterprise Solutions"
                 className="header-enterprise-link"
               />
-              <OutlineCtaLink
+              <a
                 href={site.appLoginUrl}
-                icon="book"
-                external
-                size="sm"
-                compact
+                target="_blank"
+                rel="noopener noreferrer"
                 className="header-pill-item header-pill-item--book"
+                aria-label="Book CareNow"
               >
-                Book CareNow
-              </OutlineCtaLink>
+                <span className="header-pill-book-icon" aria-hidden>
+                  <BookIcon />
+                </span>
+                <span className="header-pill-book-label-short">Book CareNow</span>
+                <span className="header-pill-book-label-full">Book CareNow</span>
+              </a>
             </div>
 
             <HeaderMobileMenu />
