@@ -189,7 +189,7 @@ export function EnterprisePageContent() {
               size="md"
               className="enterprise-contact-btn !text-white"
             >
-              Request a free tutorial
+              Request a free demo
             </ButtonLink>
           </div>
         </div>
@@ -463,7 +463,7 @@ export function EnterprisePageContent() {
               id="enterprise-closing-heading"
               className="enterprise-closing-title"
             >
-              Free tutorial &amp; pricing
+              Free demo &amp; pricing
             </h2>
             <span
               className="tlc-accent-line enterprise-closing-accent"
@@ -471,10 +471,10 @@ export function EnterprisePageContent() {
             />
             <p className="enterprise-closing-lead">
               Every community is different. We&apos;ll walk your team through a
-              complimentary tutorial and put together pricing for your campuses.
+              complimentary demo and put together pricing for your campuses.
             </p>
             <ul className="enterprise-closing-list">
-              <li>Hands-on tutorial for leadership and supervisors</li>
+              <li>Hands-on demo for leadership and supervisors</li>
               <li>Focused on operations—not just the resident app</li>
               <li>Custom pricing for single sites and multi-site groups</li>
             </ul>
@@ -484,7 +484,7 @@ export function EnterprisePageContent() {
                 size="md"
                 className="enterprise-contact-btn !text-white"
               >
-                Request a free tutorial
+                Request a free demo
               </ButtonLink>
               <ButtonLink href="/contact" variant="secondary" size="md">
                 Contact us for pricing
