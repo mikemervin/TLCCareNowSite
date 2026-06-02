@@ -304,9 +304,15 @@ a {
   color: #fff;
 }
 
-/* Home: always in pill bar; Campus & Enterprise on sm+ only */
+/* Home: pill bar on sm+ only; mobile uses hamburger menu */
 .header-home-link {
-  display: inline-flex;
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .header-home-link {
+    display: inline-flex;
+  }
 }
 
 .header-campus-link,

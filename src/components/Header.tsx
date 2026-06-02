@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/BrandMark";
+import { HeaderHomePillLink } from "@/components/HeaderHomePillLink";
 import { HeaderMobileMenu } from "@/components/HeaderMobileMenu";
 import { BookIcon } from "@/components/OutlineCtaLink";
 import { site } from "@/lib/site";
@@ -34,12 +35,7 @@ export function Header() {
 
           <nav className="tlc-header-actions" aria-label="Primary actions">
             <div className="header-pill-bar">
-              <HeaderPillLink
-                href="/"
-                shortLabel="CareNow"
-                fullLabel={site.name}
-                className="header-home-link"
-              />
+              <HeaderHomePillLink />
               <HeaderPillLink
                 href="/campus-care"
                 shortLabel="Campus Care"

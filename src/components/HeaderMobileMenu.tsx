@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 
 function MenuIcon({ open }: { open: boolean }) {
@@ -34,9 +35,11 @@ function MenuIcon({ open }: { open: boolean }) {
 }
 
 export function HeaderMobileMenu() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const menuId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
+  const onHome = pathname === "/";
 
   const close = useCallback(() => setOpen(false), []);
 
@@ -85,14 +88,16 @@ export function HeaderMobileMenu() {
           className="header-menu-panel"
           aria-label="Site menu"
         >
-          <Link
-            href="/"
-            role="menuitem"
-            className="header-menu-link"
-            onClick={close}
-          >
-            TLC CareNow
-          </Link>
+          {onHome ? null : (
+            <Link
+              href="/"
+              role="menuitem"
+              className="header-menu-link"
+              onClick={close}
+            >
+              TLC CareNow
+            </Link>
+          )}
           <Link
             href="/campus-care"
             role="menuitem"
