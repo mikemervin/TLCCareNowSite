@@ -2,13 +2,14 @@ import { AppLink } from "@/components/AppLink";
 import { PageShell } from "@/components/PageShell";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/lib/site";
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 import Link from "next/link";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Book CareNow",
   description: site.tagline,
-};
+  path: "/book-carenow",
+});
 
 export default function BookCareNowPage() {
   return (

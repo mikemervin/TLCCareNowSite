@@ -1,12 +1,13 @@
 import { LegalDocument } from "@/components/LegalDocument";
 import { PageShell } from "@/components/PageShell";
 import { site } from "@/lib/site";
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Privacy Policy",
   description: `How ${site.name} handles your information.`,
-};
+  path: "/privacy",
+});
 
 const sections = [
   {

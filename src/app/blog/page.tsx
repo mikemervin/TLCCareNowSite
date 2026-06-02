@@ -2,11 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { PageShell } from "@/components/PageShell";
 import { images } from "@/lib/images";
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Blog",
-};
+  path: "/blog",
+});
 
 const posts = [
   {

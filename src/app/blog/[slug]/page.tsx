@@ -1,6 +1,7 @@
 import { PageShell } from "@/components/PageShell";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { pageMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 
 const posts: Record<
@@ -25,8 +26,11 @@ type Props = { params: Promise<{ slug: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = posts[slug];
-  if (!post) return { title: "Blog" };
-  return { title: post.title };
+  if (!post) return pageMetadata({ title: "Blog", path: "/blog" });
+  return pageMetadata({
+    title: post.title,
+    path: `/blog/${slug}`,
+  });
 }
 
 export default async function BlogPostPage({ params }: Props) {

@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
+import { getSiteUrl } from "@/lib/site-url";
+
+const siteUrl = getSiteUrl();
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700", "900"],
@@ -11,6 +14,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "TLC CareNow",
     template: "%s | TLC CareNow",
@@ -18,6 +22,7 @@ export const metadata: Metadata = {
   description: site.description,
   openGraph: {
     type: "website",
+    url: siteUrl,
     siteName: site.name,
     title: site.name,
     description: site.tagline,

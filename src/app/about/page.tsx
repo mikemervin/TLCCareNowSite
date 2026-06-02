@@ -3,12 +3,13 @@ import { PageShell } from "@/components/PageShell";
 import { TeamLifeWebsiteLink } from "@/components/TeamLifeWebsiteLink";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/lib/site";
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "About",
   description: site.description,
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

@@ -1,10 +1,11 @@
 import { GetInTouchSection } from "@/components/GetInTouchSection";
 import { PageShell } from "@/components/PageShell";
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Contact",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (
