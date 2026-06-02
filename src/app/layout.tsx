@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
+import { SiteAnalytics } from "@/components/SiteAnalytics";
 import { getSiteUrl } from "@/lib/site-url";
 
 const siteUrl = getSiteUrl();
@@ -45,7 +46,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={roboto.variable}>
-      <body className="flex min-h-screen flex-col antialiased">{children}</body>
+      <body className="flex min-h-screen flex-col antialiased">
+        <SiteAnalytics />
+        {children}
+      </body>
     </html>
   );
 }

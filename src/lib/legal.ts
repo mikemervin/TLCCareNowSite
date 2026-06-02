@@ -1,4 +1,4 @@
-export const legalLastUpdated = "May 19, 2026";
+export const legalLastUpdated = "June 2, 2026";
 
 export const footerLegalLinks = [
   { href: "/privacy", label: "Privacy Policy" },
