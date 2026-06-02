@@ -2,8 +2,13 @@ import { mkdir, readFile, writeFile, appendFile } from "node:fs/promises";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
 import {
+  appendAnalyticsEventBlob,
+  readAnalyticsEventsBlob,
+} from "@/lib/analytics/blob-store";
+import {
   analyticsEventsPath,
   ANALYTICS_MAX_EVENTS_FILE_BYTES,
+  useBlobAnalyticsStore,
 } from "@/lib/analytics/config";
 import type { AnalyticsEvent, AnalyticsSummary } from "@/lib/analytics/types";
 
@@ -27,6 +32,10 @@ async function trimFileIfNeeded(filePath: string): Promise<void> {
 export async function appendAnalyticsEvent(
   event: Omit<AnalyticsEvent, "id">,
 ): Promise<AnalyticsEvent> {
+  if (useBlobAnalyticsStore()) {
+    return appendAnalyticsEventBlob(event);
+  }
+
   const filePath = analyticsEventsPath();
   await ensureDataDir(filePath);
   await trimFileIfNeeded(filePath);
@@ -37,6 +46,10 @@ export async function appendAnalyticsEvent(
 }
 
 export async function readAnalyticsEvents(limit = 5000): Promise<AnalyticsEvent[]> {
+  if (useBlobAnalyticsStore()) {
+    return readAnalyticsEventsBlob(limit);
+  }
+
   const filePath = analyticsEventsPath();
 
   let raw: string;
@@ -59,7 +72,10 @@ export async function readAnalyticsEvents(limit = 5000): Promise<AnalyticsEvent[
   return events.slice(-limit);
 }
 
-export function buildAnalyticsSummary(events: AnalyticsEvent[]): AnalyticsSummary {
+export function buildAnalyticsSummary(
+  events: AnalyticsEvent[],
+  storage: AnalyticsSummary["storage"] = useBlobAnalyticsStore() ? "blob" : "file",
+): AnalyticsSummary {
   const pageviews = events.filter((e) => e.type === "pageview");
   const customEvents = events.filter((e) => e.type === "event");
 
@@ -85,6 +101,7 @@ export function buildAnalyticsSummary(events: AnalyticsEvent[]): AnalyticsSummar
     .map(([date, count]) => ({ date, count }));
 
   return {
+    storage,
     totalEvents: events.length,
     pageviews: pageviews.length,
     customEvents: customEvents.length,

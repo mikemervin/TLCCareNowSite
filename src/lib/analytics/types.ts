@@ -19,6 +19,7 @@ export type AnalyticsIngestPayload = {
 };
 
 export type AnalyticsSummary = {
+  storage: "blob" | "file";
   totalEvents: number;
   pageviews: number;
   customEvents: number;

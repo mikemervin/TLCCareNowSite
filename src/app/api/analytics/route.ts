@@ -3,6 +3,7 @@ import {
   analyticsAdminSecret,
   ANALYTICS_MAX_BODY_BYTES,
   isAnalyticsIngestEnabled,
+  useBlobAnalyticsStore,
 } from "@/lib/analytics/config";
 import {
   countryFromHeaders,
@@ -45,7 +46,8 @@ export async function GET(request: NextRequest) {
   if (provided !== secret) return unauthorized();
 
   const events = await readAnalyticsEvents();
-  return Response.json(buildAnalyticsSummary(events));
+  const storage = useBlobAnalyticsStore() ? "blob" : "file";
+  return Response.json(buildAnalyticsSummary(events, storage));
 }
 
 export async function POST(request: NextRequest) {

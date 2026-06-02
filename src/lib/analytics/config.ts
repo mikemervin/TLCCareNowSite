@@ -15,6 +15,10 @@ export function analyticsEventsPath(): string {
   );
 }
 
+export function useBlobAnalyticsStore(): boolean {
+  return Boolean(process.env.BLOB_READ_WRITE_TOKEN?.trim());
+}
+
 export function analyticsAdminSecret(): string | undefined {
   const secret = process.env.ANALYTICS_ADMIN_SECRET?.trim();
   return secret && secret.length >= 16 ? secret : undefined;
