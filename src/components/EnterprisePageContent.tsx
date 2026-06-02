@@ -191,12 +191,6 @@ export function EnterprisePageContent() {
             >
               Request a free tutorial
             </ButtonLink>
-            <a
-              href={`tel:${site.phoneHeader.replace(/-/g, "")}`}
-              className="enterprise-hero-link tabular-nums"
-            >
-              {site.phoneHeader}
-            </a>
           </div>
         </div>
 
@@ -215,12 +209,18 @@ export function EnterprisePageContent() {
 
       <section className="enterprise-main tlc-section">
         <div className="tlc-container enterprise-main-inner">
-          <aside className="enterprise-intro" aria-label="Operators and residents">
+          <aside
+            className="enterprise-intro"
+            aria-label="Operators and residents"
+          >
             <p className="enterprise-intro-eyebrow">One platform</p>
-            <span className="tlc-accent-line enterprise-intro-accent" aria-hidden />
+            <span
+              className="tlc-accent-line enterprise-intro-accent"
+              aria-hidden
+            />
             <p className="enterprise-intro-lead">
-              <strong className="enterprise-intro-strong">Your team</strong> runs
-              operations in {site.name};{" "}
+              <strong className="enterprise-intro-strong">Your team</strong>{" "}
+              runs operations in {site.name};{" "}
               <strong className="enterprise-intro-strong">
                 residents and families
               </strong>{" "}
@@ -243,7 +243,9 @@ export function EnterprisePageContent() {
             aria-labelledby="enterprise-booking-heading"
           >
             <header className="enterprise-block-header enterprise-block-header--light">
-              <p className="enterprise-block-eyebrow">{bookingHighlights.eyebrow}</p>
+              <p className="enterprise-block-eyebrow">
+                {bookingHighlights.eyebrow}
+              </p>
               <h2
                 id="enterprise-booking-heading"
                 className="enterprise-block-title"
@@ -251,7 +253,9 @@ export function EnterprisePageContent() {
                 {bookingHighlights.title}
               </h2>
               <span className="tlc-accent-line" aria-hidden />
-              <p className="enterprise-block-lead">{bookingHighlights.summary}</p>
+              <p className="enterprise-block-lead">
+                {bookingHighlights.summary}
+              </p>
             </header>
             <ul className="enterprise-booking-power-grid">
               {bookingHighlights.points.map((item, index) => (
@@ -352,61 +356,61 @@ export function EnterprisePageContent() {
           </section>
 
           <div className="enterprise-ops-stack">
-          <section
-            className="enterprise-care-plans"
-            aria-labelledby="enterprise-care-plans-heading"
-          >
-            <header className="enterprise-block-header enterprise-block-header--light">
-              <h2
-                id="enterprise-care-plans-heading"
-                className="enterprise-block-title"
-              >
-                {carePlans.title}
-              </h2>
-              <span className="tlc-accent-line" aria-hidden />
-              <p className="enterprise-block-lead">{carePlans.summary}</p>
-            </header>
-            <ul className="enterprise-care-plans-grid">
-              {carePlans.points.map((point) => (
-                <li key={point.title} className="enterprise-care-plans-card">
-                  <h3 className="enterprise-care-plans-card-title">
-                    {point.title}
-                  </h3>
-                  <p className="enterprise-care-plans-card-text">
-                    {point.description}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </section>
+            <section
+              className="enterprise-care-plans"
+              aria-labelledby="enterprise-care-plans-heading"
+            >
+              <header className="enterprise-block-header enterprise-block-header--light">
+                <h2
+                  id="enterprise-care-plans-heading"
+                  className="enterprise-block-title"
+                >
+                  {carePlans.title}
+                </h2>
+                <span className="tlc-accent-line" aria-hidden />
+                <p className="enterprise-block-lead">{carePlans.summary}</p>
+              </header>
+              <ul className="enterprise-care-plans-grid">
+                {carePlans.points.map((point) => (
+                  <li key={point.title} className="enterprise-care-plans-card">
+                    <h3 className="enterprise-care-plans-card-title">
+                      {point.title}
+                    </h3>
+                    <p className="enterprise-care-plans-card-text">
+                      {point.description}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </section>
 
-          <section
-            className="enterprise-care-notes"
-            aria-labelledby="enterprise-care-notes-heading"
-          >
-            <header className="enterprise-block-header enterprise-block-header--light">
-              <h2
-                id="enterprise-care-notes-heading"
-                className="enterprise-block-title"
-              >
-                {careNotesFlow.title}
-              </h2>
-              <span className="tlc-accent-line" aria-hidden />
-              <p className="enterprise-block-lead">{careNotesFlow.summary}</p>
-            </header>
-            <ol className="enterprise-care-notes-steps">
-              {careNotesFlow.steps.map((step) => (
-                <li key={step.title} className="enterprise-care-notes-step">
-                  <h3 className="enterprise-care-notes-step-title">
-                    {step.title}
-                  </h3>
-                  <p className="enterprise-care-notes-step-text">
-                    {step.description}
-                  </p>
-                </li>
-              ))}
-            </ol>
-          </section>
+            <section
+              className="enterprise-care-notes"
+              aria-labelledby="enterprise-care-notes-heading"
+            >
+              <header className="enterprise-block-header enterprise-block-header--light">
+                <h2
+                  id="enterprise-care-notes-heading"
+                  className="enterprise-block-title"
+                >
+                  {careNotesFlow.title}
+                </h2>
+                <span className="tlc-accent-line" aria-hidden />
+                <p className="enterprise-block-lead">{careNotesFlow.summary}</p>
+              </header>
+              <ol className="enterprise-care-notes-steps">
+                {careNotesFlow.steps.map((step) => (
+                  <li key={step.title} className="enterprise-care-notes-step">
+                    <h3 className="enterprise-care-notes-step-title">
+                      {step.title}
+                    </h3>
+                    <p className="enterprise-care-notes-step-text">
+                      {step.description}
+                    </p>
+                  </li>
+                ))}
+              </ol>
+            </section>
           </div>
 
           <section
@@ -444,9 +448,9 @@ export function EnterprisePageContent() {
                 Manage your own branding
               </h3>
               <p className="enterprise-branding-text">
-                Your community&apos;s app experience can reflect your brand—not a
-                generic template. Admins configure how {site.name} looks and feels
-                for residents and staff.
+                Your community&apos;s app experience can reflect your brand—not
+                a generic template. Admins configure how {site.name} looks and
+                feels for residents and staff.
               </p>
             </div>
           </section>
@@ -455,10 +459,16 @@ export function EnterprisePageContent() {
             className="enterprise-closing"
             aria-labelledby="enterprise-closing-heading"
           >
-            <h2 id="enterprise-closing-heading" className="enterprise-closing-title">
+            <h2
+              id="enterprise-closing-heading"
+              className="enterprise-closing-title"
+            >
               Free tutorial &amp; pricing
             </h2>
-            <span className="tlc-accent-line enterprise-closing-accent" aria-hidden />
+            <span
+              className="tlc-accent-line enterprise-closing-accent"
+              aria-hidden
+            />
             <p className="enterprise-closing-lead">
               Every community is different. We&apos;ll walk your team through a
               complimentary tutorial and put together pricing for your campuses.
