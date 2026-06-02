@@ -35,6 +35,12 @@ export function Header() {
           <nav className="tlc-header-actions" aria-label="Primary actions">
             <div className="header-pill-bar">
               <HeaderPillLink
+                href="/"
+                shortLabel="CareNow"
+                fullLabel={site.name}
+                className="header-home-link"
+              />
+              <HeaderPillLink
                 href="/campus-care"
                 shortLabel="Campus Care"
                 fullLabel="TeamLife Campus Care"

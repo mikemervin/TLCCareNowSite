@@ -304,7 +304,11 @@ a {
   color: #fff;
 }
 
-/* Campus & Enterprise: inside pill bar on sm+ only */
+/* Home: always in pill bar; Campus & Enterprise on sm+ only */
+.header-home-link {
+  display: inline-flex;
+}
+
 .header-campus-link,
 .header-enterprise-link {
   display: none;

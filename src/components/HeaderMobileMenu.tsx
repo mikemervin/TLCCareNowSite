@@ -86,12 +86,12 @@ export function HeaderMobileMenu() {
           aria-label="Site menu"
         >
           <Link
-            href="/enterprise"
+            href="/"
             role="menuitem"
             className="header-menu-link"
             onClick={close}
           >
-            Enterprise Solutions
+            TLC CareNow
           </Link>
           <Link
             href="/campus-care"
@@ -100,6 +100,14 @@ export function HeaderMobileMenu() {
             onClick={close}
           >
             TeamLife Campus Care
+          </Link>
+          <Link
+            href="/enterprise"
+            role="menuitem"
+            className="header-menu-link"
+            onClick={close}
+          >
+            Enterprise Solutions
           </Link>
         </div>
       ) : null}
