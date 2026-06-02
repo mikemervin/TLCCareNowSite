@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/page-metadata";
 export const metadata = pageMetadata({
   title: "Enterprise Solutions",
   description:
-    "Book on behalf of residents in seconds, role-based dashboards, and one platform for supervisors, admins, and owners.",
+    "Operator software designed for supervisors, admins, and owners—simple dashboards to book care, run the day, and handle payroll without complicated tools.",
   path: "/enterprise",
 });
 

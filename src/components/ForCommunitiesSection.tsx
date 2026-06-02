@@ -15,37 +15,11 @@ export function ForCommunitiesSection() {
           </h2>
           <span className="tlc-accent-line communities-accent" aria-hidden />
           <p className="communities-intro">
-            Bookings, schedules, messaging, and reporting live in one place—so
-            operators, supervisors, and care staff are not juggling separate
-            tools.
+            When a resident books, your team sees it right away. Assign visits,
+            manage schedules, message staff, and run reports from one app—no
+            spreadsheets or scattered tools.
           </p>
-          <ul className="communities-audience" aria-label="Who this is for">
-            <li>Operators</li>
-            <li>Supervisors</li>
-            <li>Care staff</li>
-          </ul>
         </header>
-
-        <aside className="communities-enterprise-band">
-          <div className="communities-enterprise-copy">
-            <p className="communities-enterprise-label">Multiple communities</p>
-            <h3 className="communities-enterprise-title">Enterprise Solutions</h3>
-            <p className="communities-enterprise-text">
-              Screenshots, dashboards, and how to{" "}
-              <Link href="/enterprise" className="communities-enterprise-link">
-                request a demo
-              </Link>
-              .
-            </p>
-          </div>
-          <ButtonLink
-            href="/enterprise"
-            size="md"
-            className="communities-cta-btn"
-          >
-            View Enterprise Solutions
-          </ButtonLink>
-        </aside>
 
         <div className="communities-capabilities">
           <h3 className="communities-capabilities-heading">
@@ -67,6 +41,31 @@ export function ForCommunitiesSection() {
               </li>
             ))}
           </ul>
+        </div>
+
+        <div className="communities-enterprise">
+          <h3 className="communities-enterprise-section-title">
+            Multiple communities
+          </h3>
+          <aside className="communities-enterprise-band">
+            <div className="communities-enterprise-copy">
+              <h4 className="communities-enterprise-title">Enterprise Solutions</h4>
+              <p className="communities-enterprise-text">
+                Screenshots, dashboards, and how to{" "}
+                <Link href="/enterprise" className="communities-enterprise-link">
+                  request a demo
+                </Link>
+                .
+              </p>
+            </div>
+            <ButtonLink
+              href="/enterprise"
+              size="md"
+              className="communities-cta-btn"
+            >
+              View Enterprise Solutions
+            </ButtonLink>
+          </aside>
         </div>
       </div>
     </section>

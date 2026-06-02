@@ -153,26 +153,26 @@ export const communityFeatures: ReadonlyArray<{
 }> = [
   {
     icon: "workbasket",
-    title: "Workbasket",
+    title: "Workbasket & assignments",
     summary:
-      "Every resident booking in one queue. Assign visits without spreadsheets or phone tag.",
+      "New bookings land in one live queue. Supervisors assign care pros and update visits in the app—not in spreadsheets or phone tag.",
   },
   {
     icon: "schedule",
     title: "Schedules & punch",
     summary:
-      "Calendars, shifts, punch in/out, and location checks keep field teams on track.",
+      "Shared calendars and shift planning for your team. Punch in/out with location checks so supervisors know who is on site and when.",
   },
   {
     icon: "messages",
-    title: "Messages",
+    title: "Messages & reminders",
     summary:
-      "Team chat and scheduled reminders so handoffs are not missed.",
+      "Team messaging in the app, plus scheduled reminders for visits and handoffs—so follow-ups do not get lost between shifts.",
   },
   {
     icon: "insights",
     title: "Reports & insights",
     summary:
-      "Dashboards, community snapshots, payroll, and pricing in one view.",
+      "Dashboards and community snapshots show how care is running. Payroll and pricing tools give operators a clear view across locations.",
   },
 ];
