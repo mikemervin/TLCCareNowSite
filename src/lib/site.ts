@@ -18,6 +18,7 @@ export const site = {
 
 export const navLinks = [
   { href: "/", label: "Home" },
+  { href: "/enterprise", label: "Enterprise Solutions" },
   { href: "/campus-care", label: "Campus Care" },
   { href: "/book-carenow", label: "Book CareNow" },
   { href: "/blog", label: "Blog" },

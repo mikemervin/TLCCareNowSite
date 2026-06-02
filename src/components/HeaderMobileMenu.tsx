@@ -92,6 +92,14 @@ export function HeaderMobileMenu({ linkClassName }: HeaderMobileMenuProps) {
           aria-label="Site menu"
         >
           <Link
+            href="/enterprise"
+            role="menuitem"
+            className={`${linkClassName} header-menu-link`}
+            onClick={close}
+          >
+            Enterprise Solutions
+          </Link>
+          <Link
             href="/campus-care"
             role="menuitem"
             className={`${linkClassName} header-menu-link`}

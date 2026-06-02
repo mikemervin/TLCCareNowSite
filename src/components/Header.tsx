@@ -34,6 +34,12 @@ export function Header() {
             >
               TeamLife Campus Care
             </Link>
+            <Link
+              href="/enterprise"
+              className={`${headerNavLinkClass} header-enterprise-link`}
+            >
+              Enterprise Solutions
+            </Link>
             <OutlineCtaLink
               href={site.appLoginUrl}
               icon="book"
