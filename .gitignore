@@ -20,6 +20,9 @@
 # production
 /build
 
+# first-party analytics (local JSONL store)
+/data/
+
 # misc
 .DS_Store
 *.pem

@@ -53,6 +53,7 @@ export function EnterpriseScreenshots() {
 
   return (
     <section
+      id="enterprise-see-platform"
       className="enterprise-screenshots"
       aria-labelledby="enterprise-screenshots-heading"
     >

@@ -21,9 +21,9 @@ const sections = [
     id: "analytics",
     title: "Website analytics (this site only)",
     paragraphs: [
-      `We use Google Analytics 4 on this marketing website (${site.name} at tlccarenow.com) to understand how people find and use the site. This helps us improve pages such as our home, Enterprise, and contact content.`,
-      "Google Analytics may collect information such as pages viewed, approximate location (city/region/country), device and browser type, referral source (for example, a search engine or another website), and general interaction data. It does not tell us your name or email unless you separately submit the contact form.",
-      "Google processes this data on our behalf as a service provider. You can learn how Google uses data at google.com/policies/privacy/partners. You may install Google’s browser opt-out add-on or use browser settings that limit cookies if you prefer not to be tracked on sites that use Google Analytics.",
+      `We use first-party analytics on this marketing website (${site.name} at tlccarenow.com) to understand which pages are viewed and how people find the site. Page paths, approximate country (from network headers), browser type, referral source, and timestamps may be stored on our systems. We do not use this analytics to collect your name or email unless you separately submit the contact form.`,
+      "You can limit tracking with browser Do Not Track settings; our site skips first-party analytics when that signal is enabled.",
+      `We may also use Google Analytics 4 on this site. Google may collect similar usage data and processes it as a service provider. See google.com/policies/privacy/partners and Google’s opt-out tools if you prefer not to be tracked by Google.`,
       `This analytics description applies to this public website, not to the separate CareNow booking application at app.tlccarenow.com, unless that app’s policies say otherwise.`,
     ],
   },

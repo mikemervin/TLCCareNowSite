@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CommunityFeatureIcon } from "@/components/CommunityFeatureIcon";
+import { EnterpriseLeadCapture } from "@/components/EnterpriseLeadCapture";
 import { EnterpriseScreenshots } from "@/components/EnterpriseScreenshots";
 import { ButtonLink } from "@/components/ui/Button";
 import { communityFeatures } from "@/lib/product";
@@ -513,6 +514,8 @@ export function EnterprisePageContent() {
           </section>
         </div>
       </section>
+
+      <EnterpriseLeadCapture />
     </article>
   );
 }
