@@ -23,7 +23,6 @@ export const images = {
   blogPost: wix(
     "d20898_d805d632a8294cc8aa108b727fd73782~mv2.jpg/v1/fill/w_600,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/d20898_d805d632a8294cc8aa108b727fd73782~mv2.jpg",
   ),
-  contact: "/contact.jpg",
   favicon: wix(
     "66ee93_a609c772766f4d4cbdb94b761c1bd596%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/66ee93_a609c772766f4d4cbdb94b761c1bd596%7Emv2.png",
   ),

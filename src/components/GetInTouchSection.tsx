@@ -1,18 +1,29 @@
-import Image from "next/image";
 import { ContactForm } from "@/components/ContactForm";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { images } from "@/lib/images";
 
 type GetInTouchSectionProps = {
-  /** Taller image column on the homepage hero-adjacent layout */
-  tallImage?: boolean;
   className?: string;
 };
 
-export function GetInTouchSection({
-  tallImage = false,
-  className = "",
-}: GetInTouchSectionProps) {
+function ContactFormIcon() {
+  return (
+    <svg
+      className="get-in-touch-form-icon-svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M4 6h16v12H4z" />
+      <path d="m4 7 8 6 8-6" />
+    </svg>
+  );
+}
+
+export function GetInTouchSection({ className = "" }: GetInTouchSectionProps) {
   return (
     <section id="contact" className={`get-in-touch ${className}`.trim()}>
       <div className="tlc-container get-in-touch-inner">
@@ -25,27 +36,20 @@ export function GetInTouchSection({
         </SectionHeading>
 
         <div className="get-in-touch-card">
-          <div
-            className={`get-in-touch-media${tallImage ? " get-in-touch-media--tall" : ""}`}
-          >
-            <Image
-              src={images.contact}
-              alt="Caregiver and resident knitting together and smiling"
-              fill
-              className="object-cover object-[center_20%]"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              priority={tallImage}
-            />
-            <div className="get-in-touch-media-overlay" aria-hidden />
-          </div>
+          <header className="get-in-touch-card-head">
+            <span className="get-in-touch-form-icon" aria-hidden>
+              <ContactFormIcon />
+            </span>
+            <div className="get-in-touch-panel-head">
+              <h3 className="get-in-touch-form-title">Send us a message</h3>
+              <p className="get-in-touch-form-lead">
+                We usually reply within one business day. Name and email are
+                required.
+              </p>
+            </div>
+          </header>
 
           <div className="get-in-touch-panel">
-            <header className="get-in-touch-panel-head">
-              <h3 className="get-in-touch-form-title">Send a message</h3>
-              <p className="get-in-touch-form-lead">
-                Fill out the form and our team will respond as soon as we can.
-              </p>
-            </header>
             <ContactForm />
           </div>
         </div>

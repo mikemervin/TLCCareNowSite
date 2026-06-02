@@ -24,7 +24,7 @@ export default function HomePage() {
 
       <ForCommunitiesSection />
 
-      <GetInTouchSection tallImage />
+      <GetInTouchSection />
 
       <PartnerCommunitiesSection />
     </PageShell>

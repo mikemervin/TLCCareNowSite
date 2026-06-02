@@ -21,4 +21,11 @@ export const partnerCommunities = [
     image: "/partner-communities/solstice-renton.png",
     imageAlt: "Aerial view of Solstice Renton senior living community",
   },
+  {
+    slug: "solstice-bellingham",
+    name: "Solstice Bellingham",
+    location: "Bellingham, Washington",
+    image: "/partner-communities/solstice-bellingham.png",
+    imageAlt: "Aerial view of Solstice Bellingham senior living community",
+  },
 ] as const;

@@ -7,10 +7,10 @@ import { site } from "@/lib/site";
 const fields = [
   {
     name: "name",
-    label: "Name",
+    label: "Full name",
     type: "text" as const,
     required: true,
-    placeholder: "Your name",
+    placeholder: "Jane Smith",
     autoComplete: "name",
   },
   {
@@ -18,7 +18,7 @@ const fields = [
     label: "Email",
     type: "email" as const,
     required: true,
-    placeholder: "you@example.com",
+    placeholder: "jane@community.org",
     autoComplete: "email",
   },
   {
@@ -26,7 +26,7 @@ const fields = [
     label: "Phone",
     type: "tel" as const,
     required: false,
-    placeholder: "Optional",
+    placeholder: "(555) 123-4567",
     autoComplete: "tel",
     optional: true,
   },
@@ -35,7 +35,7 @@ const fields = [
     label: "State",
     type: "text" as const,
     required: false,
-    placeholder: "e.g. IL",
+    placeholder: "IL",
     autoComplete: "address-level1",
     optional: true,
   },
@@ -44,7 +44,7 @@ const fields = [
     label: "Subject",
     type: "text" as const,
     required: false,
-    placeholder: "How can we help?",
+    placeholder: "Campus partnership, pricing, support…",
     autoComplete: "off",
     fullWidth: true,
     optional: true,
@@ -133,7 +133,7 @@ export function ContactForm() {
                   </span>
                 ) : null}
                 {"optional" in field && field.optional ? (
-                  <span className="contact-form-optional">Optional</span>
+                  <span className="contact-form-optional">optional</span>
                 ) : null}
               </span>
               <input
@@ -154,23 +154,21 @@ export function ContactForm() {
       <label htmlFor="contact-message" className="contact-form-field">
         <span className="contact-form-label">
           Message
-          <span className="contact-form-optional">Optional</span>
+          <span className="contact-form-optional">optional</span>
         </span>
         <textarea
           id="contact-message"
           name="message"
           rows={5}
-          placeholder="Type your message here..."
+          placeholder="Tell us how we can help—community name, timeline, or questions."
           className="contact-form-input contact-form-input--textarea"
           disabled={status === "submitting"}
         />
       </label>
 
-      {/* Honeypot — hidden from people, not from bots */}
-      <label className="contact-form-honeypot" aria-hidden>
-        Company
+      <div className="contact-form-honeypot" aria-hidden="true">
         <input type="text" name="company" tabIndex={-1} autoComplete="off" />
-      </label>
+      </div>
 
       {status === "error" ? (
         <p className="contact-form-status contact-form-status--error" role="alert">
@@ -179,19 +177,20 @@ export function ContactForm() {
       ) : null}
 
       <div className="contact-form-footer">
-        <p className="get-in-touch-note">
-          We look forward to hearing from you!
+        <Button
+          type="submit"
+          size="lg"
+          className="contact-form-submit"
+          disabled={status === "submitting"}
+        >
+          {status === "submitting" ? "Sending…" : "Send message"}
+        </Button>
+        <p className="contact-form-alt">
+          Prefer email?{" "}
+          <a href={`mailto:${site.email}`} className="contact-form-alt-link">
+            {site.email}
+          </a>
         </p>
-        <div className="contact-form-actions">
-          <Button
-            type="submit"
-            size="md"
-            className="contact-form-submit"
-            disabled={status === "submitting"}
-          >
-            {status === "submitting" ? "Sending…" : "Submit"}
-          </Button>
-        </div>
       </div>
     </form>
   );
