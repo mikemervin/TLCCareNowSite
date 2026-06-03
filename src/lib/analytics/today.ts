@@ -1,11 +1,10 @@
 import { isPresenceEvent } from "@/lib/analytics/active-now";
+import { getSiteTimezone } from "@/lib/analytics/timezone";
 import type { AnalyticsEvent, TodayStats } from "@/lib/analytics/types";
-
-const SITE_TIMEZONE = "America/Chicago";
 
 export function siteTodayDateKey(when = new Date()): string {
   return new Intl.DateTimeFormat("en-CA", {
-    timeZone: SITE_TIMEZONE,
+    timeZone: getSiteTimezone(),
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
@@ -14,7 +13,7 @@ export function siteTodayDateKey(when = new Date()): string {
 
 export function eventSiteDateKey(iso: string): string {
   return new Intl.DateTimeFormat("en-CA", {
-    timeZone: SITE_TIMEZONE,
+    timeZone: getSiteTimezone(),
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
@@ -25,7 +24,7 @@ export function formatSiteTodayLabel(dateKey: string): string {
   const parsed = new Date(`${dateKey}T12:00:00`);
   if (Number.isNaN(parsed.getTime())) return dateKey;
   return parsed.toLocaleDateString("en-US", {
-    timeZone: SITE_TIMEZONE,
+    timeZone: getSiteTimezone(),
     weekday: "short",
     month: "short",
     day: "numeric",
@@ -37,7 +36,7 @@ export function formatSiteWhen(iso: string): string {
   const parsed = new Date(iso);
   if (Number.isNaN(parsed.getTime())) return iso;
   return parsed.toLocaleString("en-US", {
-    timeZone: SITE_TIMEZONE,
+    timeZone: getSiteTimezone(),
     month: "short",
     day: "numeric",
     hour: "numeric",
@@ -49,7 +48,7 @@ export function formatSiteDateKeyLabel(dateKey: string): string {
   const parsed = new Date(`${dateKey}T12:00:00`);
   if (Number.isNaN(parsed.getTime())) return dateKey;
   return parsed.toLocaleDateString("en-US", {
-    timeZone: SITE_TIMEZONE,
+    timeZone: getSiteTimezone(),
     month: "short",
     day: "numeric",
   });

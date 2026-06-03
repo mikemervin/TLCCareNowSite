@@ -40,6 +40,15 @@ export function formatCountry(code: string | null): string {
   return regionNames?.of(code) ?? code;
 }
 
+function decodeGeoDisplay(value: string): string {
+  if (!value.includes("%")) return value;
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value.replaceAll("%20", " ");
+  }
+}
+
 /** City, region, and country — e.g. "Chicago, IL · United States". */
 export function formatLocation(
   country: string | null,
@@ -50,7 +59,7 @@ export function formatLocation(
   const placeParts: string[] = [];
 
   if (city?.trim()) {
-    const c = city.trim();
+    const c = decodeGeoDisplay(city.trim());
     if (region?.trim()) {
       const r = region.trim();
       placeParts.push(country === "US" ? `${c}, ${r.toUpperCase()}` : `${c}, ${r}`);

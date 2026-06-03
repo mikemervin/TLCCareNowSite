@@ -141,7 +141,15 @@ function sanitizeGeoPart(
   maxLen: number,
 ): string | null {
   if (!raw?.trim()) return null;
-  const value = raw.trim().slice(0, maxLen);
+  let value = raw.trim();
+  if (value.includes("%")) {
+    try {
+      value = decodeURIComponent(value);
+    } catch {
+      /* keep encoded string */
+    }
+  }
+  value = value.slice(0, maxLen);
   if (/^(unknown|null|undefined)$/i.test(value)) return null;
   return value;
 }

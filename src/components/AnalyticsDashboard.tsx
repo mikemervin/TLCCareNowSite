@@ -7,6 +7,7 @@ import {
   formatSiteDateKeyLabel,
   formatSiteWhen,
 } from "@/lib/analytics/today";
+import { siteTimezoneDisplayLabel } from "@/lib/analytics/timezone";
 import {
   formatBrowser,
   formatLocation,
@@ -474,7 +475,9 @@ export function AnalyticsDashboard({
         <h2 className="analytics-today-heading">
           <span className="analytics-today-label">Today</span>
           <span className="analytics-today-date">{summary.today.dateLabel}</span>
-          <span className="analytics-today-tz">Times in Central (CT)</span>
+          <span className="analytics-today-tz">
+            Times in {siteTimezoneDisplayLabel()}
+          </span>
         </h2>
         <div className="analytics-dashboard-stats analytics-dashboard-stats--today">
           <AnalyticsActiveNow initial={summary.activeNow} />
