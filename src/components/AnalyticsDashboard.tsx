@@ -5,6 +5,8 @@ import {
   formatCountry,
   formatReferrer,
 } from "@/lib/analytics/format";
+import { submissionSourceLabel } from "@/lib/analytics/submissions-types";
+import type { FormSubmission } from "@/lib/analytics/submissions-types";
 import type {
   AnalyticsEvent,
   AnalyticsSummary,
@@ -15,6 +17,7 @@ import type {
 
 type AnalyticsDashboardProps = {
   summary: AnalyticsSummary;
+  submissions: FormSubmission[];
   showProductionHints?: boolean;
 };
 
@@ -131,6 +134,74 @@ function FormEntriesPanel({ entries }: { entries: FormEntrySnapshot[] }) {
   );
 }
 
+function SubmittedFormsPanel({ submissions }: { submissions: FormSubmission[] }) {
+  if (submissions.length === 0) {
+    return (
+      <p className="analytics-panel-empty">
+        No completed submissions stored yet. Sent forms are saved here in
+        addition to email.
+      </p>
+    );
+  }
+
+  return (
+    <div className="analytics-entry-grid">
+      {submissions.map((sub) => (
+        <article key={sub.id} className="analytics-entry-card analytics-entry-card--sent">
+          <header className="analytics-entry-head">
+            <div>
+              <h3 className="analytics-entry-title">
+                {submissionSourceLabel(sub.source)}
+              </h3>
+              <p className="analytics-entry-meta">
+                {sub.path}
+                {sub.country ? ` · ${formatCountry(sub.country)}` : ""}
+              </p>
+            </div>
+            <time className="analytics-entry-time tabular-nums">
+              {formatWhen(sub.timestamp)}
+            </time>
+          </header>
+          <dl className="analytics-entry-fields">
+            <div className="analytics-entry-field">
+              <dt>Name</dt>
+              <dd>{sub.name}</dd>
+            </div>
+            <div className="analytics-entry-field">
+              <dt>Email</dt>
+              <dd>{sub.email}</dd>
+            </div>
+            {sub.phone ? (
+              <div className="analytics-entry-field">
+                <dt>Phone</dt>
+                <dd>{sub.phone}</dd>
+              </div>
+            ) : null}
+            {sub.state ? (
+              <div className="analytics-entry-field">
+                <dt>State / location</dt>
+                <dd>{sub.state}</dd>
+              </div>
+            ) : null}
+            {sub.subject ? (
+              <div className="analytics-entry-field">
+                <dt>Subject</dt>
+                <dd>{sub.subject}</dd>
+              </div>
+            ) : null}
+            {sub.message ? (
+              <div className="analytics-entry-field">
+                <dt>Message</dt>
+                <dd>{sub.message}</dd>
+              </div>
+            ) : null}
+          </dl>
+        </article>
+      ))}
+    </div>
+  );
+}
+
 function FormFunnelsPanel({ funnels }: { funnels: FormFunnelSummary[] }) {
   const hasAny = funnels.some((f) => f.steps.some((s) => s.count > 0));
 
@@ -193,6 +264,7 @@ function FormFunnelsPanel({ funnels }: { funnels: FormFunnelSummary[] }) {
 
 export function AnalyticsDashboard({
   summary,
+  submissions,
   showProductionHints = false,
 }: AnalyticsDashboardProps) {
   const isEmpty = summary.pageviews === 0 && summary.customEvents === 0;
@@ -312,6 +384,19 @@ export function AnalyticsDashboard({
           </div>
         </div>
         <FormEntriesPanel entries={summary.formEntries} />
+      </section>
+
+      <section className="analytics-panel analytics-panel--wide">
+        <div className="analytics-panel-head-row">
+          <div>
+            <h2 className="analytics-panel-title">Submitted forms</h2>
+            <p className="analytics-panel-subtitle">
+              Full messages after someone clicks send (also emailed to your
+              inbox).
+            </p>
+          </div>
+        </div>
+        <SubmittedFormsPanel submissions={submissions} />
       </section>
 
       {summary.recentFieldUpdates.length > 0 ? (

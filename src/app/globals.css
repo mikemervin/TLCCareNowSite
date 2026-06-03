@@ -4811,6 +4811,10 @@ a {
   box-shadow: 0 2px 14px rgb(28 67 29 / 6%);
 }
 
+.analytics-entry-card--sent {
+  border-left: 3px solid var(--tlc-primary);
+}
+
 .analytics-entry-head {
   display: flex;
   align-items: flex-start;

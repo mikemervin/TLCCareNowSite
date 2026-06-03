@@ -1,3 +1,6 @@
+import { countryFromHeaders } from "@/lib/analytics/parse";
+import { appendFormSubmission } from "@/lib/analytics/submissions-store";
+import type { FormSubmissionSource } from "@/lib/analytics/submissions-types";
 import { Resend } from "resend";
 import {
   buildContactEmailHtml,
@@ -7,6 +10,18 @@ import {
   messageFromResendError,
   parseContactForm,
 } from "@/lib/contact";
+
+function submissionMeta(formData: FormData): {
+  source: FormSubmissionSource;
+  path: string;
+} {
+  const rawSource = String(formData.get("form_source") ?? "contact").trim();
+  const source: FormSubmissionSource =
+    rawSource === "enterprise" ? "enterprise" : "contact";
+  const pagePath = String(formData.get("form_path") ?? "/contact").trim();
+  const path = pagePath.startsWith("/") ? pagePath.slice(0, 512) : "/contact";
+  return { source, path };
+}
 
 export async function POST(request: Request) {
   const apiKey = process.env.RESEND_API_KEY?.trim();
@@ -59,6 +74,23 @@ export async function POST(request: Request) {
       { error: messageFromResendError(error) },
       { status: 502 },
     );
+  }
+
+  const { source, path } = submissionMeta(formData);
+  try {
+    await appendFormSubmission({
+      source,
+      path,
+      country: countryFromHeaders(request.headers),
+      name: parsed.data.name,
+      email: parsed.data.email,
+      phone: parsed.data.phone,
+      state: parsed.data.state,
+      subject: parsed.data.subject,
+      message: parsed.data.message,
+    });
+  } catch (storeError) {
+    console.error("Form submission store error:", storeError);
   }
 
   return Response.json({ ok: true });

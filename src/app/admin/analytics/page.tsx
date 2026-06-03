@@ -7,6 +7,7 @@ import {
   setAnalyticsSession,
 } from "@/lib/analytics/auth";
 import { analyticsAdminSecret } from "@/lib/analytics/config";
+import { readFormSubmissions } from "@/lib/analytics/submissions-store";
 import {
   buildAnalyticsSummary,
   readAnalyticsEvents,
@@ -67,6 +68,7 @@ export default async function AdminAnalyticsPage({ searchParams }: PageProps) {
                 await readAnalyticsEvents(),
                 useBlobAnalyticsStore() ? "blob" : "file",
               )}
+              submissions={await readFormSubmissions()}
               showProductionHints={process.env.VERCEL === "1"}
             />
           )}

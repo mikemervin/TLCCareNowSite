@@ -183,6 +183,9 @@ export function ContactForm() {
         />
       </label>
 
+      <input type="hidden" name="form_source" value="contact" />
+      <input type="hidden" name="form_path" value={pathname} />
+
       <div className="contact-form-honeypot" aria-hidden="true">
         <input type="text" name="company" tabIndex={-1} autoComplete="off" />
       </div>

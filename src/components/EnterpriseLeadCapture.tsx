@@ -276,6 +276,9 @@ export function EnterpriseLeadCapture() {
                 })}
               </div>
 
+              <input type="hidden" name="form_source" value="enterprise" />
+              <input type="hidden" name="form_path" value="/enterprise" />
+
               <div className="contact-form-honeypot" aria-hidden="true">
                 <input type="text" name="company" tabIndex={-1} autoComplete="off" />
               </div>
