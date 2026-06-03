@@ -6,8 +6,9 @@ import { site } from "@/lib/site";
 import { pageMetadata } from "@/lib/page-metadata";
 
 export const metadata = pageMetadata({
-  title: "About",
-  description: site.description,
+  title: "About TLC CareNow",
+  description:
+    "Learn how TLC CareNow and TeamLife Health Group support independent living communities with on-demand care and operator software.",
   path: "/about",
 });
 

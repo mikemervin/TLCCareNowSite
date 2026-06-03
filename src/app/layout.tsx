@@ -4,6 +4,7 @@ import "./globals.css";
 import { site } from "@/lib/site";
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 import { SiteAnalytics } from "@/components/SiteAnalytics";
+import { SiteJsonLd } from "@/components/SiteJsonLd";
 import { getSiteUrl } from "@/lib/site-url";
 
 const siteUrl = getSiteUrl();
@@ -52,6 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={roboto.variable}>
       <body className="flex min-h-screen flex-col antialiased">
+        <SiteJsonLd />
         <SiteAnalytics />
         <AnalyticsProvider />
         {children}

@@ -3,9 +3,9 @@ import { PageShell } from "@/components/PageShell";
 import { pageMetadata } from "@/lib/page-metadata";
 
 export const metadata = pageMetadata({
-  title: "Enterprise Solutions",
+  title: "Enterprise Solutions for Senior Living Operators",
   description:
-    "Operator software designed for supervisors, admins, and owners—simple dashboards to book care, run the day, and handle payroll without complicated tools.",
+    "TLC CareNow enterprise software for independent living and senior living—schedule care by the visit, role-based dashboards, and payroll visibility without complicated tools.",
   path: "/enterprise",
 });
 

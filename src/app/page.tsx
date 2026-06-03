@@ -9,7 +9,9 @@ import { HowItWorks } from "@/components/HowItWorks";
 import { PageShell } from "@/components/PageShell";
 
 export const metadata = pageMetadata({
-  description: site.description,
+  title: "Care for Independent Living Communities",
+  description:
+    "TLC CareNow helps residents of independent living communities book same-day and short-term care without traditional agency minimums—plus operator tools for your team.",
   path: "/",
 });
 

@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import { BlogPostBody } from "@/components/BlogPostBody";
 import { PageShell } from "@/components/PageShell";
 import { getAllBlogSlugs, getBlogPost } from "@/lib/blog/posts";
-import { pageMetadata } from "@/lib/page-metadata";
+import { JsonLd } from "@/components/JsonLd";
+import { articleJsonLd, pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 import type { Metadata } from "next";
 
@@ -32,6 +33,15 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <PageShell>
+      <JsonLd
+        data={articleJsonLd({
+          title: post.title,
+          description: post.description,
+          publishedAt: post.publishedAt,
+          slug: post.slug,
+          image: post.image,
+        })}
+      />
       <article className="blog-article">
         <div className="tlc-container blog-article-layout">
           <Link href="/blog" className="blog-article-back">

@@ -3,9 +3,9 @@ import { PageShell } from "@/components/PageShell";
 import { pageMetadata } from "@/lib/page-metadata";
 
 export const metadata = pageMetadata({
-  title: "Campus Care",
+  title: "TeamLife Campus Care — Senior Living Wellness",
   description:
-    "TeamLife Campus Care is a wellness program for senior living campuses, separate from the TLC CareNow booking app.",
+    "TeamLife Campus Care wellness programs for senior living campuses—separate from TLC CareNow booking for residents and care scheduling.",
   path: "/campus-care",
 });
 

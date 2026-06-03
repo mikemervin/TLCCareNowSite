@@ -6,8 +6,9 @@ import { pageMetadata } from "@/lib/page-metadata";
 import Link from "next/link";
 
 export const metadata = pageMetadata({
-  title: "Book CareNow",
-  description: site.tagline,
+  title: "Book CareNow — Resident Care Scheduling",
+  description:
+    "Sign in to the TLC CareNow app to book same-day or short-term care at your independent living or senior living community.",
   path: "/book-carenow",
 });
 
