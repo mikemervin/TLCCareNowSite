@@ -23,17 +23,12 @@ function send(payload: {
     referrer: payload.referrer ?? (document.referrer || null),
   });
 
-  if (navigator.sendBeacon) {
-    const blob = new Blob([body], { type: "application/json" });
-    navigator.sendBeacon(ENDPOINT, blob);
-    return;
-  }
-
   void fetch(ENDPOINT, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body,
     keepalive: true,
+    credentials: "same-origin",
   });
 }
 

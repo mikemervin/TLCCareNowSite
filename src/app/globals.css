@@ -4461,6 +4461,31 @@ a {
   margin-top: 0.5rem;
 }
 
+.analytics-dashboard-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+.analytics-dashboard-signout {
+  padding: 0.375rem 0.75rem;
+  border: 1px solid rgb(40 101 43 / 14%);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--tlc-text-muted);
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.analytics-dashboard-signout:hover {
+  border-color: rgb(40 101 43 / 28%);
+  color: var(--tlc-brand);
+}
+
 .analytics-dashboard-header {
   text-align: center;
   max-width: 36rem;
@@ -4478,6 +4503,26 @@ a {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-size: 0.75rem;
+}
+
+.analytics-dashboard-hint {
+  margin-top: 1rem;
+  padding: 0.875rem 1rem;
+  border-radius: 0.75rem;
+  text-align: left;
+  background: rgb(128 181 65 / 14%);
+  border: 1px solid rgb(40 101 43 / 14%);
+}
+
+.analytics-dashboard-hint p {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--tlc-brand);
+}
+
+.analytics-dashboard-hint code {
+  font-size: 0.8125rem;
 }
 
 .analytics-dashboard-stats {

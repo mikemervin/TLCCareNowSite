@@ -1,19 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useActionState } from "react";
+import { unlockAnalytics } from "@/app/admin/analytics/actions";
 import { Button } from "@/components/ui/Button";
 
-export function AnalyticsUnlockForm({ error }: { error?: boolean }) {
-  const router = useRouter();
-  const [key, setKey] = useState("");
-
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const trimmed = key.trim();
-    if (!trimmed) return;
-    router.push(`/admin/analytics?key=${encodeURIComponent(trimmed)}`);
-  }
+export function AnalyticsUnlockForm() {
+  const [state, formAction, pending] = useActionState(unlockAnalytics, {});
 
   return (
     <div className="analytics-unlock">
@@ -21,16 +13,17 @@ export function AnalyticsUnlockForm({ error }: { error?: boolean }) {
       <h1 className="analytics-unlock-title">Analytics dashboard</h1>
       <span className="tlc-accent-line analytics-unlock-accent" aria-hidden />
       <p className="analytics-unlock-text">
-        Enter your admin secret to view first-party traffic for this site.
+        Sign in once with your admin secret. After that, use the short link{" "}
+        <strong>/admin/analytics</strong> on this device.
       </p>
-      {error ? (
+      {state.error ? (
         <p className="analytics-unlock-error" role="alert">
-          That key didn&apos;t work. Check{" "}
+          That secret didn&apos;t work. Use the value from{" "}
           <code className="analytics-unlock-code">ANALYTICS_ADMIN_SECRET</code>{" "}
-          in your env settings.
+          in Vercel (not the variable name).
         </p>
       ) : null}
-      <form className="analytics-unlock-form" onSubmit={handleSubmit}>
+      <form className="analytics-unlock-form" action={formAction}>
         <label htmlFor="analytics-key" className="analytics-unlock-label">
           Admin secret
         </label>
@@ -38,15 +31,18 @@ export function AnalyticsUnlockForm({ error }: { error?: boolean }) {
           id="analytics-key"
           type="password"
           name="key"
-          value={key}
-          onChange={(event) => setKey(event.target.value)}
           className="analytics-unlock-input"
-          placeholder="Paste your secret"
-          autoComplete="off"
+          placeholder="Your secret"
+          autoComplete="current-password"
           required
         />
-        <Button type="submit" size="md" className="analytics-unlock-submit">
-          View dashboard
+        <Button
+          type="submit"
+          size="md"
+          className="analytics-unlock-submit"
+          disabled={pending}
+        >
+          {pending ? "Signing in…" : "View dashboard"}
         </Button>
       </form>
     </div>

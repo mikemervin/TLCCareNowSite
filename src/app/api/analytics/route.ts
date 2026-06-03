@@ -71,7 +71,13 @@ export async function POST(request: NextRequest) {
 
   let body: AnalyticsIngestPayload;
   try {
-    body = (await request.json()) as AnalyticsIngestPayload;
+    const contentType = request.headers.get("content-type") ?? "";
+    if (contentType.includes("application/json")) {
+      body = (await request.json()) as AnalyticsIngestPayload;
+    } else {
+      const text = await request.text();
+      body = JSON.parse(text) as AnalyticsIngestPayload;
+    }
   } catch {
     return Response.json({ error: "Invalid JSON." }, { status: 400 });
   }

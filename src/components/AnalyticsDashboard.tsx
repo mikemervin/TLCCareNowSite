@@ -1,7 +1,9 @@
+import { logoutAnalytics } from "@/app/admin/analytics/actions";
 import type { AnalyticsSummary } from "@/lib/analytics/types";
 
 type AnalyticsDashboardProps = {
   summary: AnalyticsSummary;
+  showProductionHints?: boolean;
 };
 
 function formatDay(date: string): string {
@@ -24,7 +26,11 @@ function formatWhen(iso: string): string {
   });
 }
 
-export function AnalyticsDashboard({ summary }: AnalyticsDashboardProps) {
+export function AnalyticsDashboard({
+  summary,
+  showProductionHints = false,
+}: AnalyticsDashboardProps) {
+  const isEmpty = summary.totalEvents === 0;
   const maxPathCount = summary.topPaths[0]?.count ?? 1;
   const maxDayCount = Math.max(
     ...summary.eventsByDay.map((d) => d.count),
@@ -33,6 +39,13 @@ export function AnalyticsDashboard({ summary }: AnalyticsDashboardProps) {
 
   return (
     <div className="analytics-dashboard">
+      <div className="analytics-dashboard-toolbar">
+        <form action={logoutAnalytics}>
+          <button type="submit" className="analytics-dashboard-signout">
+            Sign out
+          </button>
+        </form>
+      </div>
       <header className="analytics-dashboard-header">
         <p className="analytics-dashboard-eyebrow">First-party analytics</p>
         <h1 className="analytics-dashboard-title">Site traffic</h1>
@@ -43,6 +56,25 @@ export function AnalyticsDashboard({ summary }: AnalyticsDashboardProps) {
         <p className="analytics-dashboard-meta">
           Storage: <strong>{summary.storage}</strong>
         </p>
+        {isEmpty && showProductionHints ? (
+          <div className="analytics-dashboard-hint" role="status">
+            <p>
+              <strong>No data on production yet.</strong> In Vercel: connect a{" "}
+              <strong>Blob</strong> store (Storage tab), confirm{" "}
+              <code>NEXT_PUBLIC_ANALYTICS_ENABLED=true</code>, redeploy, then
+              browse the live site and refresh this page.
+            </p>
+          </div>
+        ) : null}
+        {isEmpty && !showProductionHints ? (
+          <div className="analytics-dashboard-hint" role="status">
+            <p>
+              Browse <strong>http://localhost:3000</strong> in another tab, then
+              refresh. Local events save to <code>data/analytics-events.jsonl</code>
+              .
+            </p>
+          </div>
+        ) : null}
       </header>
 
       <div className="analytics-dashboard-stats">
