@@ -4519,8 +4519,7 @@ a {
   }
 }
 
-.analytics-unlock-eyebrow,
-.analytics-dashboard-eyebrow {
+.analytics-unlock-eyebrow {
   margin: 0;
   font-size: 0.75rem;
   font-weight: 600;
@@ -4543,12 +4542,18 @@ a {
   margin: 1rem auto 0;
 }
 
-.analytics-unlock-text,
-.analytics-dashboard-lead {
+.analytics-unlock-text {
   margin: 1rem 0 0;
   font-size: 1rem;
   line-height: 1.65;
   color: var(--tlc-text-muted);
+}
+
+.analytics-dashboard-lead {
+  margin: 1rem 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--tlc-text);
 }
 
 .analytics-unlock-error {
@@ -4630,35 +4635,102 @@ a {
   margin-top: 0.5rem;
 }
 
-.analytics-dashboard-toolbar {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 0.5rem;
+.analytics-dashboard-hero {
+  margin-bottom: 0.25rem;
 }
 
-.analytics-dashboard-signout {
-  padding: 0.375rem 0.75rem;
-  border: 1px solid rgb(40 101 43 / 14%);
+.analytics-dashboard-hero-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: clamp(1.25rem, 3.5vw, 1.75rem);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgb(40 101 43 / 10%);
+}
+
+@media (max-width: 420px) {
+  .analytics-dashboard-hero-bar {
+    flex-wrap: wrap;
+  }
+
+  .analytics-dashboard-signout-form {
+    margin-left: auto;
+  }
+}
+
+.analytics-dashboard-eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.625rem;
+  margin: 0;
+}
+
+.analytics-dashboard-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.65rem;
   border-radius: 999px;
-  background: #fff;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tlc-brand);
+  background: rgb(40 101 43 / 9%);
+  border: 1px solid rgb(40 101 43 / 14%);
+}
+
+.analytics-dashboard-domain {
   font-size: 0.8125rem;
   font-weight: 500;
   color: var(--tlc-text-muted);
+}
+
+.analytics-dashboard-signout-form {
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.analytics-dashboard-signout {
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgb(40 101 43 / 12%);
+  border-radius: 999px;
+  background: rgb(40 101 43 / 4%);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--tlc-brand);
   cursor: pointer;
   transition:
+    background 0.2s ease,
     border-color 0.2s ease,
     color 0.2s ease;
 }
 
 .analytics-dashboard-signout:hover {
-  border-color: rgb(40 101 43 / 28%);
-  color: var(--tlc-brand);
+  background: rgb(40 101 43 / 10%);
+  border-color: rgb(40 101 43 / 22%);
+  color: var(--tlc-primary-dark);
 }
 
-.analytics-dashboard-header {
+.analytics-dashboard-signout:focus-visible {
+  outline: 2px solid var(--tlc-primary);
+  outline-offset: 2px;
+}
+
+.analytics-dashboard-hero-main {
   text-align: center;
-  max-width: 36rem;
+  max-width: 40rem;
   margin-inline: auto;
+}
+
+.analytics-dashboard-lead-note {
+  display: block;
+  margin-top: 0.625rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--tlc-text-muted);
+  opacity: 0.92;
 }
 
 .analytics-meta-pills {

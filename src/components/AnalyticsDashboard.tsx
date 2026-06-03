@@ -386,23 +386,32 @@ export function AnalyticsDashboard({
 
   return (
     <div className="analytics-dashboard">
-      <div className="analytics-dashboard-toolbar">
-        <form action={logoutAnalytics}>
-          <button type="submit" className="analytics-dashboard-signout">
-            Sign out
-          </button>
-        </form>
-      </div>
-
-      <header className="analytics-dashboard-header">
-        <p className="analytics-dashboard-eyebrow">Private · tlccarenow.com</p>
-        <h1 className="analytics-dashboard-title">Site analytics</h1>
-        <span className="tlc-accent-line analytics-dashboard-accent" aria-hidden />
-        <p className="analytics-dashboard-lead">
-          A simple view of who visited the marketing site and what they did on
-          forms. <strong>Online now</strong> refreshes automatically; other
-          numbers update when someone loads a page or interacts with a form.
-        </p>
+      <header className="analytics-dashboard-hero">
+        <div className="analytics-dashboard-hero-bar">
+          <p className="analytics-dashboard-eyebrow">
+            <span className="analytics-dashboard-badge">Private</span>
+            <span className="analytics-dashboard-domain">tlccarenow.com</span>
+          </p>
+          <form action={logoutAnalytics} className="analytics-dashboard-signout-form">
+            <button type="submit" className="analytics-dashboard-signout">
+              Sign out
+            </button>
+          </form>
+        </div>
+        <div className="analytics-dashboard-hero-main">
+          <h1 className="analytics-dashboard-title">Site analytics</h1>
+          <span
+            className="tlc-accent-line analytics-dashboard-accent"
+            aria-hidden
+          />
+          <p className="analytics-dashboard-lead">
+            Visitors, form drafts, and submissions for your marketing site.
+            <span className="analytics-dashboard-lead-note">
+              Online now refreshes every 30 seconds. Other stats update when
+              someone opens a page or uses a form.
+            </span>
+          </p>
+        </div>
       </header>
 
       <aside className="analytics-guide" aria-label="How to read this page">
