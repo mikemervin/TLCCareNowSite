@@ -191,7 +191,7 @@ export function EnterprisePageContent() {
             <ButtonLink
               href="/contact"
               size="md"
-              className="enterprise-contact-btn !text-white"
+              className="enterprise-contact-btn w-full sm:w-auto !text-white"
             >
               Request a free demo
             </ButtonLink>
