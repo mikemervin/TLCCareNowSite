@@ -55,6 +55,15 @@ export function trackPageView(path: string): void {
   });
 }
 
+/** Keeps the session counted as "online" while the tab is open (about every 45s). */
+export function trackPresence(path: string): void {
+  send({
+    type: "heartbeat",
+    path,
+    sessionId: getAnalyticsSessionId(),
+  });
+}
+
 /** @deprecated Use getAnalyticsSessionId */
 export const getFormAnalyticsSessionId = getAnalyticsSessionId;
 

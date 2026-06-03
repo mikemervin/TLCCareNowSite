@@ -41,7 +41,7 @@ export async function setAnalyticsSession(): Promise<void> {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
-    path: "/admin/analytics",
+    path: "/admin",
     maxAge: COOKIE_MAX_AGE,
   });
 }

@@ -1,3 +1,4 @@
+import { isPresenceEvent } from "@/lib/analytics/active-now";
 import type { AnalyticsEvent, TodayStats } from "@/lib/analytics/types";
 
 const SITE_TIMEZONE = "America/Chicago";
@@ -52,7 +53,10 @@ function uniqueVisitorCount(events: AnalyticsEvent[]): number {
 
 export function buildTodayStats(events: AnalyticsEvent[]): TodayStats {
   const todayKey = siteTodayDateKey();
-  const todayEvents = events.filter((e) => eventSiteDateKey(e.timestamp) === todayKey);
+  const todayEvents = events.filter(
+    (e) =>
+      eventSiteDateKey(e.timestamp) === todayKey && !isPresenceEvent(e),
+  );
   const todayPageviews = todayEvents.filter((e) => e.type === "pageview");
 
   return {

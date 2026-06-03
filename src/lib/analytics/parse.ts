@@ -33,7 +33,12 @@ function isExcludedPath(path: string): boolean {
 
 export function parseIngestPayload(body: AnalyticsIngestPayload): ParsedIngest {
   const type = body.type;
-  if (type !== "pageview" && type !== "event" && type !== "form_input") {
+  if (
+    type !== "pageview" &&
+    type !== "event" &&
+    type !== "form_input" &&
+    type !== "heartbeat"
+  ) {
     return { ok: false, error: "Invalid event type." };
   }
 
@@ -58,17 +63,28 @@ export function parseIngestPayload(body: AnalyticsIngestPayload): ParsedIngest {
     return { ok: false, error: "Event name is required." };
   }
 
+  if (type === "heartbeat" && body.name) {
+    return { ok: false, error: "Heartbeat must not include a name." };
+  }
+
   let formId: string | null = null;
   let field: string | null = null;
   let value: string | null = null;
   let sessionId: string | null = null;
 
   if (
-    (type === "pageview" || type === "event" || type === "form_input") &&
+    (type === "pageview" ||
+      type === "event" ||
+      type === "form_input" ||
+      type === "heartbeat") &&
     typeof body.sessionId === "string" &&
     body.sessionId.trim()
   ) {
     sessionId = body.sessionId.trim().slice(0, MAX_SESSION_ID_LENGTH);
+  }
+
+  if (type === "heartbeat" && !sessionId) {
+    return { ok: false, error: "Invalid session id." };
   }
 
   if (type === "form_input") {

@@ -1,4 +1,8 @@
-export type AnalyticsEventType = "pageview" | "event" | "form_input";
+export type AnalyticsEventType =
+  | "pageview"
+  | "event"
+  | "form_input"
+  | "heartbeat";
 
 export type AnalyticsEvent = {
   id: string;
@@ -63,9 +67,16 @@ export type TodayStats = {
   totalEvents: number;
 };
 
+export type ActiveNowStats = {
+  count: number;
+  windowMinutes: number;
+  asOf: string;
+};
+
 export type AnalyticsSummary = {
   storage: "blob" | "file";
   excludedAdminViews: number;
+  activeNow: ActiveNowStats;
   today: TodayStats;
   totalEvents: number;
   pageviews: number;

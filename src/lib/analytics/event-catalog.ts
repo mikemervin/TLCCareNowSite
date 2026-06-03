@@ -19,20 +19,20 @@ export const FORM_FUNNELS: FunnelDef[] = [
     title: "Contact form",
     description: "Get In Touch on /contact and embedded sections",
     steps: [
-      { key: "contact_form_started", label: "Started" },
-      { key: "contact_form_submitted", label: "Submitted" },
+      { key: "contact_form_started", label: "Started filling out" },
+      { key: "contact_form_submitted", label: "Clicked Send" },
     ],
   },
   {
     id: "enterprise",
     title: "Enterprise demo popup",
-    description: "Scroll-triggered popup on /enterprise",
+    description: "On the Enterprise page",
     steps: [
-      { key: "enterprise_lead_shown", label: "Popup opened" },
-      { key: "enterprise_lead_started", label: "Started" },
+      { key: "enterprise_lead_shown", label: "Saw the popup" },
+      { key: "enterprise_lead_started", label: "Started filling out" },
       {
         key: "enterprise_lead_submitted",
-        label: "Submitted",
+        label: "Clicked Send",
         aliases: ["enterprise_lead_submit"],
       },
     ],
@@ -40,12 +40,12 @@ export const FORM_FUNNELS: FunnelDef[] = [
 ];
 
 const EVENT_LABELS: Record<string, string> = {
-  contact_form_started: "Contact — started",
-  contact_form_submitted: "Contact — submitted",
-  enterprise_lead_shown: "Enterprise popup — opened",
-  enterprise_lead_started: "Enterprise popup — started",
-  enterprise_lead_submitted: "Enterprise popup — submitted",
-  enterprise_lead_submit: "Enterprise popup — submitted",
+  contact_form_started: "Started contact form",
+  contact_form_submitted: "Sent contact form",
+  enterprise_lead_shown: "Saw enterprise demo popup",
+  enterprise_lead_started: "Started enterprise demo form",
+  enterprise_lead_submitted: "Sent enterprise demo form",
+  enterprise_lead_submit: "Sent enterprise demo form",
 };
 
 function keysForStep(step: FunnelStepDef): string[] {

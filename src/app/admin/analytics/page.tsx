@@ -33,15 +33,22 @@ export default async function AdminAnalyticsPage({ searchParams }: PageProps) {
 
   if (!secret) {
     return (
-      <PageShell>
+      <PageShell variant="analytics-panel">
         <section className="analytics-admin-page">
           <div className="tlc-container analytics-admin-inner">
-            <div className="analytics-unlock">
-              <h1 className="analytics-unlock-title">Analytics not configured</h1>
-              <p className="analytics-unlock-text">
-                Set <code className="analytics-unlock-code">ANALYTICS_ADMIN_SECRET</code>{" "}
-                (16+ characters) in your environment, then redeploy.
-              </p>
+            <div className="analytics-unlock-wrap">
+              <div className="analytics-unlock-card">
+                <h1 className="analytics-unlock-title">Analytics not set up</h1>
+                <span
+                  className="tlc-accent-line analytics-unlock-accent"
+                  aria-hidden
+                />
+                <p className="analytics-unlock-text">
+                  Add{" "}
+                  <code className="analytics-unlock-code">ANALYTICS_ADMIN_SECRET</code>{" "}
+                  (16+ characters) to your environment, then restart or redeploy.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -57,7 +64,7 @@ export default async function AdminAnalyticsPage({ searchParams }: PageProps) {
   const authed = await isAnalyticsSessionValid();
 
   return (
-    <PageShell>
+    <PageShell variant="analytics-panel">
       <section className="analytics-admin-page">
         <div className="tlc-container analytics-admin-inner">
           {!authed ? (

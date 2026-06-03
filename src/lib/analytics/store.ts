@@ -15,6 +15,7 @@ import {
   buildTopActions,
 } from "@/lib/analytics/event-catalog";
 import { buildFormEntrySnapshots } from "@/lib/analytics/form-snapshots";
+import { buildActiveNowStats, isPresenceEvent } from "@/lib/analytics/active-now";
 import { buildTodayStats } from "@/lib/analytics/today";
 import { formatCountry, formatReferrer } from "@/lib/analytics/format";
 import type {
@@ -117,9 +118,10 @@ export function buildAnalyticsSummary(
     (e) => e.type === "pageview" && isAdminPath(e.path),
   ).length;
   const marketing = publicMarketingEvents(events);
+  const signals = marketing.filter((e) => !isPresenceEvent(e));
 
-  const pageviews = marketing.filter((e) => e.type === "pageview");
-  const customEvents = marketing.filter((e) => e.type === "event");
+  const pageviews = signals.filter((e) => e.type === "pageview");
+  const customEvents = signals.filter((e) => e.type === "event");
 
   const pathCounts = new Map<string, number>();
   for (const event of pageviews) {
@@ -132,7 +134,7 @@ export function buildAnalyticsSummary(
     .map(([path, count]) => ({ path, count }));
 
   const dayCounts = new Map<string, number>();
-  for (const event of marketing) {
+  for (const event of signals) {
     const date = event.timestamp.slice(0, 10);
     dayCounts.set(date, (dayCounts.get(date) ?? 0) + 1);
   }
@@ -151,28 +153,29 @@ export function buildAnalyticsSummary(
     formatCountry(raw),
   );
 
-  const reversed = [...marketing].reverse();
-  const formInputs = marketing.filter((e) => e.type === "form_input");
+  const reversed = [...signals].reverse();
+  const formInputs = signals.filter((e) => e.type === "form_input");
 
   return {
     storage,
     excludedAdminViews,
+    activeNow: buildActiveNowStats(events),
     today: buildTodayStats(marketing),
-    totalEvents: marketing.length,
+    totalEvents: signals.length,
     pageviews: pageviews.length,
     customEvents: customEvents.length,
     uniquePaths: pathCounts.size,
     topPaths,
     topReferrers,
     topCountries,
-    formFunnels: buildFormFunnels(marketing),
-    topActions: buildTopActions(marketing),
+    formFunnels: buildFormFunnels(signals),
+    topActions: buildTopActions(signals),
     eventsByDay,
     recent: reversed.filter((e) => e.type !== "form_input").slice(0, 50),
     recentFormEvents: reversed
       .filter((e) => e.type === "event")
       .slice(0, 30),
-    formEntries: buildFormEntrySnapshots(marketing),
+    formEntries: buildFormEntrySnapshots(signals),
     recentFieldUpdates: [...formInputs].reverse().slice(0, 40),
   };
 }
