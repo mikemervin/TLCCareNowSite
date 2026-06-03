@@ -1,60 +1,63 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PageShell } from "@/components/PageShell";
-import { images } from "@/lib/images";
+import { getBlogPostsForIndex } from "@/lib/blog/posts";
 import { pageMetadata } from "@/lib/page-metadata";
 
 export const metadata = pageMetadata({
-  title: "Blog",
+  title: "Guides — Independent Living & Senior Care",
+  description:
+    "Articles for independent living communities, senior living operators, and families on scheduling care, on-demand visits, and using TLC CareNow.",
   path: "/blog",
 });
 
-const posts = [
-  {
-    slug: "depression-in-elderly-people",
-    title:
-      "Depression in Elderly People: Tips for Helping Your Aging Loved One",
-    excerpt:
-      "Melissa* could tell that her father was suffering. He'd dropped several pounds in the last few months, was reluctant to bathe and kept...",
-    author: "Stephanie Stewart",
-    date: "Mar 31, 2021",
-    readTime: "3 min read",
-    image: images.blogPost,
-  },
-];
-
 export default function BlogPage() {
+  const posts = getBlogPostsForIndex();
+
   return (
     <PageShell>
-      <section className="bg-tlc-cream py-14 sm:py-20">
-        <div className="tlc-container">
-          <h1 className="tlc-heading-green mb-12 text-3xl sm:text-4xl">Blog</h1>
-          <ul className="space-y-12">
+      <section className="blog-index">
+        <div className="tlc-container blog-index-inner">
+          <header className="blog-index-header">
+            <p className="blog-index-eyebrow">Resources</p>
+            <h1 className="blog-index-title">Guides for communities &amp; families</h1>
+            <span className="tlc-accent-line blog-index-accent" aria-hidden />
+            <p className="blog-index-lead">
+              Practical articles on independent living, senior living operations,
+              and booking care—written for operators and families who use TLC
+              CareNow.
+            </p>
+          </header>
+
+          <ul className="blog-index-list">
             {posts.map((post) => (
               <li key={post.slug}>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="group grid gap-8 md:grid-cols-[300px_1fr]"
-                >
-                  <div className="relative aspect-[4/3] overflow-hidden bg-[#eee]">
-                    <Image
-                      src={post.image}
-                      alt=""
-                      fill
-                      className="object-cover transition-transform group-hover:scale-[1.02]"
-                      sizes="300px"
-                    />
-                  </div>
-                  <div>
-                    <h2 className="text-xl font-normal text-tlc-text group-hover:text-tlc-green sm:text-2xl">
-                      {post.title}
-                    </h2>
-                    <p className="mt-4 text-tlc-text-muted">{post.excerpt}</p>
-                    <p className="mt-3 text-sm text-tlc-text-muted">
-                      {post.author} · {post.date} · {post.readTime}
-                    </p>
-                  </div>
-                </Link>
+                <article className="blog-index-card">
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="blog-index-card-link group"
+                  >
+                    <div className="blog-index-card-media">
+                      <Image
+                        src={post.image}
+                        alt={post.imageAlt}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                        sizes="(max-width: 768px) 100vw, 280px"
+                      />
+                    </div>
+                    <div className="blog-index-card-body">
+                      <span className="blog-index-card-category">
+                        {post.category}
+                      </span>
+                      <h2 className="blog-index-card-title">{post.title}</h2>
+                      <p className="blog-index-card-excerpt">{post.excerpt}</p>
+                      <p className="blog-index-card-meta">
+                        {post.author} · {post.date} · {post.readTime}
+                      </p>
+                    </div>
+                  </Link>
+                </article>
               </li>
             ))}
           </ul>

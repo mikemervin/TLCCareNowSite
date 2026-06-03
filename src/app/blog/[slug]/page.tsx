@@ -1,63 +1,101 @@
-import { PageShell } from "@/components/PageShell";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BlogPostBody } from "@/components/BlogPostBody";
+import { PageShell } from "@/components/PageShell";
+import { getAllBlogSlugs, getBlogPost } from "@/lib/blog/posts";
 import { pageMetadata } from "@/lib/page-metadata";
+import { site } from "@/lib/site";
 import type { Metadata } from "next";
-
-const posts: Record<
-  string,
-  { title: string; author: string; date: string; body: string[] }
-> = {
-  "depression-in-elderly-people": {
-    title:
-      "Depression in Elderly People: Tips for Helping Your Aging Loved One",
-    author: "Stephanie Stewart",
-    date: "Mar 31, 2021",
-    body: [
-      "Melissa* could tell that her father was suffering. He'd dropped several pounds in the last few months, was reluctant to bathe and kept to himself more than usual.",
-      "Depression in older adults is common and often overlooked. Changes in health, mobility, or social connection can contribute to feelings of sadness or withdrawal.",
-      "If you notice persistent changes in mood, appetite, sleep, or interest in activities, talk with their physician. Professional support, social engagement, and compassionate daily care can make a meaningful difference.",
-    ],
-  },
-};
 
 type Props = { params: Promise<{ slug: string }> };
 
+export function generateStaticParams() {
+  return getAllBlogSlugs().map((slug) => ({ slug }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = posts[slug];
-  if (!post) return pageMetadata({ title: "Blog", path: "/blog" });
+  const post = getBlogPost(slug);
+  if (!post) return pageMetadata({ title: "Guides", path: "/blog" });
   return pageMetadata({
     title: post.title,
+    description: post.description,
     path: `/blog/${slug}`,
   });
 }
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = posts[slug];
+  const post = getBlogPost(slug);
   if (!post) notFound();
 
   return (
     <PageShell>
-      <article className="bg-tlc-cream py-14 sm:py-20">
-        <div className="tlc-container max-w-2xl">
-          <Link
-            href="/blog"
-            className="text-sm text-tlc-text-muted underline-offset-2 hover:underline"
-          >
-            ← Back to Blog
+      <article className="blog-article">
+        <div className="tlc-container blog-article-layout">
+          <Link href="/blog" className="blog-article-back">
+            <span className="blog-article-back-icon" aria-hidden>
+              ←
+            </span>
+            All guides
           </Link>
-          <h1 className="mt-6 text-2xl font-normal leading-snug text-tlc-text sm:text-3xl">
-            {post.title}
-          </h1>
-          <p className="mt-4 text-sm text-tlc-text-muted">
-            {post.author} · {post.date}
-          </p>
-          <div className="mt-10 space-y-6 text-[17px] leading-relaxed text-tlc-text-muted">
-            {post.body.map((paragraph) => (
-              <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-            ))}
+
+          <div className="blog-article-sheet">
+            <header className="blog-article-hero">
+              <div className="blog-article-hero-media">
+                <Image
+                  src={post.image}
+                  alt={post.imageAlt}
+                  fill
+                  priority
+                  className="object-cover object-center"
+                  sizes="(max-width: 768px) 100vw, 720px"
+                />
+                <div className="blog-article-hero-scrim" aria-hidden />
+              </div>
+              <div className="blog-article-hero-copy">
+                <span className="blog-article-category">{post.category}</span>
+                <h1 className="blog-article-title">{post.title}</h1>
+                <span className="tlc-accent-line blog-article-accent" aria-hidden />
+                <p className="blog-article-meta">
+                  <span>{post.author}</span>
+                  <span className="blog-article-meta-sep" aria-hidden>
+                    ·
+                  </span>
+                  <time dateTime={post.publishedAt}>{post.date}</time>
+                  <span className="blog-article-meta-sep" aria-hidden>
+                    ·
+                  </span>
+                  <span>{post.readTime}</span>
+                </p>
+              </div>
+            </header>
+
+            <div className="blog-article-content">
+              <BlogPostBody blocks={post.body} />
+            </div>
+
+            <footer className="blog-article-footer">
+              <p className="blog-article-footer-title">Explore {site.name}</p>
+              <p className="blog-article-footer-lead">
+                Book care, see operator tools, or get in touch with our team.
+              </p>
+              <div className="blog-article-cta-grid">
+                <Link
+                  href="/enterprise"
+                  className="blog-article-cta blog-article-cta--primary"
+                >
+                  Enterprise Solutions
+                </Link>
+                <Link href="/book-carenow" className="blog-article-cta">
+                  Book CareNow
+                </Link>
+                <Link href="/contact" className="blog-article-cta">
+                  Contact
+                </Link>
+              </div>
+            </footer>
           </div>
         </div>
       </article>

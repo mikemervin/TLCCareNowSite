@@ -21,7 +21,6 @@ export const navLinks = [
   { href: "/enterprise", label: "Enterprise Solutions" },
   { href: "/campus-care", label: "Campus Care" },
   { href: "/book-carenow", label: "Book CareNow" },
-  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
   { href: "/about", label: "About" },
 ] as const;

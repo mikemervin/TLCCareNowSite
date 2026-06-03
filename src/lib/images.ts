@@ -23,6 +23,18 @@ export const images = {
   blogPost: wix(
     "d20898_d805d632a8294cc8aa108b727fd73782~mv2.jpg/v1/fill/w_600,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/d20898_d805d632a8294cc8aa108b727fd73782~mv2.jpg",
   ),
+  /** Distinct thumbnails for blog / guides index cards. */
+  blogGuides: {
+    communities: wix(
+      "5d905dad01d24eeea6f4ba5f39b68667.jpg/v1/fill/w_600,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Examining%20New%20Tablet.jpg",
+    ),
+    families: wix(
+      "d20898_fd6eb7e184254eddb12cb42408790ccb~mv2.jpg/v1/fill/w_600,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/d20898_fd6eb7e184254eddb12cb42408790ccb~mv2.jpg",
+    ),
+    caregiving: wix(
+      "d20898_d805d632a8294cc8aa108b727fd73782~mv2.jpg/v1/fill/w_600,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/d20898_d805d632a8294cc8aa108b727fd73782~mv2.jpg",
+    ),
+  },
   favicon: wix(
     "66ee93_a609c772766f4d4cbdb94b761c1bd596%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/66ee93_a609c772766f4d4cbdb94b761c1bd596%7Emv2.png",
   ),

@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
+import { getAllBlogSlugs, getBlogPost } from "@/lib/blog/posts";
 import { getSiteUrl } from "@/lib/site-url";
-
-const blogSlugs = ["depression-in-elderly-people"] as const;
 
 const staticPaths = [
   "",
@@ -26,12 +25,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === "" ? 1 : path === "/enterprise" ? 0.9 : 0.7,
   }));
 
-  const posts: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
-    url: `${base}/blog/${slug}`,
-    lastModified: now,
-    changeFrequency: "yearly",
-    priority: 0.5,
-  }));
+  const posts: MetadataRoute.Sitemap = getAllBlogSlugs().map((slug) => {
+    const post = getBlogPost(slug);
+    return {
+      url: `${base}/blog/${slug}`,
+      lastModified: post ? new Date(post.publishedAt) : now,
+      changeFrequency: "monthly" as const,
+      priority: slug.startsWith("schedule-") || slug.startsWith("on-demand-")
+        ? 0.65
+        : 0.5,
+    };
+  });
 
   return [...pages, ...posts];
 }
