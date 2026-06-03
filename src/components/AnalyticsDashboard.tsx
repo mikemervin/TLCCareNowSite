@@ -60,9 +60,10 @@ export function AnalyticsDashboard({
           <div className="analytics-dashboard-hint" role="status">
             <p>
               <strong>No data on production yet.</strong> In Vercel: connect a{" "}
-              <strong>Blob</strong> store (Storage tab), confirm{" "}
-              <code>NEXT_PUBLIC_ANALYTICS_ENABLED=true</code>, redeploy, then
-              browse the live site and refresh this page.
+              <strong>Blob</strong> store to this project (you should see{" "}
+              <code>BLOB_STORE_ID</code> in env vars), set{" "}
+              <code>NEXT_PUBLIC_ANALYTICS_ENABLED=true</code>, redeploy, browse
+              the live site, then refresh this page.
             </p>
           </div>
         ) : null}

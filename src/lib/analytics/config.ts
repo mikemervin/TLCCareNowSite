@@ -15,8 +15,13 @@ export function analyticsEventsPath(): string {
   );
 }
 
+/** Use Vercel Blob when a read-write token or a connected store (OIDC on Vercel) is present. */
 export function useBlobAnalyticsStore(): boolean {
-  return Boolean(process.env.BLOB_READ_WRITE_TOKEN?.trim());
+  if (process.env.BLOB_READ_WRITE_TOKEN?.trim()) return true;
+  if (process.env.VERCEL === "1" && process.env.BLOB_STORE_ID?.trim()) {
+    return true;
+  }
+  return false;
 }
 
 export function analyticsAdminSecret(): string | undefined {
