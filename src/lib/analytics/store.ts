@@ -15,6 +15,7 @@ import {
   buildTopActions,
 } from "@/lib/analytics/event-catalog";
 import { buildFormEntrySnapshots } from "@/lib/analytics/form-snapshots";
+import { buildTodayStats } from "@/lib/analytics/today";
 import { formatCountry, formatReferrer } from "@/lib/analytics/format";
 import type {
   AnalyticsEvent,
@@ -156,6 +157,7 @@ export function buildAnalyticsSummary(
   return {
     storage,
     excludedAdminViews,
+    today: buildTodayStats(marketing),
     totalEvents: marketing.length,
     pageviews: pageviews.length,
     customEvents: customEvents.length,

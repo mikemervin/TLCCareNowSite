@@ -9,7 +9,8 @@ function canTrack(): boolean {
   return process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === "true";
 }
 
-export function getFormAnalyticsSessionId(): string {
+/** One session id per browser tab visit (forms + page views). */
+export function getAnalyticsSessionId(): string {
   if (typeof window === "undefined") return "";
   try {
     let id = sessionStorage.getItem(SESSION_KEY);
@@ -47,8 +48,15 @@ function send(payload: Record<string, unknown>): void {
 }
 
 export function trackPageView(path: string): void {
-  send({ type: "pageview", path });
+  send({
+    type: "pageview",
+    path,
+    sessionId: getAnalyticsSessionId(),
+  });
 }
+
+/** @deprecated Use getAnalyticsSessionId */
+export const getFormAnalyticsSessionId = getAnalyticsSessionId;
 
 /** Track button clicks and other actions, e.g. trackEvent("cta_demo", { path: "/enterprise" }) */
 export function trackEvent(
@@ -58,7 +66,7 @@ export function trackEvent(
   const path =
     options?.path ??
     (typeof window !== "undefined" ? window.location.pathname : "/");
-  send({ type: "event", path, name });
+  send({ type: "event", path, name, sessionId: getAnalyticsSessionId() });
 }
 
 /** Debounced field typing — visible in admin analytics (not sent on every key). */
@@ -78,6 +86,6 @@ export function trackFormFieldInput(
     formId,
     field,
     value,
-    sessionId: getFormAnalyticsSessionId(),
+    sessionId: getAnalyticsSessionId(),
   });
 }

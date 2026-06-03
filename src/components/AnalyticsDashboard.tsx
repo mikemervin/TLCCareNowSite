@@ -354,6 +354,33 @@ export function AnalyticsDashboard({
         ) : null}
       </header>
 
+      <section className="analytics-today-block">
+        <h2 className="analytics-section-heading">
+          Today — {summary.today.dateLabel}
+          <span className="analytics-section-heading-note">Central time</span>
+        </h2>
+        <div className="analytics-dashboard-stats analytics-dashboard-stats--today">
+          <article className="analytics-stat-card analytics-stat-card--today">
+            <p className="analytics-stat-label">Visitors today</p>
+            <p className="analytics-stat-value">{summary.today.visitors}</p>
+            <p className="analytics-stat-hint">Estimated unique sessions</p>
+          </article>
+          <article className="analytics-stat-card analytics-stat-card--today">
+            <p className="analytics-stat-label">Page views today</p>
+            <p className="analytics-stat-value">{summary.today.pageviews}</p>
+          </article>
+          <article className="analytics-stat-card analytics-stat-card--today">
+            <p className="analytics-stat-label">Form actions today</p>
+            <p className="analytics-stat-value">{summary.today.formActions}</p>
+          </article>
+          <article className="analytics-stat-card analytics-stat-card--today">
+            <p className="analytics-stat-label">Events today</p>
+            <p className="analytics-stat-value">{summary.today.totalEvents}</p>
+          </article>
+        </div>
+      </section>
+
+      <h2 className="analytics-section-heading">All time</h2>
       <div className="analytics-dashboard-stats">
         <article className="analytics-stat-card">
           <p className="analytics-stat-label">Page views</p>
@@ -489,7 +516,10 @@ export function AnalyticsDashboard({
 
       <div className="analytics-dashboard-grid">
         <section className="analytics-panel">
-          <h2 className="analytics-panel-title">Last 14 days</h2>
+          <h2 className="analytics-panel-title">Last 14 days (all events)</h2>
+          <p className="analytics-panel-subtitle">
+            Today&apos;s bar is total activity for that calendar day (Central).
+          </p>
           {summary.eventsByDay.length === 0 ? (
             <p className="analytics-panel-empty">No daily data yet.</p>
           ) : (

@@ -53,9 +53,20 @@ export type FormFunnelSummary = {
 
 export type ActionCount = { name: string; label: string; count: number };
 
+export type TodayStats = {
+  dateKey: string;
+  dateLabel: string;
+  pageviews: number;
+  /** Unique browser sessions today (best estimate). */
+  visitors: number;
+  formActions: number;
+  totalEvents: number;
+};
+
 export type AnalyticsSummary = {
   storage: "blob" | "file";
   excludedAdminViews: number;
+  today: TodayStats;
   totalEvents: number;
   pageviews: number;
   customEvents: number;

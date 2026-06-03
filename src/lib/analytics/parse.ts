@@ -63,6 +63,14 @@ export function parseIngestPayload(body: AnalyticsIngestPayload): ParsedIngest {
   let value: string | null = null;
   let sessionId: string | null = null;
 
+  if (
+    (type === "pageview" || type === "event" || type === "form_input") &&
+    typeof body.sessionId === "string" &&
+    body.sessionId.trim()
+  ) {
+    sessionId = body.sessionId.trim().slice(0, MAX_SESSION_ID_LENGTH);
+  }
+
   if (type === "form_input") {
     if (typeof body.formId !== "string" || !FORM_FIELDS[body.formId]) {
       return { ok: false, error: "Invalid form id." };
@@ -70,7 +78,7 @@ export function parseIngestPayload(body: AnalyticsIngestPayload): ParsedIngest {
     if (typeof body.field !== "string" || !FORM_FIELDS[body.formId].has(body.field)) {
       return { ok: false, error: "Invalid form field." };
     }
-    if (typeof body.sessionId !== "string" || !body.sessionId.trim()) {
+    if (!sessionId) {
       return { ok: false, error: "Invalid session id." };
     }
 
@@ -80,7 +88,6 @@ export function parseIngestPayload(body: AnalyticsIngestPayload): ParsedIngest {
       typeof body.value === "string"
         ? body.value.slice(0, MAX_FORM_VALUE_LENGTH)
         : "";
-    sessionId = body.sessionId.trim().slice(0, MAX_SESSION_ID_LENGTH);
   }
 
   let referrer: string | null = null;
