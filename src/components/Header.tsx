@@ -2,7 +2,6 @@ import Link from "next/link";
 import { BrandMark } from "@/components/BrandMark";
 import { HeaderHomePillLink } from "@/components/HeaderHomePillLink";
 import { HeaderMobileMenu } from "@/components/HeaderMobileMenu";
-import { BookIcon } from "@/components/OutlineCtaLink";
 import { site } from "@/lib/site";
 
 type HeaderPillLinkProps = {
@@ -53,13 +52,9 @@ export function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="header-pill-item header-pill-item--book"
-                aria-label="Book CareNow"
               >
-                <span className="header-pill-book-icon" aria-hidden>
-                  <BookIcon />
-                </span>
-                <span className="header-pill-book-label-short">Book CareNow</span>
-                <span className="header-pill-book-label-full">Book CareNow</span>
+                <span className="header-pill-item__short">Book CareNow</span>
+                <span className="header-pill-item__full">Book CareNow</span>
               </a>
             </div>
 
