@@ -4,6 +4,13 @@ const MAX_PATH_LENGTH = 512;
 const MAX_NAME_LENGTH = 128;
 const MAX_PAGE_TITLE_LENGTH = 200;
 const MAX_REFERRER_LENGTH = 2048;
+const MAX_FORM_VALUE_LENGTH = 500;
+const MAX_SESSION_ID_LENGTH = 64;
+
+const FORM_FIELDS: Record<string, Set<string>> = {
+  contact: new Set(["name", "email", "phone", "state", "subject", "message"]),
+  enterprise: new Set(["name", "email", "phone", "state"]),
+};
 
 export type ParsedIngest =
   | {
@@ -13,6 +20,10 @@ export type ParsedIngest =
       name: string | null;
       pageTitle: string | null;
       referrer: string | null;
+      formId: string | null;
+      field: string | null;
+      value: string | null;
+      sessionId: string | null;
     }
   | { ok: false; error: string };
 
@@ -22,7 +33,7 @@ function isExcludedPath(path: string): boolean {
 
 export function parseIngestPayload(body: AnalyticsIngestPayload): ParsedIngest {
   const type = body.type;
-  if (type !== "pageview" && type !== "event") {
+  if (type !== "pageview" && type !== "event" && type !== "form_input") {
     return { ok: false, error: "Invalid event type." };
   }
 
@@ -47,6 +58,31 @@ export function parseIngestPayload(body: AnalyticsIngestPayload): ParsedIngest {
     return { ok: false, error: "Event name is required." };
   }
 
+  let formId: string | null = null;
+  let field: string | null = null;
+  let value: string | null = null;
+  let sessionId: string | null = null;
+
+  if (type === "form_input") {
+    if (typeof body.formId !== "string" || !FORM_FIELDS[body.formId]) {
+      return { ok: false, error: "Invalid form id." };
+    }
+    if (typeof body.field !== "string" || !FORM_FIELDS[body.formId].has(body.field)) {
+      return { ok: false, error: "Invalid form field." };
+    }
+    if (typeof body.sessionId !== "string" || !body.sessionId.trim()) {
+      return { ok: false, error: "Invalid session id." };
+    }
+
+    formId = body.formId;
+    field = body.field;
+    value =
+      typeof body.value === "string"
+        ? body.value.slice(0, MAX_FORM_VALUE_LENGTH)
+        : "";
+    sessionId = body.sessionId.trim().slice(0, MAX_SESSION_ID_LENGTH);
+  }
+
   let referrer: string | null = null;
   if (typeof body.referrer === "string" && body.referrer.trim()) {
     referrer = body.referrer.trim().slice(0, MAX_REFERRER_LENGTH);
@@ -57,7 +93,18 @@ export function parseIngestPayload(body: AnalyticsIngestPayload): ParsedIngest {
     pageTitle = body.pageTitle.trim().slice(0, MAX_PAGE_TITLE_LENGTH);
   }
 
-  return { ok: true, type, path, name, pageTitle, referrer };
+  return {
+    ok: true,
+    type,
+    path,
+    name,
+    pageTitle,
+    referrer,
+    formId,
+    field,
+    value,
+    sessionId,
+  };
 }
 
 export function countryFromHeaders(headers: Headers): string | null {

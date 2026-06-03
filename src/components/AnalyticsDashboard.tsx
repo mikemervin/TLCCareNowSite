@@ -9,6 +9,7 @@ import type {
   AnalyticsEvent,
   AnalyticsSummary,
   CountRow,
+  FormEntrySnapshot,
   FormFunnelSummary,
 } from "@/lib/analytics/types";
 
@@ -75,6 +76,59 @@ function pageLabel(event: AnalyticsEvent): string {
     return eventDisplayName(event.name);
   }
   return event.pageTitle ?? "—";
+}
+
+function fieldLabel(event: AnalyticsEvent): string {
+  if (!event.field) return "—";
+  const labels: Record<string, string> = {
+    name: "Name",
+    email: "Email",
+    phone: "Phone",
+    state: "State / location",
+    subject: "Subject",
+    message: "Message",
+  };
+  return labels[event.field] ?? event.field;
+}
+
+function FormEntriesPanel({ entries }: { entries: FormEntrySnapshot[] }) {
+  if (entries.length === 0) {
+    return (
+      <p className="analytics-panel-empty">
+        No typed form content yet. When someone types in a field (even without
+        submitting), entries appear here after about a second.
+      </p>
+    );
+  }
+
+  return (
+    <div className="analytics-entry-grid">
+      {entries.map((entry) => (
+        <article key={entry.sessionId} className="analytics-entry-card">
+          <header className="analytics-entry-head">
+            <div>
+              <h3 className="analytics-entry-title">{entry.formLabel}</h3>
+              <p className="analytics-entry-meta">
+                {entry.path}
+                {entry.country ? ` · ${formatCountry(entry.country)}` : ""}
+              </p>
+            </div>
+            <time className="analytics-entry-time tabular-nums">
+              {formatWhen(entry.updatedAt)}
+            </time>
+          </header>
+          <dl className="analytics-entry-fields">
+            {entry.fields.map((field) => (
+              <div key={field.field} className="analytics-entry-field">
+                <dt>{field.label}</dt>
+                <dd>{field.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </article>
+      ))}
+    </div>
+  );
 }
 
 function FormFunnelsPanel({ funnels }: { funnels: FormFunnelSummary[] }) {
@@ -182,7 +236,7 @@ export function AnalyticsDashboard({
             <span className="analytics-pill">Admin excluded</span>
           </li>
           <li>
-            <span className="analytics-pill">No form text stored</span>
+            <span className="analytics-pill">Form typing (admin only)</span>
           </li>
         </ul>
 
@@ -246,6 +300,57 @@ export function AnalyticsDashboard({
           <p className="analytics-stat-value">{summary.totalEvents}</p>
         </article>
       </div>
+
+      <section className="analytics-panel analytics-panel--wide analytics-panel--entries">
+        <div className="analytics-panel-head-row">
+          <div>
+            <h2 className="analytics-panel-title">What people typed</h2>
+            <p className="analytics-panel-subtitle">
+              Latest value per field, including drafts that were never submitted.
+              Updates about a second after they stop typing.
+            </p>
+          </div>
+        </div>
+        <FormEntriesPanel entries={summary.formEntries} />
+      </section>
+
+      {summary.recentFieldUpdates.length > 0 ? (
+        <section className="analytics-panel analytics-panel--wide">
+          <h2 className="analytics-panel-title">Field-by-field log</h2>
+          <div className="analytics-recent-wrap">
+            <table className="analytics-recent-table analytics-recent-table--compact">
+              <thead>
+                <tr>
+                  <th scope="col">When</th>
+                  <th scope="col">Form</th>
+                  <th scope="col">Field</th>
+                  <th scope="col">Value</th>
+                  <th scope="col">Page</th>
+                </tr>
+              </thead>
+              <tbody>
+                {summary.recentFieldUpdates.map((event) => (
+                  <tr key={event.id}>
+                    <td className="analytics-recent-when tabular-nums">
+                      {formatWhen(event.timestamp)}
+                    </td>
+                    <td className="analytics-recent-muted">
+                      {event.formId ?? "—"}
+                    </td>
+                    <td className="analytics-recent-muted">
+                      {fieldLabel(event)}
+                    </td>
+                    <td className="analytics-entry-value-cell">
+                      {event.value || "—"}
+                    </td>
+                    <td className="analytics-recent-path">{event.path}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ) : null}
 
       <div className="analytics-dashboard-grid analytics-dashboard-grid--triple">
         <section className="analytics-panel">

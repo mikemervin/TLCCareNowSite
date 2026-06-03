@@ -14,6 +14,7 @@ import {
   buildFormFunnels,
   buildTopActions,
 } from "@/lib/analytics/event-catalog";
+import { buildFormEntrySnapshots } from "@/lib/analytics/form-snapshots";
 import { formatCountry, formatReferrer } from "@/lib/analytics/format";
 import type {
   AnalyticsEvent,
@@ -150,6 +151,7 @@ export function buildAnalyticsSummary(
   );
 
   const reversed = [...marketing].reverse();
+  const formInputs = marketing.filter((e) => e.type === "form_input");
 
   return {
     storage,
@@ -164,9 +166,11 @@ export function buildAnalyticsSummary(
     formFunnels: buildFormFunnels(marketing),
     topActions: buildTopActions(marketing),
     eventsByDay,
-    recent: reversed.slice(0, 50),
+    recent: reversed.filter((e) => e.type !== "form_input").slice(0, 50),
     recentFormEvents: reversed
       .filter((e) => e.type === "event")
       .slice(0, 30),
+    formEntries: buildFormEntrySnapshots(marketing),
+    recentFieldUpdates: [...formInputs].reverse().slice(0, 40),
   };
 }

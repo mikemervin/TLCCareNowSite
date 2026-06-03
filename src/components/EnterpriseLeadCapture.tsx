@@ -4,6 +4,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/Button";
 import { trackEvent } from "@/lib/analytics/client";
+import { useFormFieldAnalytics } from "@/lib/analytics/use-form-field-analytics";
 import { useFormStartedAnalytics } from "@/lib/analytics/use-form-analytics";
 import { site } from "@/lib/site";
 
@@ -76,6 +77,7 @@ export function EnterpriseLeadCapture() {
     "enterprise_lead_started",
     "/enterprise",
   );
+  const trackField = useFormFieldAnalytics("enterprise", "/enterprise");
 
   const close = useCallback(() => {
     setOpen(false);
@@ -265,6 +267,9 @@ export function EnterpriseLeadCapture() {
                         autoComplete={field.autoComplete}
                         className="enterprise-lead-input"
                         disabled={status === "submitting"}
+                        onChange={(event) =>
+                          trackField(field.name, event.currentTarget.value)
+                        }
                       />
                     </label>
                   );

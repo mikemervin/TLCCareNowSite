@@ -15,6 +15,13 @@ export function analyticsEventsPath(): string {
   );
 }
 
+export function analyticsSubmissionsPath(): string {
+  return (
+    process.env.ANALYTICS_SUBMISSIONS_PATH?.trim() ||
+    `${process.cwd()}/data/analytics-submissions.jsonl`
+  );
+}
+
 /** Use Vercel Blob when a read-write token or a connected store (OIDC on Vercel) is present. */
 export function useBlobAnalyticsStore(): boolean {
   if (process.env.BLOB_READ_WRITE_TOKEN?.trim()) return true;
@@ -31,4 +38,4 @@ export function analyticsAdminSecret(): string | undefined {
 
 export const ANALYTICS_MAX_BODY_BYTES = 2048;
 export const ANALYTICS_MAX_EVENTS_FILE_BYTES = 5 * 1024 * 1024;
-export const ANALYTICS_RATE_LIMIT_PER_MINUTE = 60;
+export const ANALYTICS_RATE_LIMIT_PER_MINUTE = 120;

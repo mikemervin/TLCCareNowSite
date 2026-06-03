@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { trackEvent } from "@/lib/analytics/client";
+import { useFormFieldAnalytics } from "@/lib/analytics/use-form-field-analytics";
 import { useFormStartedAnalytics } from "@/lib/analytics/use-form-analytics";
 import { Button } from "@/components/ui/Button";
 import { site } from "@/lib/site";
@@ -61,6 +62,7 @@ export function ContactForm() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const onFormStarted = useFormStartedAnalytics("contact_form_started", pathname);
+  const trackField = useFormFieldAnalytics("contact", pathname);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -156,6 +158,9 @@ export function ContactForm() {
                 autoComplete={field.autoComplete}
                 className="contact-form-input"
                 disabled={status === "submitting"}
+                onChange={(event) =>
+                  trackField(field.name, event.currentTarget.value)
+                }
               />
             </label>
           );
@@ -174,6 +179,7 @@ export function ContactForm() {
           placeholder="Tell us how we can help—community name, timeline, or questions."
           className="contact-form-input contact-form-input--textarea"
           disabled={status === "submitting"}
+          onChange={(event) => trackField("message", event.currentTarget.value)}
         />
       </label>
 
