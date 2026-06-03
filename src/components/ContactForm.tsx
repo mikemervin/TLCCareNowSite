@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { trackEvent } from "@/lib/analytics/client";
+import { useFormStartedAnalytics } from "@/lib/analytics/use-form-analytics";
 import { Button } from "@/components/ui/Button";
 import { site } from "@/lib/site";
 
@@ -54,8 +57,10 @@ const fields = [
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
 export function ContactForm() {
+  const pathname = usePathname();
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const onFormStarted = useFormStartedAnalytics("contact_form_started", pathname);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -85,6 +90,7 @@ export function ContactForm() {
       }
 
       setStatus("success");
+      trackEvent("contact_form_submitted", { path: pathname });
       form.reset();
     } catch {
       setStatus("error");
@@ -114,7 +120,12 @@ export function ContactForm() {
   }
 
   return (
-    <form className="contact-form" onSubmit={handleSubmit} noValidate>
+    <form
+      className="contact-form"
+      onSubmit={handleSubmit}
+      onFocusCapture={onFormStarted}
+      noValidate
+    >
       <div className="contact-form-grid">
         {fields.map((field) => {
           const inputId = `contact-${field.name}`;

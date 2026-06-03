@@ -12,6 +12,7 @@ function send(payload: {
   type: AnalyticsEventType;
   path: string;
   name?: string;
+  pageTitle?: string;
   referrer?: string;
 }): void {
   if (!canTrack()) return;
@@ -20,6 +21,7 @@ function send(payload: {
 
   const body = JSON.stringify({
     ...payload,
+    pageTitle: payload.pageTitle ?? (document.title || null),
     referrer: payload.referrer ?? (document.referrer || null),
   });
 

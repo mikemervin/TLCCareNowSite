@@ -2,11 +2,23 @@ import type { AnalyticsEventType, AnalyticsIngestPayload } from "@/lib/analytics
 
 const MAX_PATH_LENGTH = 512;
 const MAX_NAME_LENGTH = 128;
+const MAX_PAGE_TITLE_LENGTH = 200;
 const MAX_REFERRER_LENGTH = 2048;
 
 export type ParsedIngest =
-  | { ok: true; type: AnalyticsEventType; path: string; name: string | null; referrer: string | null }
+  | {
+      ok: true;
+      type: AnalyticsEventType;
+      path: string;
+      name: string | null;
+      pageTitle: string | null;
+      referrer: string | null;
+    }
   | { ok: false; error: string };
+
+function isExcludedPath(path: string): boolean {
+  return path === "/admin" || path.startsWith("/admin/");
+}
 
 export function parseIngestPayload(body: AnalyticsIngestPayload): ParsedIngest {
   const type = body.type;
@@ -19,7 +31,7 @@ export function parseIngestPayload(body: AnalyticsIngestPayload): ParsedIngest {
   }
 
   const path = body.path.slice(0, MAX_PATH_LENGTH);
-  if (path.startsWith("/api/")) {
+  if (path.startsWith("/api/") || isExcludedPath(path.split("?")[0] ?? path)) {
     return { ok: false, error: "Path not tracked." };
   }
 
@@ -40,7 +52,12 @@ export function parseIngestPayload(body: AnalyticsIngestPayload): ParsedIngest {
     referrer = body.referrer.trim().slice(0, MAX_REFERRER_LENGTH);
   }
 
-  return { ok: true, type, path, name, referrer };
+  let pageTitle: string | null = null;
+  if (typeof body.pageTitle === "string" && body.pageTitle.trim()) {
+    pageTitle = body.pageTitle.trim().slice(0, MAX_PAGE_TITLE_LENGTH);
+  }
+
+  return { ok: true, type, path, name, pageTitle, referrer };
 }
 
 export function countryFromHeaders(headers: Headers): string | null {

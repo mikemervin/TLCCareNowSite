@@ -16,7 +16,7 @@ function AnalyticsPageViewTracker() {
     if (lastKey.current === key) return;
     lastKey.current = key;
 
-    trackPageView(pathname);
+    trackPageView(key);
   }, [pathname, searchParams]);
 
   return null;

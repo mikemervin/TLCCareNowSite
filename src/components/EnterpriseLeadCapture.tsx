@@ -4,6 +4,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/Button";
 import { trackEvent } from "@/lib/analytics/client";
+import { useFormStartedAnalytics } from "@/lib/analytics/use-form-analytics";
 import { site } from "@/lib/site";
 
 const STORAGE_KEY = "tlc-enterprise-lead-seen";
@@ -70,6 +71,11 @@ export function EnterpriseLeadCapture() {
   const [errorMessage, setErrorMessage] = useState("");
   const triggered = useRef(false);
   const delayTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const popupShownTracked = useRef(false);
+  const onFormStarted = useFormStartedAnalytics(
+    "enterprise_lead_started",
+    "/enterprise",
+  );
 
   const close = useCallback(() => {
     setOpen(false);
@@ -107,6 +113,12 @@ export function EnterpriseLeadCapture() {
       if (delayTimer.current) clearTimeout(delayTimer.current);
     };
   }, []);
+
+  useEffect(() => {
+    if (!open || popupShownTracked.current) return;
+    popupShownTracked.current = true;
+    trackEvent("enterprise_lead_shown", { path: "/enterprise" });
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -163,7 +175,7 @@ export function EnterpriseLeadCapture() {
 
       setStatus("success");
       markSeen();
-      trackEvent("enterprise_lead_submit", { path: "/enterprise" });
+      trackEvent("enterprise_lead_submitted", { path: "/enterprise" });
     } catch {
       setStatus("error");
       setErrorMessage(
@@ -228,7 +240,12 @@ export function EnterpriseLeadCapture() {
               </p>
             </header>
 
-            <form className="enterprise-lead-form" onSubmit={handleSubmit} noValidate>
+            <form
+              className="enterprise-lead-form"
+              onSubmit={handleSubmit}
+              onFocusCapture={onFormStarted}
+              noValidate
+            >
               <div className="enterprise-lead-fields">
                 {fields.map((field) => {
                   const inputId = `enterprise-lead-${field.name}`;

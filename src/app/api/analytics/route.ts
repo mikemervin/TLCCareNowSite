@@ -91,6 +91,7 @@ export async function POST(request: NextRequest) {
     type: parsed.type,
     path: parsed.path,
     name: parsed.name,
+    pageTitle: parsed.pageTitle,
     referrer: parsed.referrer,
     country: countryFromHeaders(request.headers),
     userAgent: userAgentFromHeaders(request.headers),
