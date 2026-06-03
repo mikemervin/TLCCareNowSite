@@ -32,6 +32,29 @@ export function formatSiteTodayLabel(dateKey: string): string {
   });
 }
 
+/** Display timestamps in site timezone (server runs in UTC on Vercel). */
+export function formatSiteWhen(iso: string): string {
+  const parsed = new Date(iso);
+  if (Number.isNaN(parsed.getTime())) return iso;
+  return parsed.toLocaleString("en-US", {
+    timeZone: SITE_TIMEZONE,
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}
+
+export function formatSiteDateKeyLabel(dateKey: string): string {
+  const parsed = new Date(`${dateKey}T12:00:00`);
+  if (Number.isNaN(parsed.getTime())) return dateKey;
+  return parsed.toLocaleDateString("en-US", {
+    timeZone: SITE_TIMEZONE,
+    month: "short",
+    day: "numeric",
+  });
+}
+
 function uniqueVisitorCount(events: AnalyticsEvent[]): number {
   const sessions = new Set<string>();
   const fingerprints = new Set<string>();
@@ -42,7 +65,7 @@ function uniqueVisitorCount(events: AnalyticsEvent[]): number {
       continue;
     }
     if (event.type === "pageview") {
-      const fp = `${event.country ?? "?"}|${event.userAgent ?? "?"}`;
+      const fp = `${event.city ?? ""}|${event.region ?? ""}|${event.country ?? "?"}|${event.userAgent ?? "?"}`;
       fingerprints.add(fp);
     }
   }

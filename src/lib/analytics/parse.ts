@@ -130,13 +130,45 @@ export function parseIngestPayload(body: AnalyticsIngestPayload): ParsedIngest {
   };
 }
 
-export function countryFromHeaders(headers: Headers): string | null {
-  const country =
+export type GeoFromHeaders = {
+  country: string | null;
+  city: string | null;
+  region: string | null;
+};
+
+function sanitizeGeoPart(
+  raw: string | null,
+  maxLen: number,
+): string | null {
+  if (!raw?.trim()) return null;
+  const value = raw.trim().slice(0, maxLen);
+  if (/^(unknown|null|undefined)$/i.test(value)) return null;
+  return value;
+}
+
+export function geoFromHeaders(headers: Headers): GeoFromHeaders {
+  const countryRaw =
     headers.get("x-vercel-ip-country") ||
     headers.get("cf-ipcountry") ||
     headers.get("x-country-code");
-  if (!country || country === "XX") return null;
-  return country.slice(0, 2).toUpperCase();
+  const country =
+    countryRaw && countryRaw !== "XX"
+      ? countryRaw.slice(0, 2).toUpperCase()
+      : null;
+
+  const city =
+    sanitizeGeoPart(headers.get("x-vercel-ip-city"), 80) ||
+    sanitizeGeoPart(headers.get("cf-ipcity"), 80);
+
+  const region =
+    sanitizeGeoPart(headers.get("x-vercel-ip-country-region"), 32) ||
+    sanitizeGeoPart(headers.get("cf-region"), 32);
+
+  return { country, city, region };
+}
+
+export function countryFromHeaders(headers: Headers): string | null {
+  return geoFromHeaders(headers).country;
 }
 
 export function userAgentFromHeaders(headers: Headers): string | null {

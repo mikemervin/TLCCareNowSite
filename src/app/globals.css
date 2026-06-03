@@ -2492,22 +2492,67 @@ a {
   color: var(--tlc-text-muted);
 }
 
-.enterprise-intro {
-  max-width: 44rem;
-  margin-inline: auto;
-  padding: 1.75rem 1.5rem 1.625rem;
-  text-align: center;
+.enterprise-platform-stack {
+  width: 100%;
+  overflow: hidden;
   border-radius: 1.25rem;
   background: #fff;
-  border: 1px solid rgb(40 101 43 / 10%);
+  border: 1px solid rgb(40 101 43 / 12%);
   box-shadow:
-    0 1px 2px rgb(28 67 29 / 4%),
-    0 12px 32px rgb(28 67 29 / 6%);
+    0 1px 2px rgb(28 67 29 / 5%),
+    0 16px 40px rgb(28 67 29 / 8%);
+}
+
+.enterprise-platform-stack .enterprise-screenshots {
+  padding-top: 1.25rem;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (min-width: 640px) {
+  .enterprise-platform-stack .enterprise-screenshots {
+    padding-top: 1.5rem;
+  }
+}
+
+.enterprise-intro {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 1.75rem 1.375rem 1.5rem;
+  text-align: center;
+  border: none;
+  border-radius: 0;
+  background: linear-gradient(
+    180deg,
+    var(--tlc-cream) 0%,
+    rgb(248 247 244 / 60%) 55%,
+    #fff 100%
+  );
+  border-bottom: 1px solid rgb(40 101 43 / 10%);
+  box-shadow: none;
 }
 
 @media (min-width: 640px) {
   .enterprise-intro {
-    padding: 2rem 2.25rem 1.875rem;
+    padding: 2rem 2.5rem 1.75rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .enterprise-platform-stack .enterprise-intro {
+    padding: 1.625rem 1.375rem 1.375rem;
+    text-align: left;
+  }
+
+  .enterprise-platform-stack .enterprise-intro-accent {
+    margin-inline: 0;
+  }
+
+  .enterprise-platform-stack .enterprise-intro-cta {
+    justify-content: flex-start;
+    align-items: baseline;
   }
 }
 
@@ -2526,7 +2571,8 @@ a {
 }
 
 .enterprise-intro-lead {
-  margin: 1.125rem 0 0;
+  margin: 1.125rem auto 0;
+  max-width: 40rem;
   font-size: 1.0625rem;
   line-height: 1.7;
   color: var(--tlc-text-muted);
@@ -2537,6 +2583,13 @@ a {
     margin-top: 1.25rem;
     font-size: 1.125rem;
     line-height: 1.75;
+  }
+}
+
+@media (max-width: 639px) {
+  .enterprise-platform-stack .enterprise-intro-lead {
+    margin-inline: 0;
+    max-width: none;
   }
 }
 

@@ -213,34 +213,36 @@ export function EnterprisePageContent() {
 
       <section className="enterprise-main tlc-section">
         <div className="tlc-container enterprise-main-inner">
-          <aside
-            className="enterprise-intro"
-            aria-label="Operators and residents"
-          >
-            <p className="enterprise-intro-eyebrow">One platform</p>
-            <span
-              className="tlc-accent-line enterprise-intro-accent"
-              aria-hidden
-            />
-            <p className="enterprise-intro-lead">
-              <strong className="enterprise-intro-strong">Your team</strong>{" "}
-              runs operations in {site.name};{" "}
-              <strong className="enterprise-intro-strong">
-                residents and families
-              </strong>{" "}
-              use the same platform to book and stay informed.
-            </p>
-            <div className="enterprise-intro-cta">
-              <Link href="/" className="enterprise-intro-link">
-                See the home page
-              </Link>
-              <span className="enterprise-intro-cta-note">
-                for the resident experience
-              </span>
-            </div>
-          </aside>
+          <div className="enterprise-platform-stack">
+            <aside
+              className="enterprise-intro"
+              aria-label="Operators and residents"
+            >
+              <p className="enterprise-intro-eyebrow">One platform</p>
+              <span
+                className="tlc-accent-line enterprise-intro-accent"
+                aria-hidden
+              />
+              <p className="enterprise-intro-lead">
+                <strong className="enterprise-intro-strong">Your team</strong>{" "}
+                runs operations in {site.name};{" "}
+                <strong className="enterprise-intro-strong">
+                  residents and families
+                </strong>{" "}
+                use the same platform to book and stay informed.
+              </p>
+              <div className="enterprise-intro-cta">
+                <Link href="/" className="enterprise-intro-link">
+                  See the home page
+                </Link>
+                <span className="enterprise-intro-cta-note">
+                  for the resident experience
+                </span>
+              </div>
+            </aside>
 
-          <EnterpriseScreenshots />
+            <EnterpriseScreenshots />
+          </div>
 
           <section
             className="enterprise-booking-power"

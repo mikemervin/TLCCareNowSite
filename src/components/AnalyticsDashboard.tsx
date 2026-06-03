@@ -4,8 +4,12 @@ import { logoutAnalytics } from "@/app/admin/analytics/actions";
 import { eventDisplayName } from "@/lib/analytics/event-catalog";
 import { analyticsPageLabel } from "@/lib/analytics/page-labels";
 import {
+  formatSiteDateKeyLabel,
+  formatSiteWhen,
+} from "@/lib/analytics/today";
+import {
   formatBrowser,
-  formatCountry,
+  formatLocation,
   formatReferrer,
 } from "@/lib/analytics/format";
 import { submissionSourceLabel } from "@/lib/analytics/submissions-types";
@@ -33,30 +37,14 @@ function activityMetaLine(event: AnalyticsEvent): string {
   if (event.type !== "pageview") {
     parts.push(formatPagePath(event.path));
   }
-  const country = formatCountry(event.country);
-  if (country && country !== "—") parts.push(country);
+  const location = formatLocation(
+    event.country,
+    event.city ?? null,
+    event.region ?? null,
+  );
+  if (location && location !== "—") parts.push(location);
   parts.push(formatBrowser(event.userAgent));
   return parts.join(" · ");
-}
-
-function formatDay(date: string): string {
-  const parsed = new Date(`${date}T12:00:00`);
-  if (Number.isNaN(parsed.getTime())) return date;
-  return parsed.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-  });
-}
-
-function formatWhen(iso: string): string {
-  const parsed = new Date(iso);
-  if (Number.isNaN(parsed.getTime())) return iso;
-  return parsed.toLocaleString("en-US", {
-    month: "short",
-    day: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-  });
 }
 
 function describeActivity(event: AnalyticsEvent): string {
@@ -177,11 +165,13 @@ function FormEntriesPanel({ entries }: { entries: FormEntrySnapshot[] }) {
               <h4 className="analytics-entry-title">{entry.formLabel}</h4>
               <p className="analytics-entry-meta">
                 {formatPagePath(entry.path)}
-                {entry.country ? ` · ${formatCountry(entry.country)}` : ""}
+                {formatLocation(entry.country, entry.city, entry.region) !== "—"
+                  ? ` · ${formatLocation(entry.country, entry.city, entry.region)}`
+                  : ""}
               </p>
             </div>
             <time className="analytics-entry-time tabular-nums">
-              {formatWhen(entry.updatedAt)}
+              {formatSiteWhen(entry.updatedAt)}
             </time>
           </header>
           <dl className="analytics-entry-fields">
@@ -225,11 +215,14 @@ function SubmittedFormsPanel({ submissions }: { submissions: FormSubmission[] })
               </h4>
               <p className="analytics-entry-meta">
                 {formatPagePath(sub.path)}
-                {sub.country ? ` · ${formatCountry(sub.country)}` : ""}
+                {formatLocation(sub.country, sub.city ?? null, sub.region ?? null) !==
+                "—"
+                  ? ` · ${formatLocation(sub.country, sub.city ?? null, sub.region ?? null)}`
+                  : ""}
               </p>
             </div>
             <time className="analytics-entry-time tabular-nums">
-              {formatWhen(sub.timestamp)}
+              {formatSiteWhen(sub.timestamp)}
             </time>
           </header>
           <dl className="analytics-entry-fields">
@@ -355,7 +348,7 @@ function ActivityFeed({ events }: { events: AnalyticsEvent[] }) {
             <p className="analytics-activity-meta">{activityMetaLine(event)}</p>
           </div>
           <time className="analytics-activity-time tabular-nums">
-            {formatWhen(event.timestamp)}
+            {formatSiteWhen(event.timestamp)}
           </time>
         </li>
       ))}
@@ -373,7 +366,7 @@ export function AnalyticsDashboard({
     summary.pageviews === 0 && summary.excludedAdminViews > 0;
   const maxPathCount = summary.topPaths[0]?.count ?? 1;
   const maxReferrerCount = summary.topReferrers[0]?.count ?? 1;
-  const maxCountryCount = summary.topCountries[0]?.count ?? 1;
+  const maxLocationCount = summary.topLocations[0]?.count ?? 1;
   const maxDayCount = Math.max(
     ...summary.eventsByDay.map((d) => d.count),
     1,
@@ -432,6 +425,10 @@ export function AnalyticsDashboard({
           <li>
             <strong>Leads</strong> — what they typed (drafts) and what they sent.
           </li>
+          <li>
+            <strong>Location</strong> — city and browser on the timeline help you
+            tell your visits apart from everyone else&apos;s.
+          </li>
         </ul>
       </aside>
 
@@ -477,7 +474,7 @@ export function AnalyticsDashboard({
         <h2 className="analytics-today-heading">
           <span className="analytics-today-label">Today</span>
           <span className="analytics-today-date">{summary.today.dateLabel}</span>
-          <span className="analytics-today-tz">Central time</span>
+          <span className="analytics-today-tz">Times in Central (CT)</span>
         </h2>
         <div className="analytics-dashboard-stats analytics-dashboard-stats--today">
           <AnalyticsActiveNow initial={summary.activeNow} />
@@ -557,11 +554,14 @@ export function AnalyticsDashboard({
               maxCount={maxReferrerCount}
             />
           </Panel>
-          <Panel title="Country">
+          <Panel
+            title="Location"
+            subtitle="City and region on the live site (Vercel); country only on localhost."
+          >
             <CountList
-              items={summary.topCountries}
+              items={summary.topLocations}
               emptyLabel="No location data yet."
-              maxCount={maxCountryCount}
+              maxCount={maxLocationCount}
             />
           </Panel>
         </div>
@@ -605,7 +605,7 @@ export function AnalyticsDashboard({
                 {summary.eventsByDay.map((item) => (
                   <li key={item.date} className="analytics-day-row">
                     <span className="analytics-day-label">
-                      {formatDay(item.date)}
+                      {formatSiteDateKeyLabel(item.date)}
                     </span>
                     <span className="analytics-day-bar-track" aria-hidden>
                       <span
@@ -643,7 +643,7 @@ export function AnalyticsDashboard({
                     {summary.recentFieldUpdates.map((event) => (
                       <tr key={event.id}>
                         <td className="analytics-recent-when tabular-nums">
-                          {formatWhen(event.timestamp)}
+                          {formatSiteWhen(event.timestamp)}
                         </td>
                         <td className="analytics-recent-muted">
                           {formatFormId(event.formId)}

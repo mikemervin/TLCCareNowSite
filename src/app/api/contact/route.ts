@@ -1,4 +1,4 @@
-import { countryFromHeaders } from "@/lib/analytics/parse";
+import { geoFromHeaders } from "@/lib/analytics/parse";
 import { appendFormSubmission } from "@/lib/analytics/submissions-store";
 import type { FormSubmissionSource } from "@/lib/analytics/submissions-types";
 import { Resend } from "resend";
@@ -77,11 +77,14 @@ export async function POST(request: Request) {
   }
 
   const { source, path } = submissionMeta(formData);
+  const geo = geoFromHeaders(request.headers);
   try {
     await appendFormSubmission({
       source,
       path,
-      country: countryFromHeaders(request.headers),
+      country: geo.country,
+      city: geo.city,
+      region: geo.region,
       name: parsed.data.name,
       email: parsed.data.email,
       phone: parsed.data.phone,

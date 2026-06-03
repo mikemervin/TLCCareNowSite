@@ -17,6 +17,8 @@ export type NewFormSubmission = {
   source: FormSubmissionSource;
   path: string;
   country: string | null;
+  city: string | null;
+  region: string | null;
   name: string;
   email: string;
   phone: string;

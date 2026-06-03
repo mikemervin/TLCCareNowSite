@@ -12,6 +12,8 @@ export type AnalyticsEvent = {
   pageTitle: string | null;
   referrer: string | null;
   country: string | null;
+  city: string | null;
+  region: string | null;
   userAgent: string | null;
   /** Set for form_input — contact | enterprise */
   formId: string | null;
@@ -27,6 +29,8 @@ export type FormEntrySnapshot = {
   formLabel: string;
   path: string;
   country: string | null;
+  city: string | null;
+  region: string | null;
   updatedAt: string;
   fields: { field: string; label: string; value: string }[];
 };
@@ -84,7 +88,7 @@ export type AnalyticsSummary = {
   uniquePaths: number;
   topPaths: { path: string; count: number }[];
   topReferrers: CountRow[];
-  topCountries: CountRow[];
+  topLocations: CountRow[];
   formFunnels: FormFunnelSummary[];
   topActions: ActionCount[];
   eventsByDay: { date: string; count: number }[];

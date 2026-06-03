@@ -39,3 +39,33 @@ export function formatCountry(code: string | null): string {
   if (!code) return "—";
   return regionNames?.of(code) ?? code;
 }
+
+/** City, region, and country — e.g. "Chicago, IL · United States". */
+export function formatLocation(
+  country: string | null,
+  city?: string | null,
+  region?: string | null,
+): string {
+  const countryLabel = country ? formatCountry(country) : null;
+  const placeParts: string[] = [];
+
+  if (city?.trim()) {
+    const c = city.trim();
+    if (region?.trim()) {
+      const r = region.trim();
+      placeParts.push(country === "US" ? `${c}, ${r.toUpperCase()}` : `${c}, ${r}`);
+    } else {
+      placeParts.push(c);
+    }
+  }
+
+  if (placeParts.length > 0) {
+    if (countryLabel && countryLabel !== "—") {
+      return `${placeParts[0]} · ${countryLabel}`;
+    }
+    return placeParts[0];
+  }
+
+  if (countryLabel && countryLabel !== "—") return countryLabel;
+  return "—";
+}

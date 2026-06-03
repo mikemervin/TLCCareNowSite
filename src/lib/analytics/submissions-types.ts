@@ -6,6 +6,8 @@ export type FormSubmission = {
   path: string;
   timestamp: string;
   country: string | null;
+  city: string | null;
+  region: string | null;
   name: string;
   email: string;
   phone: string;

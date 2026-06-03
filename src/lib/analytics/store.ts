@@ -16,8 +16,8 @@ import {
 } from "@/lib/analytics/event-catalog";
 import { buildFormEntrySnapshots } from "@/lib/analytics/form-snapshots";
 import { buildActiveNowStats, isPresenceEvent } from "@/lib/analytics/active-now";
-import { buildTodayStats } from "@/lib/analytics/today";
-import { formatCountry, formatReferrer } from "@/lib/analytics/format";
+import { buildTodayStats, eventSiteDateKey } from "@/lib/analytics/today";
+import { formatLocation, formatReferrer } from "@/lib/analytics/format";
 import type {
   AnalyticsEvent,
   AnalyticsSummary,
@@ -135,7 +135,7 @@ export function buildAnalyticsSummary(
 
   const dayCounts = new Map<string, number>();
   for (const event of signals) {
-    const date = event.timestamp.slice(0, 10);
+    const date = eventSiteDateKey(event.timestamp);
     dayCounts.set(date, (dayCounts.get(date) ?? 0) + 1);
   }
 
@@ -149,8 +149,11 @@ export function buildAnalyticsSummary(
     (raw) => formatReferrer(raw),
   );
 
-  const topCountries = topCounts(pageviews.map((e) => e.country), (raw) =>
-    formatCountry(raw),
+  const topLocations = topCounts(
+    pageviews.map((e) =>
+      formatLocation(e.country, e.city ?? null, e.region ?? null),
+    ),
+    (label) => label,
   );
 
   const reversed = [...signals].reverse();
@@ -167,7 +170,7 @@ export function buildAnalyticsSummary(
     uniquePaths: pathCounts.size,
     topPaths,
     topReferrers,
-    topCountries,
+    topLocations,
     formFunnels: buildFormFunnels(signals),
     topActions: buildTopActions(signals),
     eventsByDay,

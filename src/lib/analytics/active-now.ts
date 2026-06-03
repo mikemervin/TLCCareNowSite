@@ -21,7 +21,7 @@ function uniqueActiveSessions(events: AnalyticsEvent[]): number {
     }
 
     if (event.type === "pageview" || event.type === "heartbeat") {
-      const fp = `${event.country ?? "?"}|${event.userAgent ?? "?"}`;
+      const fp = `${event.city ?? ""}|${event.region ?? ""}|${event.country ?? "?"}|${event.userAgent ?? "?"}`;
       fingerprints.add(fp);
     }
   }

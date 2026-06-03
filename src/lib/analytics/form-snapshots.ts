@@ -33,6 +33,8 @@ export function buildFormEntrySnapshots(
       formId: string;
       path: string;
       country: string | null;
+      city: string | null;
+      region: string | null;
       updatedAt: string;
       fields: Map<string, string>;
     }
@@ -44,6 +46,8 @@ export function buildFormEntrySnapshots(
       formId: event.formId!,
       path: event.path,
       country: event.country,
+      city: event.city ?? null,
+      region: event.region ?? null,
       updatedAt: event.timestamp,
       fields: new Map<string, string>(),
     };
@@ -52,6 +56,8 @@ export function buildFormEntrySnapshots(
       existing.updatedAt = event.timestamp;
       existing.path = event.path;
       existing.country = event.country;
+      existing.city = event.city ?? null;
+      existing.region = event.region ?? null;
     }
 
     existing.fields.set(event.field!, event.value ?? "");
@@ -65,6 +71,8 @@ export function buildFormEntrySnapshots(
       formLabel: FORM_LABELS[data.formId] ?? data.formId,
       path: data.path,
       country: data.country,
+      city: data.city,
+      region: data.region,
       updatedAt: data.updatedAt,
       fields: [...data.fields.entries()]
         .map(([field, value]) => ({

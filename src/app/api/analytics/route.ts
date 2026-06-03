@@ -6,7 +6,7 @@ import {
   useBlobAnalyticsStore,
 } from "@/lib/analytics/config";
 import {
-  countryFromHeaders,
+  geoFromHeaders,
   parseIngestPayload,
   userAgentFromHeaders,
 } from "@/lib/analytics/parse";
@@ -87,6 +87,8 @@ export async function POST(request: NextRequest) {
     return Response.json({ error: parsed.error }, { status: 400 });
   }
 
+  const geo = geoFromHeaders(request.headers);
+
   await appendAnalyticsEvent({
     type: parsed.type,
     path: parsed.path,
@@ -97,7 +99,9 @@ export async function POST(request: NextRequest) {
     field: parsed.field,
     value: parsed.value,
     sessionId: parsed.sessionId,
-    country: countryFromHeaders(request.headers),
+    country: geo.country,
+    city: geo.city,
+    region: geo.region,
     userAgent: userAgentFromHeaders(request.headers),
     timestamp: new Date().toISOString(),
   });
