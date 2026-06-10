@@ -1,6 +1,17 @@
 import { isPresenceEvent } from "@/lib/analytics/active-now";
+import { formatLocation } from "@/lib/analytics/format";
+import {
+  buildDeviceBreakdown,
+  buildKnownPageCounts,
+  buildOutboundClicks,
+  buildPeakHours,
+  buildSessionStats,
+  buildUtmCampaigns,
+  marketingPageviews,
+  todayMarketingEvents,
+} from "@/lib/analytics/insights";
 import { getSiteTimezone } from "@/lib/analytics/timezone";
-import type { AnalyticsEvent, TodayStats } from "@/lib/analytics/types";
+import type { AnalyticsEvent, CountRow, TodayStats } from "@/lib/analytics/types";
 
 export function siteTodayDateKey(when = new Date()): string {
   return new Intl.DateTimeFormat("en-CA", {
@@ -73,13 +84,61 @@ function uniqueVisitorCount(events: AnalyticsEvent[]): number {
   return fingerprints.size;
 }
 
-export function buildTodayStats(events: AnalyticsEvent[]): TodayStats {
+function sessionKey(event: AnalyticsEvent): string | null {
+  if (event.sessionId) return event.sessionId;
+  if (event.type === "pageview") {
+    return `fp:${event.city ?? ""}|${event.region ?? ""}|${event.country ?? "?"}|${event.userAgent ?? "?"}`;
+  }
+  return null;
+}
+
+/** One location per session today (uses the latest event with geo for that session). */
+export function buildTodayVisitorsByLocation(
+  events: AnalyticsEvent[],
+  limit = 15,
+): CountRow[] {
   const todayKey = siteTodayDateKey();
   const todayEvents = events.filter(
     (e) =>
       eventSiteDateKey(e.timestamp) === todayKey && !isPresenceEvent(e),
   );
-  const todayPageviews = todayEvents.filter((e) => e.type === "pageview");
+
+  const sessionLocation = new Map<string, string>();
+  const sorted = [...todayEvents].sort((a, b) =>
+    a.timestamp.localeCompare(b.timestamp),
+  );
+
+  for (const event of sorted) {
+    const key = sessionKey(event);
+    if (!key) continue;
+    const label = formatLocation(
+      event.country,
+      event.city ?? null,
+      event.region ?? null,
+    );
+    if (label === "—") continue;
+    sessionLocation.set(key, label);
+  }
+
+  const counts = new Map<string, number>();
+  for (const label of sessionLocation.values()) {
+    counts.set(label, (counts.get(label) ?? 0) + 1);
+  }
+
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, limit)
+    .map(([label, count]) => ({ label, count }));
+}
+
+export function buildTodayStats(events: AnalyticsEvent[]): TodayStats {
+  const todayKey = siteTodayDateKey();
+  const todayEvents = todayMarketingEvents(events);
+  const todayPageviews = marketingPageviews(todayEvents);
+  const appClicks = buildOutboundClicks(todayEvents, { todayOnly: true }).reduce(
+    (sum, row) => sum + row.count,
+    0,
+  );
 
   return {
     dateKey: todayKey,
@@ -88,5 +147,17 @@ export function buildTodayStats(events: AnalyticsEvent[]): TodayStats {
     visitors: uniqueVisitorCount(todayEvents),
     formActions: todayEvents.filter((e) => e.type === "event").length,
     totalEvents: todayEvents.length,
+    visitorsByLocation: buildTodayVisitorsByLocation(events),
+    topPages: buildKnownPageCounts(todayPageviews, { todayOnly: true, limit: 8 }),
+    blogPages: buildKnownPageCounts(todayPageviews, {
+      todayOnly: true,
+      blogOnly: true,
+      limit: 8,
+    }),
+    deviceBreakdown: buildDeviceBreakdown(todayPageviews),
+    peakHours: buildPeakHours(todayPageviews),
+    sessionStats: buildSessionStats(todayPageviews),
+    utmCampaigns: buildUtmCampaigns(todayPageviews),
+    appClicks,
   };
 }

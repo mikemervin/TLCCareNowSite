@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { TrackedOutboundLink } from "@/components/TrackedOutboundLink";
 import { ButtonLink } from "@/components/ui/Button";
 import { TeamLifeWebsiteLink } from "@/components/TeamLifeWebsiteLink";
 import { images } from "@/lib/images";
@@ -95,14 +96,15 @@ export function CampusCarePageContent() {
               <p className="campus-care-compare-text">
                 Residents book visits, pay securely, and track care from their
                 phone—visit{" "}
-                <a
+                <TrackedOutboundLink
                   href={site.appUrl}
+                  clickId="app_campus_care_inline"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="campus-care-inline-link"
                 >
                   app.tlccarenow.com
-                </a>
+                </TrackedOutboundLink>
                 .
               </p>
             </div>

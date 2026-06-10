@@ -37,7 +37,9 @@ export default function AboutPage() {
               our organization.
             </p>
             <div className="pt-4">
-              <AppLink size="md">Open TLC CareNow</AppLink>
+              <AppLink size="md" clickId="app_about">
+                Open TLC CareNow
+              </AppLink>
             </div>
           </div>
         </div>

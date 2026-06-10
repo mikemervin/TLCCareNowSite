@@ -12,11 +12,13 @@ type AnalyticsActiveNowProps = {
 export function AnalyticsActiveNow({ initial }: AnalyticsActiveNowProps) {
   const [active, setActive] = useState(initial);
   const [error, setError] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
 
     async function refresh() {
+      if (!cancelled) setRefreshing(true);
       try {
         const res = await fetch("/api/admin/analytics/active", {
           credentials: "same-origin",
@@ -32,9 +34,12 @@ export function AnalyticsActiveNow({ initial }: AnalyticsActiveNowProps) {
         }
       } catch {
         if (!cancelled) setError(true);
+      } finally {
+        if (!cancelled) setRefreshing(false);
       }
     }
 
+    void refresh();
     const id = window.setInterval(refresh, POLL_MS);
     return () => {
       cancelled = true;
@@ -43,13 +48,25 @@ export function AnalyticsActiveNow({ initial }: AnalyticsActiveNowProps) {
   }, []);
 
   return (
-    <article className="analytics-stat-card analytics-stat-card--today analytics-stat-card--live">
-      <p className="analytics-stat-label">Online now</p>
+    <article
+      className={`analytics-stat-card analytics-stat-card--today analytics-stat-card--live${
+        error ? " analytics-stat-card--live-error" : ""
+      }`}
+    >
+      <div className="analytics-stat-card-top">
+        <p className="analytics-stat-label">Online now</p>
+        {!error ? (
+          <span
+            className={`analytics-live-dot${refreshing ? " analytics-live-dot--pulse" : ""}`}
+            aria-hidden
+          />
+        ) : null}
+      </div>
       <p className="analytics-stat-value">{active.count}</p>
       <p className="analytics-stat-hint">
         {error
-          ? "Could not refresh — reload the page"
-          : `Active in the last ${active.windowMinutes} min · updates every 30s`}
+          ? "Live count paused — refresh this page"
+          : `Browsers active in the last ${active.windowMinutes} min`}
       </p>
     </article>
   );

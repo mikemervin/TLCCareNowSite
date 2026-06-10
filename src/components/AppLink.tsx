@@ -1,8 +1,12 @@
+"use client";
+
 import Link from "next/link";
+import { trackOutboundClick } from "@/lib/analytics/client";
 import { site } from "@/lib/site";
 
 type AppLinkProps = {
   href?: string;
+  clickId?: string;
   children: React.ReactNode;
   className?: string;
   variant?: "primary" | "secondary" | "text";
@@ -26,8 +30,15 @@ const sizes = {
   lg: "px-8 py-3.5 text-[15px] font-bold tracking-wide",
 };
 
+function defaultClickId(href: string): string {
+  if (href.includes("/admin/login")) return "app_book_page_staff";
+  if (href.includes("/login")) return "app_book_page_login";
+  return "app_book_page_open";
+}
+
 export function AppLink({
   href = site.appLoginUrl,
+  clickId,
   children,
   className = "",
   variant = "primary",
@@ -36,10 +47,17 @@ export function AppLink({
   showExternalIcon = true,
 }: AppLinkProps) {
   const classes = `${variants[variant]} ${variant !== "text" ? sizes[size] : ""} ${className}`;
+  const resolvedClickId = clickId ?? defaultClickId(href);
 
   if (external) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={classes}
+        onClick={() => trackOutboundClick(resolvedClickId)}
+      >
         {children}
         {variant !== "text" && showExternalIcon ? (
           <span className="sr-only"> (opens in new tab)</span>

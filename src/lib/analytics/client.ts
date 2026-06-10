@@ -67,6 +67,14 @@ export function trackPresence(path: string): void {
 /** @deprecated Use getAnalyticsSessionId */
 export const getFormAnalyticsSessionId = getAnalyticsSessionId;
 
+/** Clicks to app.tlccarenow.com and other outbound booking links. */
+export function trackOutboundClick(
+  clickId: string,
+  options?: { path?: string },
+): void {
+  trackEvent(`outbound_${clickId}`, options);
+}
+
 /** Track button clicks and other actions, e.g. trackEvent("cta_demo", { path: "/enterprise" }) */
 export function trackEvent(
   name: string,

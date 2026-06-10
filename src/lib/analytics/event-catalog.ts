@@ -46,6 +46,14 @@ const EVENT_LABELS: Record<string, string> = {
   enterprise_lead_started: "Started enterprise demo form",
   enterprise_lead_submitted: "Sent enterprise demo form",
   enterprise_lead_submit: "Sent enterprise demo form",
+  outbound_book_carenow_header: "Book CareNow (header)",
+  outbound_book_carenow_footer: "Book care online (footer)",
+  outbound_app_book_page_open: "Open TLC CareNow (book page)",
+  outbound_app_book_page_login: "Resident login (book page)",
+  outbound_app_book_page_staff: "Staff sign in (book page)",
+  outbound_app_book_page_inline: "App link in text (book page)",
+  outbound_app_campus_care_inline: "App link (Campus Care page)",
+  outbound_app_about: "Open TLC CareNow (about page)",
 };
 
 function keysForStep(step: FunnelStepDef): string[] {
@@ -63,7 +71,14 @@ export function countNamedEvents(
 }
 
 export function eventDisplayName(name: string): string {
-  return EVENT_LABELS[name] ?? name.replaceAll("_", " ");
+  if (EVENT_LABELS[name]) return EVENT_LABELS[name];
+  if (name.startsWith("outbound_")) {
+    return name
+      .slice("outbound_".length)
+      .replaceAll("_", " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+  }
+  return name.replaceAll("_", " ");
 }
 
 export function buildFormFunnels(events: AnalyticsEvent[]): FormFunnelSummary[] {

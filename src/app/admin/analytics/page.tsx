@@ -36,6 +36,7 @@ export default async function AdminAnalyticsPage({ searchParams }: PageProps) {
       <PageShell variant="analytics-panel">
         <section className="analytics-admin-page">
           <div className="tlc-container analytics-admin-inner">
+            <div className="analytics-console">
             <div className="analytics-unlock-wrap">
               <div className="analytics-unlock-card">
                 <h1 className="analytics-unlock-title">Analytics not set up</h1>
@@ -50,6 +51,7 @@ export default async function AdminAnalyticsPage({ searchParams }: PageProps) {
                 </p>
               </div>
             </div>
+            </div>
           </div>
         </section>
       </PageShell>
@@ -62,23 +64,27 @@ export default async function AdminAnalyticsPage({ searchParams }: PageProps) {
   }
 
   const authed = await isAnalyticsSessionValid();
+  const submissions = authed ? await readFormSubmissions() : [];
 
   return (
     <PageShell variant="analytics-panel">
       <section className="analytics-admin-page">
         <div className="tlc-container analytics-admin-inner">
-          {!authed ? (
-            <AnalyticsUnlockForm />
-          ) : (
-            <AnalyticsDashboard
-              summary={buildAnalyticsSummary(
-                await readAnalyticsEvents(),
-                useBlobAnalyticsStore() ? "blob" : "file",
-              )}
-              submissions={await readFormSubmissions()}
-              showProductionHints={process.env.VERCEL === "1"}
-            />
-          )}
+          <div className="analytics-console">
+            {!authed ? (
+              <AnalyticsUnlockForm />
+            ) : (
+              <AnalyticsDashboard
+                summary={buildAnalyticsSummary(
+                  await readAnalyticsEvents(),
+                  useBlobAnalyticsStore() ? "blob" : "file",
+                  submissions,
+                )}
+                submissions={submissions}
+                showProductionHints={process.env.VERCEL === "1"}
+              />
+            )}
+          </div>
         </div>
       </section>
     </PageShell>

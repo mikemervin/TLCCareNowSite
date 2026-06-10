@@ -18,6 +18,21 @@ import { buildFormEntrySnapshots } from "@/lib/analytics/form-snapshots";
 import { buildActiveNowStats, isPresenceEvent } from "@/lib/analytics/active-now";
 import { buildTodayStats, eventSiteDateKey } from "@/lib/analytics/today";
 import { formatLocation, formatReferrer } from "@/lib/analytics/format";
+import {
+  buildDeviceBreakdown,
+  buildKnownPageCounts,
+  buildLeadStats,
+  buildOutboundClicks,
+  buildPeakHours,
+  buildSessionStats,
+  buildUtmCampaigns,
+  marketingPageviews,
+} from "@/lib/analytics/insights";
+import {
+  canonicalAnalyticsPath,
+  pathTrafficCategory,
+} from "@/lib/analytics/page-labels";
+import type { FormSubmission } from "@/lib/analytics/submissions-types";
 import type {
   AnalyticsEvent,
   AnalyticsSummary,
@@ -113,6 +128,7 @@ export async function readAnalyticsEvents(limit = 5000): Promise<AnalyticsEvent[
 export function buildAnalyticsSummary(
   events: AnalyticsEvent[],
   storage: AnalyticsSummary["storage"] = useBlobAnalyticsStore() ? "blob" : "file",
+  submissions: FormSubmission[] = [],
 ): AnalyticsSummary {
   const excludedAdminViews = events.filter(
     (e) => e.type === "pageview" && isAdminPath(e.path),
@@ -125,13 +141,28 @@ export function buildAnalyticsSummary(
 
   const pathCounts = new Map<string, number>();
   for (const event of pageviews) {
-    pathCounts.set(event.path, (pathCounts.get(event.path) ?? 0) + 1);
+    const path = canonicalAnalyticsPath(event.path);
+    pathCounts.set(path, (pathCounts.get(path) ?? 0) + 1);
   }
 
-  const topPaths = [...pathCounts.entries()]
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 15)
-    .map(([path, count]) => ({ path, count }));
+  const knownPathRows: { path: string; count: number }[] = [];
+  const noisePathRows: { path: string; count: number }[] = [];
+
+  for (const [path, count] of pathCounts.entries()) {
+    const row = { path, count };
+    if (pathTrafficCategory(path) === "known") {
+      knownPathRows.push(row);
+    } else {
+      noisePathRows.push(row);
+    }
+  }
+
+  const topPaths = knownPathRows
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 15);
+  const noisePaths = noisePathRows
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 15);
 
   const dayCounts = new Map<string, number>();
   for (const event of signals) {
@@ -158,6 +189,7 @@ export function buildAnalyticsSummary(
 
   const reversed = [...signals].reverse();
   const formInputs = signals.filter((e) => e.type === "form_input");
+  const formEntries = buildFormEntrySnapshots(signals);
 
   return {
     storage,
@@ -169,8 +201,16 @@ export function buildAnalyticsSummary(
     customEvents: customEvents.length,
     uniquePaths: pathCounts.size,
     topPaths,
+    noisePaths,
     topReferrers,
     topLocations,
+    blogRankings: buildKnownPageCounts(pageviews, { blogOnly: true, limit: 10 }),
+    deviceBreakdown: buildDeviceBreakdown(pageviews),
+    peakHours: buildPeakHours(pageviews),
+    sessionStats: buildSessionStats(pageviews),
+    utmCampaigns: buildUtmCampaigns(pageviews),
+    outboundClicks: buildOutboundClicks(signals),
+    leadStats: buildLeadStats(formEntries, submissions),
     formFunnels: buildFormFunnels(signals),
     topActions: buildTopActions(signals),
     eventsByDay,
@@ -178,7 +218,7 @@ export function buildAnalyticsSummary(
     recentFormEvents: reversed
       .filter((e) => e.type === "event")
       .slice(0, 30),
-    formEntries: buildFormEntrySnapshots(signals),
+    formEntries,
     recentFieldUpdates: [...formInputs].reverse().slice(0, 40),
   };
 }

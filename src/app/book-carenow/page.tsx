@@ -1,4 +1,5 @@
 import { AppLink } from "@/components/AppLink";
+import { TrackedOutboundLink } from "@/components/TrackedOutboundLink";
 import { PageShell } from "@/components/PageShell";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/lib/site";
@@ -22,20 +23,24 @@ export default function BookCareNowPage() {
           </SectionHeading>
           <p className="mt-8 text-lg leading-relaxed text-tlc-text-muted">
             {site.description} Sign in at{" "}
-            <a
+            <TrackedOutboundLink
               href={site.appUrl}
+              clickId="app_book_page_inline"
               className="font-medium text-tlc-primary hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
               app.tlccarenow.com
-            </a>{" "}
+            </TrackedOutboundLink>{" "}
             to schedule visits, pay securely, and manage your care.
           </p>
           <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <AppLink size="lg">Open TLC CareNow</AppLink>
+            <AppLink size="lg" clickId="app_book_page_open">
+              Open TLC CareNow
+            </AppLink>
             <AppLink
               href={site.adminLoginUrl}
+              clickId="app_book_page_staff"
               variant="secondary"
               size="md"
             >

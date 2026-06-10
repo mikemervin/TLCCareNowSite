@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { TrackedOutboundLink } from "@/components/TrackedOutboundLink";
 import { APP_BRAND_POWERED_BY } from "@/lib/app-brand";
 import { SocialLinks } from "@/components/SocialLinks";
 import { footerLegalLinks } from "@/lib/legal";
@@ -32,15 +33,24 @@ export function Footer() {
           {contactItems.map((item) => (
             <div key={item.label} className="site-footer-col">
               <span className="site-footer-label">{item.label}</span>
-              <a
-                href={item.href}
-                {...("external" in item && item.external
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
-                className={`site-footer-value${"tabular" in item && item.tabular ? " tabular-nums" : ""}`}
-              >
-                {item.value}
-              </a>
+              {"external" in item && item.external ? (
+                <TrackedOutboundLink
+                  href={item.href}
+                  clickId="book_carenow_footer"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="site-footer-value"
+                >
+                  {item.value}
+                </TrackedOutboundLink>
+              ) : (
+                <a
+                  href={item.href}
+                  className={`site-footer-value${"tabular" in item && item.tabular ? " tabular-nums" : ""}`}
+                >
+                  {item.value}
+                </a>
+              )}
             </div>
           ))}
 

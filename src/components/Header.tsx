@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/BrandMark";
+import { TrackedOutboundLink } from "@/components/TrackedOutboundLink";
 import { HeaderHomePillLink } from "@/components/HeaderHomePillLink";
 import { HeaderMobileMenu } from "@/components/HeaderMobileMenu";
 import { site } from "@/lib/site";
@@ -47,15 +48,16 @@ export function Header() {
                 fullLabel="Enterprise Solutions"
                 className="header-enterprise-link"
               />
-              <a
+              <TrackedOutboundLink
                 href={site.appLoginUrl}
+                clickId="book_carenow_header"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="header-pill-item header-pill-item--book"
               >
                 <span className="header-pill-item__short">Book CareNow</span>
                 <span className="header-pill-item__full">Book CareNow</span>
-              </a>
+              </TrackedOutboundLink>
             </div>
 
             <HeaderMobileMenu />
