@@ -25,6 +25,7 @@ import type {
   CountRow,
   FormEntrySnapshot,
   FormFunnelSummary,
+  LeadStats,
 } from "@/lib/analytics/types";
 
 type AnalyticsDashboardProps = {
@@ -311,64 +312,171 @@ function NoisePathList({
   );
 }
 
+function DraftEntryCard({ entry }: { entry: FormEntrySnapshot }) {
+  const location = formatLocation(entry.country, entry.city, entry.region);
+  const message = entry.fields.find((field) => field.field === "message");
+  const otherFields = entry.fields.filter((field) => field.field !== "message");
+
+  return (
+    <article className="analytics-entry-card analytics-entry-card--draft">
+      <header className="analytics-entry-head">
+        <div>
+          <div className="analytics-entry-badges">
+            <span className="analytics-entry-status analytics-entry-status--draft">
+              Draft
+            </span>
+            <span className="analytics-entry-form-tag">{entry.formLabel}</span>
+          </div>
+          <p className="analytics-entry-meta">
+            {formatPagePath(entry.path)}
+            {location !== "—" ? ` · ${location}` : ""}
+          </p>
+        </div>
+        <time className="analytics-entry-time tabular-nums">
+          {formatSiteWhen(entry.updatedAt)}
+        </time>
+      </header>
+      {otherFields.length > 0 ? (
+        <dl className="analytics-entry-fields analytics-entry-fields--compact">
+          {otherFields.map((field) => (
+            <div key={field.field} className="analytics-entry-field">
+              <dt>{field.label}</dt>
+              <dd>{field.value}</dd>
+            </div>
+          ))}
+        </dl>
+      ) : null}
+      {message ? (
+        <blockquote className="analytics-entry-message">
+          {truncateText(message.value, 280)}
+        </blockquote>
+      ) : null}
+    </article>
+  );
+}
+
+function SentEntryCard({ sub }: { sub: FormSubmission }) {
+  const location = formatLocation(sub.country, sub.city ?? null, sub.region ?? null);
+
+  return (
+    <article className="analytics-entry-card analytics-entry-card--sent">
+      <header className="analytics-entry-head">
+        <div>
+          <div className="analytics-entry-badges">
+            <span className="analytics-entry-status analytics-entry-status--sent">
+              Sent
+            </span>
+            <span className="analytics-entry-form-tag">
+              {submissionSourceLabel(sub.source)}
+            </span>
+          </div>
+          <p className="analytics-entry-meta">
+            {formatPagePath(sub.path)}
+            {location !== "—" ? ` · ${location}` : ""}
+          </p>
+        </div>
+        <time className="analytics-entry-time tabular-nums">
+          {formatSiteWhen(sub.timestamp)}
+        </time>
+      </header>
+      <dl className="analytics-entry-fields analytics-entry-fields--compact">
+        <div className="analytics-entry-field">
+          <dt>Name</dt>
+          <dd>{sub.name}</dd>
+        </div>
+        <div className="analytics-entry-field">
+          <dt>Email</dt>
+          <dd>{sub.email}</dd>
+        </div>
+        {sub.phone ? (
+          <div className="analytics-entry-field">
+            <dt>Phone</dt>
+            <dd>{sub.phone}</dd>
+          </div>
+        ) : null}
+        {sub.state ? (
+          <div className="analytics-entry-field">
+            <dt>Location</dt>
+            <dd>{sub.state}</dd>
+          </div>
+        ) : null}
+        {sub.subject ? (
+          <div className="analytics-entry-field">
+            <dt>Subject</dt>
+            <dd>{sub.subject}</dd>
+          </div>
+        ) : null}
+      </dl>
+      {sub.message ? (
+        <blockquote className="analytics-entry-message">
+          {truncateText(sub.message, 280)}
+        </blockquote>
+      ) : null}
+    </article>
+  );
+}
+
+function SpamEntriesDrawer({
+  count,
+  label,
+  children,
+}: {
+  count: number;
+  label: string;
+  children: ReactNode;
+}) {
+  if (count === 0) return null;
+
+  return (
+    <details className="analytics-spam-drawer">
+      <summary className="analytics-spam-drawer-summary">
+        <span className="analytics-spam-drawer-label">{label}</span>
+        <span className="analytics-spam-drawer-count tabular-nums">{count}</span>
+      </summary>
+      <div className="analytics-spam-drawer-body">{children}</div>
+    </details>
+  );
+}
+
 function FormEntriesPanel({ entries }: { entries: FormEntrySnapshot[] }) {
   if (entries.length === 0) {
     return (
       <p className="analytics-panel-empty">
-        No one has typed into a form yet. Partial entries show up here even if
-        they never click Send.
+        No drafts yet. Partial entries appear here when someone types but does
+        not click Send.
       </p>
     );
   }
 
+  const realEntries = entries.filter(
+    (entry) => !isLikelySpamText(...entry.fields.map((field) => field.value)),
+  );
+  const spamEntries = entries.filter((entry) =>
+    isLikelySpamText(...entry.fields.map((field) => field.value)),
+  );
+
   return (
-    <div className="analytics-entry-grid">
-      {entries.map((entry) => {
-        const spam = isLikelySpamText(...entry.fields.map((field) => field.value));
-        return (
-        <article
-          key={entry.sessionId}
-          className={`analytics-entry-card${spam ? " analytics-entry-card--spam" : ""}`}
-        >
-          <div className="analytics-entry-badges">
-            <span className="analytics-entry-status analytics-entry-status--draft">
-              Draft — not sent
-            </span>
-            {spam ? (
-              <span className="analytics-entry-status analytics-entry-status--spam">
-                Likely spam
-              </span>
-            ) : null}
-          </div>
-          <header className="analytics-entry-head">
-            <div>
-              <h4 className="analytics-entry-title">{entry.formLabel}</h4>
-              <p className="analytics-entry-meta">
-                {formatPagePath(entry.path)}
-                {formatLocation(entry.country, entry.city, entry.region) !== "—"
-                  ? ` · ${formatLocation(entry.country, entry.city, entry.region)}`
-                  : ""}
-              </p>
+    <div className="analytics-entry-stack">
+      {realEntries.length > 0 ? (
+        <div className="analytics-entry-list">
+          {realEntries.map((entry) => (
+            <DraftEntryCard key={entry.sessionId} entry={entry} />
+          ))}
+        </div>
+      ) : (
+        <p className="analytics-panel-empty analytics-panel-empty--inline">
+          No real drafts—only filtered spam below.
+        </p>
+      )}
+      <SpamEntriesDrawer count={spamEntries.length} label="Filtered spam drafts">
+        <div className="analytics-entry-list">
+          {spamEntries.map((entry) => (
+            <div key={entry.sessionId} className="analytics-entry-card--spam-wrap">
+              <DraftEntryCard entry={entry} />
             </div>
-            <time className="analytics-entry-time tabular-nums">
-              {formatSiteWhen(entry.updatedAt)}
-            </time>
-          </header>
-          <dl className="analytics-entry-fields">
-            {entry.fields.map((field) => (
-              <div key={field.field} className="analytics-entry-field">
-                <dt>{field.label}</dt>
-                <dd>
-                  {field.field === "message"
-                    ? truncateText(field.value)
-                    : field.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </article>
-        );
-      })}
+          ))}
+        </div>
+      </SpamEntriesDrawer>
     </div>
   );
 }
@@ -377,92 +485,79 @@ function SubmittedFormsPanel({ submissions }: { submissions: FormSubmission[] })
   if (submissions.length === 0) {
     return (
       <p className="analytics-panel-empty">
-        No stored submissions yet. When someone clicks Send, a copy appears here
-        and you still get email via Resend.
+        No completed sends yet. When someone clicks Send, a copy appears here and
+        you still get email.
       </p>
     );
   }
 
+  const realSubmissions = submissions.filter(
+    (sub) =>
+      !isLikelySpamText(sub.name, sub.email, sub.subject, sub.message, sub.phone),
+  );
+  const spamSubmissions = submissions.filter((sub) =>
+    isLikelySpamText(sub.name, sub.email, sub.subject, sub.message, sub.phone),
+  );
+
   return (
-    <div className="analytics-entry-grid">
-      {submissions.map((sub) => {
-        const spam = isLikelySpamText(
-          sub.name,
-          sub.email,
-          sub.subject,
-          sub.message,
-        );
-        return (
-        <article
-          key={sub.id}
-          className={`analytics-entry-card analytics-entry-card--sent${
-            spam ? " analytics-entry-card--spam" : ""
-          }`}
-        >
-          <div className="analytics-entry-badges">
-            <span className="analytics-entry-status analytics-entry-status--sent">
-              Sent
-            </span>
-            {spam ? (
-              <span className="analytics-entry-status analytics-entry-status--spam">
-                Likely spam
-              </span>
-            ) : null}
-          </div>
-          <header className="analytics-entry-head">
-            <div>
-              <h4 className="analytics-entry-title">
-                {submissionSourceLabel(sub.source)}
-              </h4>
-              <p className="analytics-entry-meta">
-                {formatPagePath(sub.path)}
-                {formatLocation(sub.country, sub.city ?? null, sub.region ?? null) !==
-                "—"
-                  ? ` · ${formatLocation(sub.country, sub.city ?? null, sub.region ?? null)}`
-                  : ""}
-              </p>
+    <div className="analytics-entry-stack">
+      {realSubmissions.length > 0 ? (
+        <div className="analytics-entry-list">
+          {realSubmissions.map((sub) => (
+            <SentEntryCard key={sub.id} sub={sub} />
+          ))}
+        </div>
+      ) : (
+        <p className="analytics-panel-empty analytics-panel-empty--inline">
+          No real sends yet—only filtered spam below.
+        </p>
+      )}
+      <SpamEntriesDrawer count={spamSubmissions.length} label="Filtered spam sends">
+        <div className="analytics-entry-list">
+          {spamSubmissions.map((sub) => (
+            <div key={sub.id} className="analytics-entry-card--spam-wrap">
+              <SentEntryCard sub={sub} />
             </div>
-            <time className="analytics-entry-time tabular-nums">
-              {formatSiteWhen(sub.timestamp)}
-            </time>
-          </header>
-          <dl className="analytics-entry-fields">
-            <div className="analytics-entry-field">
-              <dt>Name</dt>
-              <dd>{sub.name}</dd>
-            </div>
-            <div className="analytics-entry-field">
-              <dt>Email</dt>
-              <dd>{sub.email}</dd>
-            </div>
-            {sub.phone ? (
-              <div className="analytics-entry-field">
-                <dt>Phone</dt>
-                <dd>{sub.phone}</dd>
-              </div>
-            ) : null}
-            {sub.state ? (
-              <div className="analytics-entry-field">
-                <dt>Location</dt>
-                <dd>{sub.state}</dd>
-              </div>
-            ) : null}
-            {sub.subject ? (
-              <div className="analytics-entry-field">
-                <dt>Subject</dt>
-                <dd>{sub.subject}</dd>
-              </div>
-            ) : null}
-            {sub.message ? (
-              <div className="analytics-entry-field">
-                <dt>Message</dt>
-                <dd>{truncateText(sub.message)}</dd>
-              </div>
-            ) : null}
-          </dl>
-        </article>
-        );
-      })}
+          ))}
+        </div>
+      </SpamEntriesDrawer>
+    </div>
+  );
+}
+
+function LeadsSummaryStrip({ leadStats }: { leadStats: LeadStats }) {
+  const spamTotal = leadStats.likelySpamDrafts + leadStats.likelySpamSends;
+
+  return (
+    <div className="analytics-leads-hero">
+      <article className="analytics-lead-metric analytics-lead-metric--primary">
+        <p className="analytics-lead-metric-label">Real sends</p>
+        <p className="analytics-lead-metric-value tabular-nums">
+          {leadStats.realSends}
+        </p>
+        <p className="analytics-lead-metric-note">Legitimate completed forms</p>
+      </article>
+      <article className="analytics-lead-metric">
+        <p className="analytics-lead-metric-label">Drafts</p>
+        <p className="analytics-lead-metric-value tabular-nums">
+          {leadStats.draftCount}
+        </p>
+        <p className="analytics-lead-metric-note">Typed but not sent</p>
+      </article>
+      <article className="analytics-lead-metric">
+        <p className="analytics-lead-metric-label">Total sent</p>
+        <p className="analytics-lead-metric-value tabular-nums">
+          {leadStats.sentCount}
+        </p>
+        <p className="analytics-lead-metric-note">All completed forms</p>
+      </article>
+      <article className="analytics-lead-metric analytics-lead-metric--muted">
+        <p className="analytics-lead-metric-label">Spam filtered</p>
+        <p className="analytics-lead-metric-value tabular-nums">{spamTotal}</p>
+        <p className="analytics-lead-metric-note">
+          {leadStats.likelySpamSends} sent · {leadStats.likelySpamDrafts} drafts
+        </p>
+      </article>
     </div>
   );
 }
@@ -482,53 +577,53 @@ function FormFunnelsPanel({ funnels }: { funnels: FormFunnelSummary[] }) {
   return (
     <div className="analytics-funnel-grid">
       {funnels.map((funnel) => {
-        const maxStep = Math.max(...funnel.steps.map((s) => s.count), 1);
         const lastStep = funnel.steps[funnel.steps.length - 1];
         const firstStep = funnel.steps[0];
         const conversionPct =
           firstStep && lastStep && firstStep.count > 0
             ? Math.round((lastStep.count / firstStep.count) * 100)
             : null;
+        const completed = (lastStep?.count ?? 0) > 0;
 
         return (
-          <article key={funnel.id} className="analytics-funnel-card">
+          <article
+            key={funnel.id}
+            className={`analytics-funnel-card${completed ? " analytics-funnel-card--complete" : ""}`}
+          >
             <header className="analytics-funnel-head">
-              <h4 className="analytics-funnel-title">{funnel.title}</h4>
-              {conversionPct !== null && lastStep.count > 0 ? (
-                <p className="analytics-funnel-rate">
-                  <strong>{conversionPct}%</strong> finished the last step
-                </p>
+              <div>
+                <h4 className="analytics-funnel-title">{funnel.title}</h4>
+                <p className="analytics-funnel-desc">{funnel.description}</p>
+              </div>
+              {conversionPct !== null && completed ? (
+                <span className="analytics-funnel-badge tabular-nums">
+                  {conversionPct}%
+                </span>
               ) : (
-                <p className="analytics-funnel-rate analytics-funnel-rate--muted">
-                  No completed sends yet
-                </p>
+                <span className="analytics-funnel-badge analytics-funnel-badge--idle">
+                  —
+                </span>
               )}
             </header>
-            <ol className="analytics-funnel-steps">
+            <div className="analytics-funnel-pipeline">
               {funnel.steps.map((step, index) => (
-                <li key={step.label} className="analytics-funnel-step">
-                  <div className="analytics-funnel-step-head">
-                    <span className="analytics-funnel-step-index">
-                      {index + 1}
+                <div key={step.label} className="analytics-funnel-pipeline-item">
+                  {index > 0 ? (
+                    <span className="analytics-funnel-arrow" aria-hidden>
+                      →
                     </span>
-                    <span className="analytics-funnel-step-label">
-                      {step.label}
-                    </span>
-                    <span className="analytics-funnel-step-count tabular-nums">
+                  ) : null}
+                  <div className="analytics-funnel-node">
+                    <span className="analytics-funnel-node-count tabular-nums">
                       {step.count}
                     </span>
+                    <span className="analytics-funnel-node-label">
+                      {step.label}
+                    </span>
                   </div>
-                  <span className="analytics-path-bar-track" aria-hidden>
-                    <span
-                      className="analytics-path-bar-fill analytics-path-bar-fill--funnel"
-                      style={{
-                        width: `${(step.count / maxStep) * 100}%`,
-                      }}
-                    />
-                  </span>
-                </li>
+                </div>
               ))}
-            </ol>
+            </div>
           </article>
         );
       })}
@@ -951,28 +1046,27 @@ export function AnalyticsDashboard({
 
       <SectionGroup
         title="Leads"
-        lead="Form funnels first—then drafts and completed sends."
+        lead="Real inquiries up top—spam is collapsed so it does not clutter the view."
       >
-        <div className="analytics-leads-summary">
-          <MiniStat label="Real sends" value={leadStats.realSends} />
-          <MiniStat label="Drafts" value={leadStats.draftCount} />
-          <MiniStat
-            label="Likely spam"
-            value={leadStats.likelySpamDrafts + leadStats.likelySpamSends}
-            hint={`${leadStats.likelySpamSends} sent · ${leadStats.likelySpamDrafts} drafts`}
-          />
-          <MiniStat label="Total sent" value={leadStats.sentCount} />
-        </div>
-        <Panel title="Form progress" subtitle="Started → finished for each form.">
-          <FormFunnelsPanel funnels={summary.formFunnels} />
-        </Panel>
-        <div className="analytics-leads-grid">
-          <Panel title="Drafts" subtitle="Typed but not sent.">
-            <FormEntriesPanel entries={summary.formEntries} />
+        <div className="analytics-leads-surface">
+          <LeadsSummaryStrip leadStats={leadStats} />
+          <Panel
+            title="Form progress"
+            subtitle="How many people started each form and finished the last step."
+          >
+            <FormFunnelsPanel funnels={summary.formFunnels} />
           </Panel>
-          <Panel title="Completed sends" subtitle="Saved on Send—you also get email.">
-            <SubmittedFormsPanel submissions={submissions} />
-          </Panel>
+          <div className="analytics-leads-grid">
+            <Panel title="Drafts" subtitle="Real drafts first. Spam is tucked away below.">
+              <FormEntriesPanel entries={summary.formEntries} />
+            </Panel>
+            <Panel
+              title="Completed sends"
+              subtitle="Legitimate sends first—you still get email for all of them."
+            >
+              <SubmittedFormsPanel submissions={submissions} />
+            </Panel>
+          </div>
         </div>
       </SectionGroup>
 
