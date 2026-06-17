@@ -38,4 +38,6 @@ export function analyticsAdminSecret(): string | undefined {
 
 export const ANALYTICS_MAX_BODY_BYTES = 2048;
 export const ANALYTICS_MAX_EVENTS_FILE_BYTES = 5 * 1024 * 1024;
+/** Vercel server uploads cap at 4.5 MB — stay below that for read-modify-write blob puts. */
+export const ANALYTICS_MAX_BLOB_BYTES = 3.5 * 1024 * 1024;
 export const ANALYTICS_RATE_LIMIT_PER_MINUTE = 120;

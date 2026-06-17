@@ -89,22 +89,30 @@ export async function POST(request: NextRequest) {
 
   const geo = geoFromHeaders(request.headers);
 
-  await appendAnalyticsEvent({
-    type: parsed.type,
-    path: parsed.path,
-    name: parsed.name,
-    pageTitle: parsed.pageTitle,
-    referrer: parsed.referrer,
-    formId: parsed.formId,
-    field: parsed.field,
-    value: parsed.value,
-    sessionId: parsed.sessionId,
-    country: geo.country,
-    city: geo.city,
-    region: geo.region,
-    userAgent: userAgentFromHeaders(request.headers),
-    timestamp: new Date().toISOString(),
-  });
+  try {
+    await appendAnalyticsEvent({
+      type: parsed.type,
+      path: parsed.path,
+      name: parsed.name,
+      pageTitle: parsed.pageTitle,
+      referrer: parsed.referrer,
+      formId: parsed.formId,
+      field: parsed.field,
+      value: parsed.value,
+      sessionId: parsed.sessionId,
+      country: geo.country,
+      city: geo.city,
+      region: geo.region,
+      userAgent: userAgentFromHeaders(request.headers),
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error) {
+    console.error("[analytics] failed to persist event", error);
+    return Response.json(
+      { error: "Analytics storage unavailable." },
+      { status: 503 },
+    );
+  }
 
   return Response.json({ ok: true });
 }

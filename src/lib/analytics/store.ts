@@ -10,6 +10,7 @@ import {
   ANALYTICS_MAX_EVENTS_FILE_BYTES,
   useBlobAnalyticsStore,
 } from "@/lib/analytics/config";
+import { trimJsonlToMaxBytes } from "@/lib/analytics/jsonl-trim";
 import {
   buildFormFunnels,
   buildTopActions,
@@ -73,10 +74,11 @@ async function trimFileIfNeeded(filePath: string): Promise<void> {
   try {
     const contents = await readFile(filePath, "utf8");
     if (contents.length <= ANALYTICS_MAX_EVENTS_FILE_BYTES) return;
-
-    const lines = contents.trimEnd().split("\n");
-    const keep = lines.slice(-Math.floor(lines.length * 0.75));
-    await writeFile(filePath, `${keep.join("\n")}\n`, "utf8");
+    await writeFile(
+      filePath,
+      trimJsonlToMaxBytes(contents, ANALYTICS_MAX_EVENTS_FILE_BYTES),
+      "utf8",
+    );
   } catch {
     /* file may not exist yet */
   }

@@ -1,5 +1,7 @@
-import { get, put } from "@vercel/blob";
+import { BlobFileTooLargeError, get, put } from "@vercel/blob";
 import { randomUUID } from "node:crypto";
+import { ANALYTICS_MAX_BLOB_BYTES } from "@/lib/analytics/config";
+import { trimJsonlToMaxBytes } from "@/lib/analytics/jsonl-trim";
 import type { AnalyticsEvent } from "@/lib/analytics/types";
 
 const BLOB_PATH = "analytics/events.jsonl";
@@ -36,17 +38,32 @@ async function writeBlobRaw(content: string): Promise<void> {
   });
 }
 
+function appendJsonlLine(existing: string, line: string): string {
+  const base = trimJsonlToMaxBytes(existing, ANALYTICS_MAX_BLOB_BYTES).trimEnd();
+  return base ? `${base}\n${line}\n` : `${line}\n`;
+}
+
 export async function appendAnalyticsEventBlob(
   event: Omit<AnalyticsEvent, "id">,
 ): Promise<AnalyticsEvent> {
   const record: AnalyticsEvent = { id: randomUUID(), ...event };
+  const line = JSON.stringify(record);
   const existing = await readBlobRaw();
-  const trimmed = existing.trimEnd();
-  const next = trimmed
-    ? `${trimmed}\n${JSON.stringify(record)}\n`
-    : `${JSON.stringify(record)}\n`;
-  await writeBlobRaw(next);
-  return record;
+  let next = appendJsonlLine(existing, line);
+
+  try {
+    await writeBlobRaw(next);
+    return record;
+  } catch (error) {
+    if (!(error instanceof BlobFileTooLargeError)) throw error;
+
+    next = appendJsonlLine(
+      trimJsonlToMaxBytes(existing, Math.floor(ANALYTICS_MAX_BLOB_BYTES * 0.5)),
+      line,
+    );
+    await writeBlobRaw(next);
+    return record;
+  }
 }
 
 export async function readAnalyticsEventsBlob(
