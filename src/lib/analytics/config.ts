@@ -22,13 +22,29 @@ export function analyticsSubmissionsPath(): string {
   );
 }
 
+export type AnalyticsStorageBackend = "file" | "blob" | "postgres";
+
+export function usePostgresAnalyticsStore(): boolean {
+  return Boolean(
+    process.env.POSTGRES_URL?.trim() || process.env.DATABASE_URL?.trim(),
+  );
+}
+
 /** Use Vercel Blob when a read-write token or a connected store (OIDC on Vercel) is present. */
 export function useBlobAnalyticsStore(): boolean {
+  if (process.env.ANALYTICS_USE_BLOB === "false") return false;
   if (process.env.BLOB_READ_WRITE_TOKEN?.trim()) return true;
   if (process.env.VERCEL === "1" && process.env.BLOB_STORE_ID?.trim()) {
     return true;
   }
   return false;
+}
+
+/** Postgres when configured; otherwise Blob; otherwise local JSONL (dev only). */
+export function analyticsStorageBackend(): AnalyticsStorageBackend {
+  if (usePostgresAnalyticsStore()) return "postgres";
+  if (useBlobAnalyticsStore()) return "blob";
+  return "file";
 }
 
 export function analyticsAdminSecret(): string | undefined {

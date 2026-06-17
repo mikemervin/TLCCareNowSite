@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { trackPageView, trackPresence } from "@/lib/analytics/client";
+import { trackPageView } from "@/lib/analytics/client";
 
 function AnalyticsPageViewTracker() {
   const pathname = usePathname();
@@ -17,24 +17,7 @@ function AnalyticsPageViewTracker() {
     lastKey.current = key;
 
     trackPageView(key);
-    trackPresence(pathname);
   }, [pathname, searchParams]);
-
-  useEffect(() => {
-    const ping = () => {
-      if (document.visibilityState !== "visible") return;
-      trackPresence(pathname);
-    };
-
-    ping();
-    const interval = window.setInterval(ping, 45_000);
-    document.addEventListener("visibilitychange", ping);
-
-    return () => {
-      window.clearInterval(interval);
-      document.removeEventListener("visibilitychange", ping);
-    };
-  }, [pathname]);
 
   return null;
 }

@@ -3,7 +3,7 @@ import {
   analyticsAdminSecret,
   ANALYTICS_MAX_BODY_BYTES,
   isAnalyticsIngestEnabled,
-  useBlobAnalyticsStore,
+  analyticsStorageBackend,
 } from "@/lib/analytics/config";
 import {
   geoFromHeaders,
@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
   if (provided !== secret) return unauthorized();
 
   const events = await readAnalyticsEvents();
-  const storage = useBlobAnalyticsStore() ? "blob" : "file";
+  const storage = analyticsStorageBackend();
   return Response.json(buildAnalyticsSummary(events, storage));
 }
 
@@ -85,6 +85,12 @@ export async function POST(request: NextRequest) {
   const parsed = parseIngestPayload(body);
   if (!parsed.ok) {
     return Response.json({ error: parsed.error }, { status: 400 });
+  }
+
+  // Heartbeats were burning Vercel Blob advanced-operation quota (2k/mo on Hobby).
+  // "Online now" uses recent pageviews and form activity instead.
+  if (parsed.type === "heartbeat") {
+    return Response.json({ ok: true });
   }
 
   const geo = geoFromHeaders(request.headers);

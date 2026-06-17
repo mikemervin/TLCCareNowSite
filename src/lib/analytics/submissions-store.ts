@@ -1,11 +1,15 @@
 import { mkdir, readFile, writeFile, appendFile } from "node:fs/promises";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
-import { analyticsSubmissionsPath, useBlobAnalyticsStore } from "@/lib/analytics/config";
+import { analyticsSubmissionsPath, analyticsStorageBackend } from "@/lib/analytics/config";
 import {
   appendFormSubmissionBlob,
   readFormSubmissionsBlob,
 } from "@/lib/analytics/submissions-blob";
+import {
+  appendFormSubmissionPostgres,
+  readFormSubmissionsPostgres,
+} from "@/lib/analytics/postgres-store";
 import type {
   FormSubmission,
   FormSubmissionSource,
@@ -52,7 +56,12 @@ export async function appendFormSubmission(
     ...data,
   };
 
-  if (useBlobAnalyticsStore()) {
+  if (analyticsStorageBackend() === "postgres") {
+    await appendFormSubmissionPostgres(record);
+    return record;
+  }
+
+  if (analyticsStorageBackend() === "blob") {
     await appendFormSubmissionBlob(record);
     return record;
   }
@@ -65,7 +74,11 @@ export async function appendFormSubmission(
 }
 
 export async function readFormSubmissions(limit = 200): Promise<FormSubmission[]> {
-  if (useBlobAnalyticsStore()) {
+  const backend = analyticsStorageBackend();
+  if (backend === "postgres") {
+    return readFormSubmissionsPostgres(limit);
+  }
+  if (backend === "blob") {
     return readFormSubmissionsBlob(limit);
   }
 

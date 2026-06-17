@@ -8,8 +8,12 @@ import {
 import {
   analyticsEventsPath,
   ANALYTICS_MAX_EVENTS_FILE_BYTES,
-  useBlobAnalyticsStore,
+  analyticsStorageBackend,
 } from "@/lib/analytics/config";
+import {
+  appendAnalyticsEventPostgres,
+  readAnalyticsEventsPostgres,
+} from "@/lib/analytics/postgres-store";
 import { trimJsonlToMaxBytes } from "@/lib/analytics/jsonl-trim";
 import {
   buildFormFunnels,
@@ -87,7 +91,11 @@ async function trimFileIfNeeded(filePath: string): Promise<void> {
 export async function appendAnalyticsEvent(
   event: Omit<AnalyticsEvent, "id">,
 ): Promise<AnalyticsEvent> {
-  if (useBlobAnalyticsStore()) {
+  const backend = analyticsStorageBackend();
+  if (backend === "postgres") {
+    return appendAnalyticsEventPostgres(event);
+  }
+  if (backend === "blob") {
     return appendAnalyticsEventBlob(event);
   }
 
@@ -101,7 +109,11 @@ export async function appendAnalyticsEvent(
 }
 
 export async function readAnalyticsEvents(limit = 5000): Promise<AnalyticsEvent[]> {
-  if (useBlobAnalyticsStore()) {
+  const backend = analyticsStorageBackend();
+  if (backend === "postgres") {
+    return readAnalyticsEventsPostgres(limit);
+  }
+  if (backend === "blob") {
     return readAnalyticsEventsBlob(limit);
   }
 
@@ -129,7 +141,7 @@ export async function readAnalyticsEvents(limit = 5000): Promise<AnalyticsEvent[
 
 export function buildAnalyticsSummary(
   events: AnalyticsEvent[],
-  storage: AnalyticsSummary["storage"] = useBlobAnalyticsStore() ? "blob" : "file",
+  storage: AnalyticsSummary["storage"] = analyticsStorageBackend(),
   submissions: FormSubmission[] = [],
 ): AnalyticsSummary {
   const excludedAdminViews = events.filter(

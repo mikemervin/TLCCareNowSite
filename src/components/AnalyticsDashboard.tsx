@@ -743,7 +743,7 @@ export function AnalyticsDashboard({
         <dl className="analytics-guide-grid">
           <div>
             <dt>Online now</dt>
-            <dd>Browsers active in the last few minutes (approximate).</dd>
+            <dd>Browsers with a pageview or form activity in the last few minutes.</dd>
           </div>
           <div>
             <dt>People</dt>
@@ -1172,7 +1172,7 @@ export function AnalyticsDashboard({
           ) : null}
 
           <p className="analytics-advanced-foot">
-            Data stored in Vercel Blob ({summary.storage}). Admin pages are not
+            Data stored in {summary.storage === "postgres" ? "Neon Postgres" : summary.storage === "blob" ? "Vercel Blob" : "local JSONL"} ({summary.storage}). Admin pages are not
             tracked.
           </p>
         </div>

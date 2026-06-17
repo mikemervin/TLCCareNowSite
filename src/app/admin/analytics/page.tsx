@@ -6,13 +6,12 @@ import {
   isValidAdminKey,
   setAnalyticsSession,
 } from "@/lib/analytics/auth";
-import { analyticsAdminSecret } from "@/lib/analytics/config";
+import { analyticsAdminSecret, analyticsStorageBackend } from "@/lib/analytics/config";
 import { readFormSubmissions } from "@/lib/analytics/submissions-store";
 import {
   buildAnalyticsSummary,
   readAnalyticsEvents,
 } from "@/lib/analytics/store";
-import { useBlobAnalyticsStore } from "@/lib/analytics/config";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
@@ -77,7 +76,7 @@ export default async function AdminAnalyticsPage({ searchParams }: PageProps) {
               <AnalyticsDashboard
                 summary={buildAnalyticsSummary(
                   await readAnalyticsEvents(),
-                  useBlobAnalyticsStore() ? "blob" : "file",
+                  analyticsStorageBackend(),
                   submissions,
                 )}
                 submissions={submissions}

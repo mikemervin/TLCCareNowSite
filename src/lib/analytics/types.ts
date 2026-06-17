@@ -101,7 +101,7 @@ export type ActiveNowStats = {
 };
 
 export type AnalyticsSummary = {
-  storage: "blob" | "file";
+  storage: "blob" | "file" | "postgres";
   excludedAdminViews: number;
   activeNow: ActiveNowStats;
   today: TodayStats;
