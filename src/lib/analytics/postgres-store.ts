@@ -1,67 +1,99 @@
-import { neon } from "@neondatabase/serverless";
+import postgres from "postgres";
 import { randomUUID } from "node:crypto";
 import type { AnalyticsEvent } from "@/lib/analytics/types";
 import type { FormSubmission } from "@/lib/analytics/submissions-types";
 
 let schemaReady: Promise<void> | null = null;
+let queryClient: ReturnType<typeof postgres> | null = null;
 
-function sql() {
+function postgresUrl(): string {
   const url =
     process.env.POSTGRES_URL?.trim() || process.env.DATABASE_URL?.trim();
   if (!url) {
     throw new Error("Postgres is not configured (POSTGRES_URL or DATABASE_URL).");
   }
-  return neon(url);
+  return url;
+}
+
+/** Session/direct URL when available — safer for DDL on Supabase. */
+function postgresMigrationUrl(): string {
+  return (
+    process.env.POSTGRES_URL_NON_POOLING?.trim() ||
+    process.env.POSTGRES_PRISMA_URL?.trim() ||
+    postgresUrl()
+  );
+}
+
+function getSql() {
+  if (!queryClient) {
+    queryClient = postgres(postgresUrl(), {
+      // Required for Supabase transaction pooler (port 6543).
+      prepare: false,
+      max: 1,
+      idle_timeout: 20,
+      connect_timeout: 10,
+    });
+  }
+  return queryClient;
 }
 
 async function ensureSchema(): Promise<void> {
   if (!schemaReady) {
     schemaReady = (async () => {
-      const query = sql();
-      await query`
-        CREATE TABLE IF NOT EXISTS analytics_events (
-          id TEXT PRIMARY KEY,
-          type TEXT NOT NULL,
-          path TEXT NOT NULL,
-          name TEXT,
-          page_title TEXT,
-          referrer TEXT,
-          country TEXT,
-          city TEXT,
-          region TEXT,
-          user_agent TEXT,
-          form_id TEXT,
-          field TEXT,
-          value TEXT,
-          session_id TEXT,
-          timestamp TIMESTAMPTZ NOT NULL
-        )
-      `;
-      await query`
-        CREATE INDEX IF NOT EXISTS analytics_events_timestamp_idx
-        ON analytics_events (timestamp DESC)
-      `;
-      await query`
-        CREATE TABLE IF NOT EXISTS analytics_submissions (
-          id TEXT PRIMARY KEY,
-          source TEXT NOT NULL,
-          path TEXT NOT NULL,
-          timestamp TIMESTAMPTZ NOT NULL,
-          country TEXT,
-          city TEXT,
-          region TEXT,
-          name TEXT NOT NULL,
-          email TEXT NOT NULL,
-          phone TEXT NOT NULL,
-          state TEXT NOT NULL,
-          subject TEXT NOT NULL,
-          message TEXT NOT NULL
-        )
-      `;
-      await query`
-        CREATE INDEX IF NOT EXISTS analytics_submissions_timestamp_idx
-        ON analytics_submissions (timestamp DESC)
-      `;
+      const migration = postgres(postgresMigrationUrl(), {
+        prepare: false,
+        max: 1,
+        connect_timeout: 10,
+      });
+
+      try {
+        await migration`
+          CREATE TABLE IF NOT EXISTS analytics_events (
+            id TEXT PRIMARY KEY,
+            type TEXT NOT NULL,
+            path TEXT NOT NULL,
+            name TEXT,
+            page_title TEXT,
+            referrer TEXT,
+            country TEXT,
+            city TEXT,
+            region TEXT,
+            user_agent TEXT,
+            form_id TEXT,
+            field TEXT,
+            value TEXT,
+            session_id TEXT,
+            timestamp TIMESTAMPTZ NOT NULL
+          )
+        `;
+        await migration`
+          CREATE INDEX IF NOT EXISTS analytics_events_timestamp_idx
+          ON analytics_events (timestamp DESC)
+        `;
+        await migration`
+          CREATE TABLE IF NOT EXISTS analytics_submissions (
+            id TEXT PRIMARY KEY,
+            source TEXT NOT NULL,
+            path TEXT NOT NULL,
+            timestamp TIMESTAMPTZ NOT NULL,
+            country TEXT,
+            city TEXT,
+            region TEXT,
+            name TEXT NOT NULL,
+            email TEXT NOT NULL,
+            phone TEXT NOT NULL,
+            state TEXT NOT NULL,
+            subject TEXT NOT NULL,
+            message TEXT NOT NULL
+          )
+        `;
+        await migration`
+          CREATE INDEX IF NOT EXISTS analytics_submissions_timestamp_idx
+          ON analytics_submissions (timestamp DESC)
+        `;
+      } finally {
+        await migration.end({ timeout: 5 });
+      }
     })().catch((error) => {
       schemaReady = null;
       throw error;
@@ -113,9 +145,9 @@ export async function appendAnalyticsEventPostgres(
 ): Promise<AnalyticsEvent> {
   await ensureSchema();
   const record: AnalyticsEvent = { id: randomUUID(), ...event };
-  const query = sql();
+  const sql = getSql();
 
-  await query`
+  await sql`
     INSERT INTO analytics_events (
       id, type, path, name, page_title, referrer,
       country, city, region, user_agent,
@@ -146,8 +178,8 @@ export async function readAnalyticsEventsPostgres(
   limit = 5000,
 ): Promise<AnalyticsEvent[]> {
   await ensureSchema();
-  const query = sql();
-  const rows = await query`
+  const sql = getSql();
+  const rows = await sql`
     SELECT *
     FROM analytics_events
     ORDER BY timestamp DESC
@@ -160,8 +192,8 @@ export async function appendFormSubmissionPostgres(
   row: FormSubmission,
 ): Promise<void> {
   await ensureSchema();
-  const query = sql();
-  await query`
+  const sql = getSql();
+  await sql`
     INSERT INTO analytics_submissions (
       id, source, path, timestamp,
       country, city, region,
@@ -188,8 +220,8 @@ export async function readFormSubmissionsPostgres(
   limit = 200,
 ): Promise<FormSubmission[]> {
   await ensureSchema();
-  const query = sql();
-  const rows = await query`
+  const sql = getSql();
+  const rows = await sql`
     SELECT *
     FROM analytics_submissions
     ORDER BY timestamp DESC
