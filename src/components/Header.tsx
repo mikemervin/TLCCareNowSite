@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/BrandMark";
-import { TrackedOutboundLink } from "@/components/TrackedOutboundLink";
 import { HeaderHomePillLink } from "@/components/HeaderHomePillLink";
 import { HeaderMobileMenu } from "@/components/HeaderMobileMenu";
+import { HeaderNationwideBadge } from "@/components/HeaderNationwideBadge";
+import { TrackedOutboundLink } from "@/components/TrackedOutboundLink";
 import { site } from "@/lib/site";
 
 type HeaderPillLinkProps = {
@@ -35,6 +36,7 @@ export function Header() {
 
           <nav className="tlc-header-actions" aria-label="Primary actions">
             <div className="header-pill-bar">
+              <HeaderNationwideBadge />
               <HeaderHomePillLink />
               <HeaderPillLink
                 href="/campus-care"
