@@ -21,7 +21,7 @@ export function HeroSection() {
           <p className="hero-body">
             Book same-day or short-term help through the TLC CareNow app. Our
             team is <strong>on site 24/7</strong> to support residents and
-            families.
+            families at communities across America.
           </p>
         </div>
 

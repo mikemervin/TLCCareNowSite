@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { site } from "@/lib/site";
 import { getSiteUrl } from "@/lib/site-url";
 
-const DEFAULT_OG_IMAGE = "/apple-icon.png";
-
 function absoluteUrl(path: string): string {
   const base = getSiteUrl();
   if (path === "/" || path === "") return base;
@@ -38,14 +36,6 @@ export function pageMetadata({
     description: desc,
     siteName: site.name,
     locale: "en_US",
-    images: [
-      {
-        url: DEFAULT_OG_IMAGE,
-        width: 180,
-        height: 180,
-        alt: site.name,
-      },
-    ],
     ...(openGraphType === "article" && publishedTime
       ? { publishedTime }
       : {}),
@@ -59,10 +49,9 @@ export function pageMetadata({
     },
     openGraph,
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: ogTitle,
       description: desc,
-      images: [DEFAULT_OG_IMAGE],
     },
   };
 }

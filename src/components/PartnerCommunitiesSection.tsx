@@ -33,11 +33,12 @@ export function PartnerCommunitiesSection() {
           <p className="partner-communities-eyebrow">Partner communities</p>
           <span className="tlc-accent-line partner-communities-accent" aria-hidden />
           <h2 id="partner-communities-title" className="partner-communities-title">
-            Available at select locations
+            Serving communities nationwide
           </h2>
           <p className="partner-communities-intro">
-            Residents at participating Solstice communities can book on-demand
-            care through TLC CareNow.
+            TLC CareNow partners with independent living communities across the
+            country. Residents at participating locations—including these Solstice
+            communities—can book on-demand care through the app.
           </p>
         </header>
 
@@ -71,7 +72,7 @@ export function PartnerCommunitiesSection() {
           <Link href="/contact" className="partner-communities-link">
             Contact us
           </Link>{" "}
-          about bringing CareNow to your campus.
+          about bringing CareNow to your campus anywhere in the U.S.
         </p>
       </div>
     </section>

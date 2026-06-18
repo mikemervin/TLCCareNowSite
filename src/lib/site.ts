@@ -2,7 +2,7 @@ export const site = {
   name: "TLC CareNow",
   tagline: "Book and manage care services",
   description:
-    "TLC CareNow empowers residents of independent living communities to schedule same-day care and short-term assistance—without traditional agency minimums.",
+    "TLC CareNow empowers residents of independent living communities nationwide to schedule same-day care and short-term assistance—without traditional agency minimums.",
   teamLifeUrl: "https://www.teamlifecares.com",
   teamLifeWebsite: "www.teamlifecares.com",
   /** Live PWA / booking app (matches tlc-care-now production). */

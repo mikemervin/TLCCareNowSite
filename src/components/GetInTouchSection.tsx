@@ -30,7 +30,7 @@ export function GetInTouchSection({ className = "" }: GetInTouchSectionProps) {
         <SectionHeading
           align="center"
           className="get-in-touch-heading"
-          subtitle="Tell us about your community or ask a question about TLC CareNow—we'll get back to you soon."
+          subtitle="Tell us about your community anywhere in America, or ask a question about TLC CareNow—we'll get back to you soon."
         >
           Get In Touch
         </SectionHeading>
