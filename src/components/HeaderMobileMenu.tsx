@@ -5,32 +5,15 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 
 function MenuIcon({ open }: { open: boolean }) {
-  if (open) {
-    return (
-      <svg
-        viewBox="0 0 20 20"
-        className="h-4 w-4"
-        aria-hidden
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.75"
-      >
-        <path d="M5 5l10 10M15 5 5 15" strokeLinecap="round" />
-      </svg>
-    );
-  }
-
   return (
-    <svg
-      viewBox="0 0 20 20"
-      className="h-4 w-4"
+    <span
+      className={`header-menu-icon${open ? " header-menu-icon--open" : ""}`}
       aria-hidden
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.75"
     >
-      <path d="M4 6h12M4 10h12M4 14h12" strokeLinecap="round" />
-    </svg>
+      <span className="header-menu-icon__line" />
+      <span className="header-menu-icon__line" />
+      <span className="header-menu-icon__line" />
+    </span>
   );
 }
 

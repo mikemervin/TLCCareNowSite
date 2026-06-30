@@ -2,7 +2,6 @@ import Link from "next/link";
 import { BrandMark } from "@/components/BrandMark";
 import { HeaderHomePillLink } from "@/components/HeaderHomePillLink";
 import { HeaderMobileMenu } from "@/components/HeaderMobileMenu";
-import { HeaderNationwideBadge } from "@/components/HeaderNationwideBadge";
 import { TrackedOutboundLink } from "@/components/TrackedOutboundLink";
 import { site } from "@/lib/site";
 
@@ -35,34 +34,35 @@ export function Header() {
           <BrandMark compact className="tlc-header-brand" />
 
           <nav className="tlc-header-actions" aria-label="Primary actions">
-            <div className="header-pill-bar">
-              <HeaderNationwideBadge />
-              <HeaderHomePillLink />
-              <HeaderPillLink
-                href="/campus-care"
-                shortLabel="Campus Care"
-                fullLabel="TeamLife Campus Care"
-                className="header-campus-link"
-              />
-              <HeaderPillLink
-                href="/enterprise"
-                shortLabel="Enterprise"
-                fullLabel="Enterprise Solutions"
-                className="header-enterprise-link"
-              />
-              <TrackedOutboundLink
-                href={site.appLoginUrl}
-                clickId="book_carenow_header"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="header-pill-item header-pill-item--book"
-              >
-                <span className="header-pill-item__short">Book CareNow</span>
-                <span className="header-pill-item__full">Book CareNow</span>
-              </TrackedOutboundLink>
-            </div>
+            <div className="header-mobile-cluster">
+              <div className="header-pill-bar">
+                <HeaderHomePillLink />
+                <HeaderPillLink
+                  href="/campus-care"
+                  shortLabel="Campus Care"
+                  fullLabel="TeamLife Campus Care"
+                  className="header-campus-link"
+                />
+                <HeaderPillLink
+                  href="/enterprise"
+                  shortLabel="Enterprise"
+                  fullLabel="Enterprise Solutions"
+                  className="header-enterprise-link"
+                />
+                <TrackedOutboundLink
+                  href={site.appLoginUrl}
+                  clickId="book_carenow_header"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="header-pill-item header-pill-item--book"
+                >
+                  <span className="header-pill-item__short">Book CareNow</span>
+                  <span className="header-pill-item__full">Book CareNow</span>
+                </TrackedOutboundLink>
+              </div>
 
-            <HeaderMobileMenu />
+              <HeaderMobileMenu />
+            </div>
           </nav>
         </div>
       </div>
