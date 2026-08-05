@@ -133,19 +133,35 @@ function activityBadgeLabel(event: AnalyticsEvent): string | null {
 }
 
 function SectionGroup({
+  id,
+  step,
   title,
   lead,
+  tone = "default",
   children,
 }: {
+  id?: string;
+  step?: string;
   title: string;
   lead?: string;
+  tone?: "default" | "leads" | "live";
   children: ReactNode;
 }) {
   return (
-    <section className="analytics-section-group">
+    <section
+      id={id}
+      className={`analytics-section-group analytics-section-group--${tone}`}
+    >
       <header className="analytics-section-group-head">
-        <h2 className="analytics-section-group-title">{title}</h2>
-        {lead ? <p className="analytics-section-group-lead">{lead}</p> : null}
+        {step ? (
+          <span className="analytics-section-step" aria-hidden>
+            {step}
+          </span>
+        ) : null}
+        <div className="analytics-section-group-copy">
+          <h2 className="analytics-section-group-title">{title}</h2>
+          {lead ? <p className="analytics-section-group-lead">{lead}</p> : null}
+        </div>
       </header>
       {children}
     </section>
@@ -713,9 +729,6 @@ export function AnalyticsDashboard({
           <p className="analytics-dashboard-eyebrow">
             <span className="analytics-dashboard-badge">Private</span>
             <span className="analytics-dashboard-domain">www.tlccarenow.com</span>
-            <span className="analytics-dashboard-refresh-note">
-              Marketing site only · reload for latest stats
-            </span>
           </p>
           <form action={logoutAnalytics} className="analytics-dashboard-signout-form">
             <button type="submit" className="analytics-dashboard-signout">
@@ -724,50 +737,68 @@ export function AnalyticsDashboard({
           </form>
         </div>
         <div className="analytics-dashboard-hero-main">
-          <h1 className="analytics-dashboard-title">Site analytics</h1>
+          <h1 className="analytics-dashboard-title">Site pulse</h1>
           <span
             className="tlc-accent-line analytics-dashboard-accent"
             aria-hidden
           />
           <p className="analytics-dashboard-lead">
-            A readable snapshot of who visited today, which pages they opened,
-            and what they typed into your forms.
+            Who showed up today, what they clicked, and whether anyone reached
+            out—plain English, newest first.
+          </p>
+          <p className="analytics-dashboard-refresh-note">
+            Marketing site only · reload the page for the latest numbers · times
+            in {siteTimezoneDisplayLabel()}
           </p>
         </div>
       </header>
 
+      <nav className="analytics-jump-nav" aria-label="Jump to section">
+        <a href="#analytics-today" className="analytics-jump-link">
+          Today
+        </a>
+        <a href="#analytics-leads" className="analytics-jump-link">
+          Leads
+        </a>
+        <a href="#analytics-live" className="analytics-jump-link">
+          Live feed
+        </a>
+        <a href="#analytics-traffic" className="analytics-jump-link">
+          Traffic
+        </a>
+        <a href="#analytics-more" className="analytics-jump-link">
+          More
+        </a>
+      </nav>
+
       <details className="analytics-guide">
         <summary className="analytics-guide-summary">
-          How to read this dashboard
+          Quick decoder (optional)
         </summary>
         <dl className="analytics-guide-grid">
           <div>
             <dt>Online now</dt>
-            <dd>Browsers with a pageview or form activity in the last few minutes.</dd>
+            <dd>Someone with the site open in the last few minutes.</dd>
           </div>
           <div>
             <dt>People</dt>
-            <dd>Unique visitors today—one browser session each.</dd>
+            <dd>Unique browsers today—one person, one count.</dd>
           </div>
           <div>
             <dt>Pages opened</dt>
-            <dd>Every page load; refreshing counts again.</dd>
+            <dd>Every page load (a refresh counts again).</dd>
           </div>
           <div>
             <dt>Leads</dt>
-            <dd>Form drafts and completed sends from Contact and Enterprise.</dd>
+            <dd>Contact &amp; Enterprise form drafts and completed sends.</dd>
           </div>
           <div>
             <dt>App clicks</dt>
-            <dd>Book CareNow and other links to app.tlccarenow.com.</dd>
+            <dd>Taps on Book CareNow / links to the CareNow app.</dd>
           </div>
           <div>
             <dt>Bounce rate</dt>
-            <dd>Sessions that viewed only one page before leaving.</dd>
-          </div>
-          <div>
-            <dt>Campaigns</dt>
-            <dd>UTM tags in the URL (utm_source, utm_medium, utm_campaign).</dd>
+            <dd>Visitors who left after viewing only one page.</dd>
           </div>
         </dl>
       </details>
@@ -810,73 +841,87 @@ export function AnalyticsDashboard({
         </div>
       ) : null}
 
-      <section className="analytics-today-block analytics-surface">
+      <section
+        id="analytics-today"
+        className="analytics-today-block analytics-surface"
+      >
         <header className="analytics-surface-head">
           <h2 className="analytics-today-heading">
+            <span className="analytics-section-step" aria-hidden>
+              1
+            </span>
             <span className="analytics-today-label">Today</span>
             <span className="analytics-today-date">{summary.today.dateLabel}</span>
           </h2>
           <p className="analytics-surface-note">
-            Times in {siteTimezoneDisplayLabel()} · online count updates every 30s
+            The only numbers you need to check daily · live count refreshes every
+            30s
           </p>
         </header>
+
         <div className="analytics-dashboard-stats analytics-dashboard-stats--today">
           <AnalyticsActiveNow initial={summary.activeNow} />
           <article className="analytics-stat-card analytics-stat-card--today">
             <p className="analytics-stat-label">People</p>
             <p className="analytics-stat-value">{summary.today.visitors}</p>
-            <p className="analytics-stat-hint">Unique sessions today</p>
+            <p className="analytics-stat-hint">Unique visitors</p>
           </article>
           <article className="analytics-stat-card analytics-stat-card--today">
-            <p className="analytics-stat-label">Pages opened</p>
+            <p className="analytics-stat-label">Pages</p>
             <p className="analytics-stat-value">{summary.today.pageviews}</p>
+            <p className="analytics-stat-hint">Opened today</p>
           </article>
           <article className="analytics-stat-card analytics-stat-card--today">
-            <p className="analytics-stat-label">Form steps</p>
+            <p className="analytics-stat-label">Form activity</p>
             <p className="analytics-stat-value">{summary.today.formActions}</p>
-            <p className="analytics-stat-hint">Opened, typed, or sent</p>
+            <p className="analytics-stat-hint">Started, typed, or sent</p>
           </article>
         </div>
+
         <div className="analytics-mini-stats">
           <MiniStat
-            label="App clicks today"
+            label="Book CareNow clicks"
             value={summary.today.appClicks}
-            hint="Book CareNow & app links"
+            hint="App links today"
           />
           <MiniStat
-            label="Bounce rate"
+            label="Quick exits"
             value={`${summary.today.sessionStats.bounceRatePct}%`}
             hint="Left after one page"
           />
           <MiniStat
-            label="Pages / visit"
+            label="Pages per visit"
             value={summary.today.sessionStats.avgPagesPerVisit}
-            hint="Today’s sessions"
+            hint="How deep they went"
           />
         </div>
+
         <div className="analytics-dashboard-grid analytics-dashboard-grid--today">
-          <Panel title="Today's top pages" subtitle="Marketing pages opened today.">
+          <Panel title="What they opened" subtitle="Top marketing pages today.">
             <CountList
               items={summary.today.topPages}
-              emptyLabel="No page views yet today."
+              emptyLabel="Quiet so far—no page views yet today."
               maxCount={maxTodayPagesCount}
             />
           </Panel>
-          <Panel title="Today's guides" subtitle="Blog articles read today.">
+          <Panel
+            title="Where they’re from"
+            subtitle="Unique people today (city on the live site)."
+          >
             <CountList
-              items={summary.today.blogPages}
-              emptyLabel="No blog reads yet today."
-              maxCount={maxTodayBlogCount}
+              items={summary.today.visitorsByLocation}
+              emptyLabel="No location data yet today."
+              maxCount={maxTodayLocationCount}
             />
           </Panel>
-          <Panel title="Devices today" subtitle="One device label per visitor session.">
+          <Panel title="Phones vs computers" subtitle="Device mix for today’s visitors.">
             <CountList
               items={summary.today.deviceBreakdown}
               emptyLabel="No device data yet today."
               maxCount={maxTodayDeviceCount}
             />
           </Panel>
-          <Panel title="Busiest hours today" subtitle="When today's page views happened.">
+          <Panel title="Busiest hours" subtitle="When today’s page views happened.">
             <CountList
               items={summary.today.peakHours}
               emptyLabel="No traffic yet today."
@@ -884,10 +929,21 @@ export function AnalyticsDashboard({
             />
           </Panel>
         </div>
+
+        {summary.today.blogPages.length > 0 ? (
+          <Panel title="Guides read today" subtitle="Blog articles opened today.">
+            <CountList
+              items={summary.today.blogPages}
+              emptyLabel="No blog reads yet today."
+              maxCount={maxTodayBlogCount}
+            />
+          </Panel>
+        ) : null}
+
         {summary.today.utmCampaigns.length > 0 ? (
           <Panel
-            title="Campaigns today"
-            subtitle="From utm_source / utm_medium / utm_campaign in the URL."
+            title="Campaign tags today"
+            subtitle="Visits that arrived with UTM tags in the URL."
           >
             <CountList
               items={summary.today.utmCampaigns}
@@ -896,63 +952,82 @@ export function AnalyticsDashboard({
             />
           </Panel>
         ) : null}
-        <Panel
-          title="People today by location"
-          subtitle="Unique visitors today—not page views. City on the live site (Vercel); country only on localhost."
-        >
-          <CountList
-            items={summary.today.visitorsByLocation}
-            emptyLabel="No visitors with location data yet today."
-            maxCount={maxTodayLocationCount}
-          />
-        </Panel>
       </section>
 
       <SectionGroup
-        title="Traffic"
-        lead="Real pages first. Bots, typos, and junk URLs are separated below."
+        id="analytics-leads"
+        step="2"
+        title="Leads & forms"
+        lead="The money section—real inquiries first, spam tucked away."
+        tone="leads"
       >
-        <div className="analytics-dashboard-grid analytics-dashboard-grid--triple">
+        <div className="analytics-leads-surface">
+          <LeadsSummaryStrip leadStats={leadStats} />
           <Panel
-            title="Top pages"
-            subtitle="Marketing site pages people actually opened."
+            title="Did they finish the form?"
+            subtitle="How far people got on Contact and Enterprise."
           >
+            <FormFunnelsPanel funnels={summary.formFunnels} />
+          </Panel>
+          <div className="analytics-leads-grid">
+            <Panel
+              title="Drafts in progress"
+              subtitle="Started typing but haven’t hit Send."
+            >
+              <FormEntriesPanel entries={summary.formEntries} />
+            </Panel>
+            <Panel
+              title="Completed sends"
+              subtitle="Forms that actually went through (you still get the email)."
+            >
+              <SubmittedFormsPanel submissions={submissions} />
+            </Panel>
+          </div>
+        </div>
+      </SectionGroup>
+
+      <SectionGroup
+        id="analytics-live"
+        step="3"
+        title="Live feed"
+        lead="Newest activity first. Bot and 404 hits stay muted."
+        tone="live"
+      >
+        <Panel title="Just now">
+          <ActivityFeed events={summary.recent} />
+        </Panel>
+      </SectionGroup>
+
+      <SectionGroup
+        id="analytics-traffic"
+        step="4"
+        title="Traffic highlights"
+        lead="All-time winners—what people open, how they find you, and Book CareNow clicks."
+      >
+        <div className="analytics-dashboard-grid analytics-dashboard-grid--double">
+          <Panel title="Favorite pages" subtitle="Real marketing pages, all time.">
             <PathCountList
               items={topPaths}
               emptyLabel="No page views yet."
               maxCount={maxAggregatedPathCount}
             />
           </Panel>
-          <Panel
-            title="How they arrived"
-            subtitle="Referring site or direct visit."
-          >
+          <Panel title="How they found you" subtitle="Referrer or direct visit.">
             <CountList
               items={summary.topReferrers}
-              emptyLabel="Everyone came directly (typed the URL or a bookmark)."
+              emptyLabel="Everyone came directly (typed the URL or used a bookmark)."
               maxCount={maxReferrerCount}
-            />
-          </Panel>
-          <Panel
-            title="All-time views by area"
-            subtitle="Total page loads per location—not unique people."
-          >
-            <CountList
-              items={summary.topLocations}
-              emptyLabel="No location data yet."
-              maxCount={maxLocationCount}
             />
           </Panel>
         </div>
         <div className="analytics-dashboard-grid analytics-dashboard-grid--double">
           <Panel
-            title="Book CareNow / app clicks"
-            subtitle="Clicks to app.tlccarenow.com from header, footer, and book page."
+            title="Book CareNow clicks"
+            subtitle="Links to app.tlccarenow.com from the site."
           >
             {summary.outboundClicks.length === 0 ? (
               <p className="analytics-panel-empty">
-                No app clicks recorded yet. Click Book CareNow on the live site to
-                test.
+                No app clicks yet. Tap Book CareNow on the live site to test.
               </p>
             ) : (
               <ul className="analytics-path-list">
@@ -977,104 +1052,94 @@ export function AnalyticsDashboard({
               </ul>
             )}
           </Panel>
-          <Panel title="Guide rankings (all time)" subtitle="Blog articles by total views.">
+          <Panel
+            title="Views by place"
+            subtitle="Total page loads by location (not unique people)."
+          >
+            <CountList
+              items={summary.topLocations}
+              emptyLabel="No location data yet."
+              maxCount={maxLocationCount}
+            />
+          </Panel>
+        </div>
+        {summary.blogRankings.length > 0 ? (
+          <Panel title="Most-read guides" subtitle="Blog articles by total views.">
             <CountList
               items={summary.blogRankings}
               emptyLabel="No blog reads recorded yet."
               maxCount={maxBlogCount}
             />
           </Panel>
-          <Panel title="Devices (all time)" subtitle="Mobile, desktop, and tablet sessions.">
-            <CountList
-              items={summary.deviceBreakdown}
-              emptyLabel="No device data yet."
-              maxCount={maxDeviceCount}
-            />
-          </Panel>
-          <Panel title="Busiest hours (all time)" subtitle="Peak traffic times in Eastern.">
-            <CountList
-              items={summary.peakHours}
-              emptyLabel="No hourly data yet."
-              maxCount={maxPeakCount}
-            />
-          </Panel>
-        </div>
-        <div className="analytics-mini-stats analytics-mini-stats--traffic">
-          <MiniStat
-            label="Bounce rate (all time)"
-            value={`${summary.sessionStats.bounceRatePct}%`}
-            hint={`${summary.sessionStats.sessions} sessions`}
-          />
-          <MiniStat
-            label="Pages / visit (all time)"
-            value={summary.sessionStats.avgPagesPerVisit}
-            hint="Average depth per session"
-          />
-        </div>
-        {summary.utmCampaigns.length > 0 ? (
-          <Panel
-            title="Campaigns (all time)"
-            subtitle="Traffic with UTM tags in the URL."
-          >
-            <CountList
-              items={summary.utmCampaigns}
-              emptyLabel="No campaign-tagged visits yet."
-              maxCount={maxUtmCount}
-            />
-          </Panel>
         ) : null}
-        <Panel
-          title="Bots & junk URLs"
-          subtitle="Not real pages—scanners, spam links, and mistyped URLs. Visitors see a 404."
-        >
-          <NoisePathList
-            items={summary.noisePaths}
-            emptyLabel="No bot or junk URL traffic recorded."
-            maxCount={maxNoisePathCount}
-          />
-        </Panel>
       </SectionGroup>
 
-      <SectionGroup
-        title="Recent activity"
-        lead="Newest first. Bot and 404 hits are muted."
-      >
-        <Panel title="Timeline">
-          <ActivityFeed events={summary.recent} />
-        </Panel>
-      </SectionGroup>
-
-      <SectionGroup
-        title="Leads"
-        lead="Real inquiries up top—spam is collapsed so it does not clutter the view."
-      >
-        <div className="analytics-leads-surface">
-          <LeadsSummaryStrip leadStats={leadStats} />
-          <Panel
-            title="Form progress"
-            subtitle="How many people started each form and finished the last step."
-          >
-            <FormFunnelsPanel funnels={summary.formFunnels} />
-          </Panel>
-          <div className="analytics-leads-grid">
-            <Panel title="Drafts" subtitle="Real drafts first. Spam is tucked away below.">
-              <FormEntriesPanel entries={summary.formEntries} />
-            </Panel>
-            <Panel
-              title="Completed sends"
-              subtitle="Legitimate sends first—you still get email for all of them."
-            >
-              <SubmittedFormsPanel submissions={submissions} />
-            </Panel>
-          </div>
-        </div>
-      </SectionGroup>
-
-      <details className="analytics-advanced">
+      <details id="analytics-more" className="analytics-advanced">
         <summary className="analytics-advanced-summary">
-          All-time numbers &amp; technical details
+          <span className="analytics-section-step analytics-section-step--inline" aria-hidden>
+            5
+          </span>
+          More detail (devices, hours, bots, tech)
         </summary>
         <div className="analytics-advanced-body">
+          <p className="analytics-advanced-intro">
+            Optional deep dive—handy when you want patterns, not daily checks.
+          </p>
+
+          <div className="analytics-mini-stats analytics-mini-stats--traffic">
+            <MiniStat
+              label="Bounce rate (all time)"
+              value={`${summary.sessionStats.bounceRatePct}%`}
+              hint={`${summary.sessionStats.sessions} sessions`}
+            />
+            <MiniStat
+              label="Pages / visit (all time)"
+              value={summary.sessionStats.avgPagesPerVisit}
+              hint="Average depth"
+            />
+          </div>
+
+          <div className="analytics-dashboard-grid analytics-dashboard-grid--double">
+            <Panel title="Devices" subtitle="Mobile, desktop, and tablet.">
+              <CountList
+                items={summary.deviceBreakdown}
+                emptyLabel="No device data yet."
+                maxCount={maxDeviceCount}
+              />
+            </Panel>
+            <Panel title="Busiest hours" subtitle="Peak traffic times in Eastern.">
+              <CountList
+                items={summary.peakHours}
+                emptyLabel="No hourly data yet."
+                maxCount={maxPeakCount}
+              />
+            </Panel>
+          </div>
+
+          {summary.utmCampaigns.length > 0 ? (
+            <Panel
+              title="Campaign tags (all time)"
+              subtitle="Traffic that arrived with UTM tags."
+            >
+              <CountList
+                items={summary.utmCampaigns}
+                emptyLabel="No campaign-tagged visits yet."
+                maxCount={maxUtmCount}
+              />
+            </Panel>
+          ) : null}
+
+          <Panel
+            title="Bots & junk URLs"
+            subtitle="Scanners and mistyped paths—visitors see a 404. Safe to ignore."
+          >
+            <NoisePathList
+              items={summary.noisePaths}
+              emptyLabel="No bot or junk URL traffic recorded."
+              maxCount={maxNoisePathCount}
+            />
+          </Panel>
+
           <div className="analytics-dashboard-stats">
             <article className="analytics-stat-card">
               <p className="analytics-stat-label">All pages opened</p>
@@ -1124,7 +1189,7 @@ export function AnalyticsDashboard({
           {summary.recentFieldUpdates.length > 0 ? (
             <Panel
               title="Keystroke log"
-              subtitle="Every field change—usually only needed for debugging."
+              subtitle="Every field change—usually only for debugging."
             >
               <div className="analytics-recent-wrap">
                 <table className="analytics-recent-table analytics-recent-table--compact">
@@ -1172,8 +1237,13 @@ export function AnalyticsDashboard({
           ) : null}
 
           <p className="analytics-advanced-foot">
-            Data stored in {summary.storage === "postgres" ? "Neon Postgres" : summary.storage === "blob" ? "Vercel Blob" : "local JSONL"} ({summary.storage}). Admin pages are not
-            tracked.
+            Stored in{" "}
+            {summary.storage === "postgres"
+              ? "Neon Postgres"
+              : summary.storage === "blob"
+                ? "Vercel Blob"
+                : "local JSONL"}{" "}
+            ({summary.storage}). Admin pages are not tracked.
           </p>
         </div>
       </details>
