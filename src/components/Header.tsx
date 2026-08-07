@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
-import { BrandMark } from "@/components/BrandMark";
+import { usePathname } from "next/navigation";
 import { HeaderHomePillLink } from "@/components/HeaderHomePillLink";
 import { HeaderMobileMenu } from "@/components/HeaderMobileMenu";
+import { BrandMark } from "@/components/BrandMark";
 import { TrackedOutboundLink } from "@/components/TrackedOutboundLink";
 import { site } from "@/lib/site";
 
@@ -12,14 +15,26 @@ type HeaderPillLinkProps = {
   className?: string;
 };
 
+function isActivePath(pathname: string, href: string) {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 function HeaderPillLink({
   href,
   shortLabel,
   fullLabel,
   className = "",
 }: HeaderPillLinkProps) {
+  const pathname = usePathname();
+  const active = isActivePath(pathname, href);
+
   return (
-    <Link href={href} className={`header-pill-item ${className}`.trim()}>
+    <Link
+      href={href}
+      className={`header-pill-item${active ? " is-active" : ""} ${className}`.trim()}
+      aria-current={active ? "page" : undefined}
+    >
       <span className="header-pill-item__short">{shortLabel}</span>
       <span className="header-pill-item__full">{fullLabel}</span>
     </Link>

@@ -2,7 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 
 function MenuIcon({ open }: { open: boolean }) {
   return (
@@ -17,12 +24,40 @@ function MenuIcon({ open }: { open: boolean }) {
   );
 }
 
-export function HeaderMobileMenu() {
+function isActivePath(pathname: string, href: string) {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function MenuLink({
+  href,
+  children,
+  onClick,
+}: {
+  href: string;
+  children: ReactNode;
+  onClick: () => void;
+}) {
   const pathname = usePathname();
+  const active = isActivePath(pathname, href);
+
+  return (
+    <Link
+      href={href}
+      role="menuitem"
+      className={`header-menu-link${active ? " is-active" : ""}`}
+      aria-current={active ? "page" : undefined}
+      onClick={onClick}
+    >
+      {children}
+    </Link>
+  );
+}
+
+export function HeaderMobileMenu() {
   const [open, setOpen] = useState(false);
   const menuId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
-  const onHome = pathname === "/";
 
   const close = useCallback(() => setOpen(false), []);
 
@@ -71,40 +106,18 @@ export function HeaderMobileMenu() {
           className="header-menu-panel"
           aria-label="Site menu"
         >
-          {onHome ? null : (
-            <Link
-              href="/"
-              role="menuitem"
-              className="header-menu-link"
-              onClick={close}
-            >
-              TLC CareNow
-            </Link>
-          )}
-          <Link
-            href="/campus-care"
-            role="menuitem"
-            className="header-menu-link"
-            onClick={close}
-          >
+          <MenuLink href="/" onClick={close}>
+            TLC CareNow
+          </MenuLink>
+          <MenuLink href="/campus-care" onClick={close}>
             TeamLife Campus Care
-          </Link>
-          <Link
-            href="/enterprise"
-            role="menuitem"
-            className="header-menu-link"
-            onClick={close}
-          >
+          </MenuLink>
+          <MenuLink href="/enterprise" onClick={close}>
             Enterprise Solutions
-          </Link>
-          <Link
-            href="/blog"
-            role="menuitem"
-            className="header-menu-link"
-            onClick={close}
-          >
+          </MenuLink>
+          <MenuLink href="/blog" onClick={close}>
             Blog
-          </Link>
+          </MenuLink>
         </div>
       ) : null}
     </div>

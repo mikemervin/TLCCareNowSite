@@ -137,17 +137,12 @@ a {
   }
 }
 
-/* Mobile: Book CareNow + menu read as one pill; sm+ layout unchanged */
+/* Mobile: Book CareNow and menu as separate controls; sm+ layout unchanged */
 .header-mobile-cluster {
   display: inline-flex;
   align-items: center;
-  gap: 0;
+  gap: 0.5rem;
   height: 2.25rem;
-  padding: 0.125rem;
-  border-radius: 999px;
-  background: var(--tlc-cream);
-  border: 1px solid rgb(40 101 43 / 10%);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 65%);
 }
 
 @media (min-width: 640px) {
@@ -159,15 +154,10 @@ a {
 @media (max-width: 639px) {
   .header-mobile-cluster .header-pill-bar {
     height: 100%;
-    padding: 0;
-    border: none;
-    background: transparent;
-    box-shadow: none;
-    border-radius: 0;
   }
 
   .header-mobile-cluster .header-pill-item--book {
-    border-radius: 999px 0 0 999px;
+    border-radius: 999px;
   }
 
   .header-mobile-cluster .header-mobile-menu {
@@ -178,20 +168,10 @@ a {
   }
 
   .header-mobile-cluster .header-menu-trigger {
-    width: 2rem;
-    min-width: 2rem;
+    width: 2.25rem;
+    min-width: 2.25rem;
     height: 100%;
-    min-height: 2rem;
-    margin-left: 0.0625rem;
-    border: none;
-    border-left: 1px solid rgb(40 101 43 / 14%);
-    border-radius: 0 999px 999px 0;
-    background: transparent;
-  }
-
-  .header-mobile-cluster .header-menu-trigger:hover {
-    border-color: rgb(40 101 43 / 14%);
-    background: #fff;
+    min-height: 2.25rem;
   }
 }
 
@@ -254,6 +234,15 @@ a {
 .header-pill-item:hover {
   background: #fff;
   color: var(--tlc-primary);
+}
+
+.header-pill-item.is-active,
+.header-pill-item[aria-current="page"] {
+  background: #fff;
+  color: var(--tlc-primary);
+  box-shadow:
+    0 1px 2px rgb(28 67 29 / 6%),
+    inset 0 0 0 1px rgb(40 101 43 / 12%);
 }
 
 .header-pill-item:focus-visible {
@@ -516,6 +505,13 @@ a {
 .header-menu-link:hover {
   background: #fff;
   color: var(--tlc-primary);
+}
+
+.header-menu-link.is-active,
+.header-menu-link[aria-current="page"] {
+  background: #fff;
+  color: var(--tlc-primary);
+  box-shadow: inset 0 0 0 1px rgb(40 101 43 / 12%);
 }
 
 .tlc-section {
@@ -4676,15 +4672,6 @@ a {
 .analytics-site-outer .header-pill-item--book:hover {
   background: var(--tlc-primary-dark);
   color: #fff;
-}
-
-.analytics-site-outer .header-mobile-cluster {
-  border-color: rgb(43 108 176 / 12%);
-  background: #f0f6fb;
-}
-
-.analytics-site-outer .header-mobile-cluster .header-menu-trigger {
-  border-left-color: rgb(43 108 176 / 14%);
 }
 
 .analytics-site-outer footer {
