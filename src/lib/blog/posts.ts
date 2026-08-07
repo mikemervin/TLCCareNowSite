@@ -25,6 +25,101 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "how-tlc-carenow-helped-helen-stay-in-her-community",
+    title:
+      "How TLC CareNow Helped Helen Stay in the Community She Chose",
+    description:
+      "A family story about short CareNow visits that helped a resident stay in independent living longer—after illness, shaky mornings, and the fear of needing to move.",
+    excerpt:
+      "Helen’s family almost started looking at assisted living. Short, on-demand CareNow visits gave her enough support to keep the apartment—and the neighbors—she already loved.",
+    author: "TLC CareNow",
+    date: "Aug 7, 2026",
+    publishedAt: "2026-08-07",
+    readTime: "6 min read",
+    image: images.blogGuides.stayInCommunity,
+    imageAlt:
+      "Senior woman smiling on a sunny balcony at her independent living community",
+    category: "Families",
+    body: [
+      {
+        type: "p",
+        text: "Helen had lived in her independent living community for almost four years. She knew the dining room by heart. She had her tablemates. She liked her one-bedroom apartment because the morning light hit the chair by the window just right. When her daughter, Rachel, started quietly Googling assisted living options after a rough winter, Helen’s first response was simple: “I’m not ready to leave.”",
+      },
+      {
+        type: "p",
+        text: "She wasn’t arguing with the facts. After a hospital stay for pneumonia, mornings were harder. Showers felt risky. Getting dressed took long enough that she skipped breakfast. Some days she stayed in the apartment instead of walking to activities she used to love. Rachel lived ninety minutes away. Staff were kind, but they couldn’t quietly become Helen’s daily caregivers. Everyone could feel the same question hanging in the air: How much longer can she stay here?",
+      },
+      {
+        type: "h2",
+        text: "The moment that changed the plan",
+      },
+      {
+        type: "p",
+        text: "The turning point wasn’t another crisis. It was a conversation with the community office. Helen’s building had recently added TLC CareNow—short, bookable visits on campus for help with everyday needs. No four-hour agency minimum. No hoping a neighbor “had a minute.” Rachel could book from her phone. Staff could book when Helen was tired of asking. Visits were confirmed and timed.",
+      },
+      {
+        type: "p",
+        text: "Rachel booked three things that first week: help getting ready before breakfast twice, one companionship walk to dining, and one shower assist. Helen rolled her eyes at “all the fuss”—and then ate in the dining room three days in a row.",
+      },
+      {
+        type: "h2",
+        text: "What support looked like in real life",
+      },
+      {
+        type: "ul",
+        items: [
+          "Morning help on hard days so Helen didn’t miss breakfast because dressing took too long",
+          "A steady escort to dining and activities when her balance felt uncertain",
+          "Shower support that protected dignity without turning every bath into a battle",
+          "A few companionship check-ins when Rachel traveled for work",
+          "A light pattern of visits after appointments instead of “see how she does alone”",
+        ],
+      },
+      {
+        type: "p",
+        text: "None of those visits were dramatic. That was the point. They filled the gaps that usually push families toward a move: skipped meals, skipped showers, isolation, and the quiet fear of falling with no one nearby.",
+      },
+      {
+        type: "h2",
+        text: "Why Helen could stay",
+      },
+      {
+        type: "p",
+        text: "Assisted living might still be right for Helen someday. But for months after that winter, it stopped being the only option on the table. Helen kept her apartment. She kept her friends. Rachel stopped living in perpetual emergency mode and started booking help the way other families book rides—when the day needed it.",
+      },
+      {
+        type: "p",
+        text: "The community stayed in the loop. Staff could see what was scheduled. Rachel could see confirmations instead of guessing from a phone call. Helen still made her own choices; CareNow simply made those choices safer to keep.",
+      },
+      {
+        type: "h2",
+        text: "What families can take from Helen’s story",
+      },
+      {
+        type: "ul",
+        items: [
+          "Ask early whether your community offers TLC CareNow—before a rough season becomes a move-out conversation.",
+          "Start with one or two practical visits, not a full care plan. Momentum matters more than perfection.",
+          "Use short visits after illness or hospital stays to steady the first weeks home.",
+          "Share access with another family member so support doesn’t depend on a single person.",
+          "Tell staff what “a good week” looks like for your loved one so they know what to reinforce.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Staying is a form of love, too",
+      },
+      {
+        type: "p",
+        text: "Helen’s story isn’t a promise that every resident can stay forever. It’s a reminder that length of stay is often decided in the small hours: the morning someone can’t get ready, the dinner they skip, the shower they avoid, the lonely afternoon that makes the apartment feel too quiet. When families can book short help for those moments, independent living has a better chance to keep working.",
+      },
+      {
+        type: "p",
+        text: "If your community already uses CareNow, sign in at app.tlccarenow.com to book support. If you’re not sure whether CareNow is available in their building, ask the community office or reach us through our contact page—we’re glad to help you find the next step.",
+      },
+    ],
+  },
+  {
     slug: "physical-activity-for-seniors-in-independent-living",
     title:
       "Physical Activity for Seniors in Independent Living: A Practical Family Guide",
@@ -33,8 +128,8 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Staying active in independent living is less about gym memberships and more about steady, safe movement. Here is how families help keep momentum without pushing too hard.",
     author: "TLC CareNow",
-    date: "Aug 7, 2026",
-    publishedAt: "2026-08-07",
+    date: "Jul 24, 2026",
+    publishedAt: "2026-07-24",
     readTime: "6 min read",
     image: images.blogGuides.physicalActivity,
     imageAlt:
@@ -150,8 +245,8 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Good nutrition in independent living is about more than the menu. Here is how families notice changes early and make mealtime easier to keep.",
     author: "TLC CareNow",
-    date: "Jul 24, 2026",
-    publishedAt: "2026-07-24",
+    date: "Jul 10, 2026",
+    publishedAt: "2026-07-10",
     readTime: "6 min read",
     image: images.blogGuides.healthyEating,
     imageAlt:
@@ -267,8 +362,8 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Discharge day is not the finish line. Here is how families and communities use short, on-demand visits to steady the first week back in independent living.",
     author: "TLC CareNow",
-    date: "Jul 10, 2026",
-    publishedAt: "2026-07-10",
+    date: "Jun 26, 2026",
+    publishedAt: "2026-06-26",
     readTime: "6 min read",
     image: images.blogGuides.afterHospital,
     imageAlt:
@@ -374,8 +469,8 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Extending a loved one’s independence isn’t about one big intervention. It’s the small visits that keep them steady, social, and home in the community they chose.",
     author: "TLC CareNow",
-    date: "Jun 26, 2026",
-    publishedAt: "2026-06-26",
+    date: "Jun 12, 2026",
+    publishedAt: "2026-06-12",
     readTime: "6 min read",
     image: images.blogGuides.stayIndependent,
     imageAlt:
@@ -465,8 +560,8 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "From morning routines to companionship after appointments—here is how communities can deliver day-to-day help without agency minimums or last-minute scrambling.",
     author: "TLC CareNow",
-    date: "Jun 12, 2026",
-    publishedAt: "2026-06-12",
+    date: "May 29, 2026",
+    publishedAt: "2026-05-29",
     readTime: "7 min read",
     image: images.blogGuides.dayToDay,
     imageAlt:
@@ -583,8 +678,8 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Traditional home-care minimums do not fit independent living. Here is how operators schedule extra help by the visit instead of by the half-day block.",
     author: "TLC CareNow",
-    date: "May 29, 2026",
-    publishedAt: "2026-05-29",
+    date: "May 15, 2026",
+    publishedAt: "2026-05-15",
     readTime: "6 min read",
     image: images.blogGuides.scheduling,
     imageAlt:
@@ -655,8 +750,8 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "On-demand care is not the same as moving to assisted living. Here is how families request help inside a senior living community and what good communication looks like.",
     author: "TLC CareNow",
-    date: "May 15, 2026",
-    publishedAt: "2026-05-15",
+    date: "May 1, 2026",
+    publishedAt: "2026-05-01",
     readTime: "5 min read",
     image: images.blogGuides.onDemandFamilies,
     imageAlt:
@@ -727,8 +822,8 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Weight loss, skipping baths, and pulling away from people can be more than “just getting older.” Here is what to watch for and how to help.",
     author: "Stephanie Stewart",
-    date: "May 1, 2026",
-    publishedAt: "2026-05-01",
+    date: "Apr 17, 2026",
+    publishedAt: "2026-04-17",
     readTime: "6 min read",
     image: images.blogGuides.depression,
     imageAlt:

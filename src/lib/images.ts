@@ -43,6 +43,7 @@ export const images = {
     afterHospital: "/blog/guide-after-hospital-v2.jpg",
     healthyEating: "/blog/guide-healthy-eating.jpg",
     physicalActivity: "/blog/guide-physical-activity-v2.jpg",
+    stayInCommunity: "/blog/guide-stay-in-community-v2.jpg",
   },
   favicon: wix(
     "66ee93_a609c772766f4d4cbdb94b761c1bd596%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/66ee93_a609c772766f4d4cbdb94b761c1bd596%7Emv2.png",
