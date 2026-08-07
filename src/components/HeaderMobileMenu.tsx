@@ -97,6 +97,14 @@ export function HeaderMobileMenu() {
           >
             Enterprise Solutions
           </Link>
+          <Link
+            href="/blog"
+            role="menuitem"
+            className="header-menu-link"
+            onClick={close}
+          >
+            Blog
+          </Link>
         </div>
       ) : null}
     </div>

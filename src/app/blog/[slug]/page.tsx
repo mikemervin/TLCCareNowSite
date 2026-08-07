@@ -18,7 +18,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getBlogPost(slug);
-  if (!post) return pageMetadata({ title: "Guides", path: "/blog" });
+  if (!post) return pageMetadata({ title: "Blog", path: "/blog" });
   return pageMetadata({
     title: post.title,
     description: post.description,
@@ -48,7 +48,7 @@ export default async function BlogPostPage({ params }: Props) {
             <span className="blog-article-back-icon" aria-hidden>
               ←
             </span>
-            All guides
+            All posts
           </Link>
 
           <div className="blog-article-sheet">

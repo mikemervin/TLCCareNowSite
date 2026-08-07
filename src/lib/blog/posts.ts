@@ -25,6 +25,556 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "physical-activity-for-seniors-in-independent-living",
+    title:
+      "Physical Activity for Seniors in Independent Living: A Practical Family Guide",
+    description:
+      "How families support safe movement in senior living—walking, strength, balance, and when short CareNow visits help residents stay active.",
+    excerpt:
+      "Staying active in independent living is less about gym memberships and more about steady, safe movement. Here is how families help keep momentum without pushing too hard.",
+    author: "TLC CareNow",
+    date: "Aug 7, 2026",
+    publishedAt: "2026-08-07",
+    readTime: "6 min read",
+    image: images.blogGuides.physicalActivity,
+    imageAlt:
+      "Senior woman doing gentle water exercise in a community swimming pool",
+    category: "Families",
+    body: [
+      {
+        type: "p",
+        text: "In independent living, movement is easy to postpone. The dining room is down the hall. The activity calendar looks busy. Your loved one says they’re “fine.” Then a week turns into a month of mostly sitting—TV in the morning, a short walk to lunch, an early evening in the chair. Families often notice the shift late: slower walking, fewer outings, more hesitation on stairs or getting up from the couch.",
+      },
+      {
+        type: "p",
+        text: "Physical activity later in life isn’t about training for a marathon. It’s about keeping strength, balance, and confidence so the apartment, the dining room, and the life they chose still feel manageable. You don’t need to become a personal trainer. You do need a clear eye—and a plan when fear, pain, or loneliness makes moving feel optional.",
+      },
+      {
+        type: "h2",
+        text: "What “enough activity” usually looks like",
+      },
+      {
+        type: "p",
+        text: "Guidelines for older adults usually point to a mix of aerobic movement, strength, and balance—most days, in doses that fit their body. In a community, that can look simple: hallway walks, chair exercises, a fitness class, gardening, or a short outdoor stroll with company. Consistency beats intensity. Ten meaningful minutes done regularly often matter more than one ambitious day followed by a week of rest.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Aerobic movement: walking to dining, hallway loops, or a paced outdoor walk",
+          "Strength: sit-to-stands, light bands, or community fitness sessions that protect muscle",
+          "Balance: careful standing practice, tai chi–style classes, or guided stretches",
+          "Everyday motion: making the bed, carrying a light bag, standing while talking on the phone",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Warning signs families notice first",
+      },
+      {
+        type: "ul",
+        items: [
+          "Skipping community walks, classes, or outings they used to enjoy",
+          "Needing furniture or walls to stand up more often",
+          "Avoiding stairs, the courtyard, or longer halls because of fear of falling",
+          "Saying “I’m too tired” after very little activity—or sleeping more during the day",
+          "A recent fall, near-fall, hospital stay, or illness that quietly ended their routine",
+        ],
+      },
+      {
+        type: "p",
+        text: "One quiet week isn’t a crisis. A pattern lasting more than a couple of weeks deserves a conversation with your loved one, the community wellness team, and their physician—especially if pain, dizziness, shortness of breath, or new weakness is part of the story.",
+      },
+      {
+        type: "h2",
+        text: "Make movement easier—not stricter",
+      },
+      {
+        type: "p",
+        text: "Lecturing rarely restores a walking habit. Removing friction does.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Ask which part of the day they feel strongest and protect a short walk then.",
+          "Pair movement with people: a neighbor, a family FaceTime walk, or a companionship visit.",
+          "After a rough morning, help with getting ready so they don’t skip an activity because dressing took too long.",
+          "Start smaller than you think—one hallway loop or one chair-exercise video is a win.",
+          "Tell wellness or fitness staff what feels safe for your loved one, including fall history and physician limits.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "When short CareNow visits help with activity",
+      },
+      {
+        type: "p",
+        text: "Sometimes the barrier isn’t motivation—it’s the day around movement. Unsteady footing. Fear of walking alone. No energy to get dressed for a class. After illness, strength can lag while caution stays high.",
+      },
+      {
+        type: "p",
+        text: "In communities that use TLC CareNow, families and staff can book short visits for exactly those moments: help getting ready before a walk or class, a steady escort down the hall or to the courtyard, or companionship so movement doesn’t feel lonely or risky. Visits are timed and confirmed—so you’re not hoping someone “stops by.” That kind of practical support protects activity without turning every walk into a clinical event.",
+      },
+      {
+        type: "h2",
+        text: "Questions worth asking the community",
+      },
+      {
+        type: "ul",
+        items: [
+          "What walking routes, fitness classes, or balance programs are available—and how hard are they to join?",
+          "Who notices when someone stops coming to activities—and how are families told?",
+          "Is TLC CareNow (or similar on-demand help) available for activity escorts and companionship?",
+          "How should we restart movement after a fall, hospital stay, or long illness?",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Movement is fuel for independence",
+      },
+      {
+        type: "p",
+        text: "Physical activity won’t solve every health challenge. It does give your loved one a better shot at balance, strength, clearer days, and staying proud in the life they chose. Watch for patterns, make movement easier, loop in the community early—and use short, bookable help when the barrier is getting started, not knowing that movement matters.",
+      },
+      {
+        type: "p",
+        text: "If your community offers CareNow, sign in at app.tlccarenow.com to schedule activity support. For questions about whether CareNow is available in their building, ask the community office or reach us through our contact page.",
+      },
+    ],
+  },
+  {
+    slug: "healthy-eating-for-seniors-in-independent-living",
+    title:
+      "Healthy Eating for Seniors in Independent Living: A Practical Family Guide",
+    description:
+      "How families support healthy eating in senior living—appetite changes, dining routines, hydration, and when short CareNow visits help at mealtime.",
+    excerpt:
+      "Good nutrition in independent living is about more than the menu. Here is how families notice changes early and make mealtime easier to keep.",
+    author: "TLC CareNow",
+    date: "Jul 24, 2026",
+    publishedAt: "2026-07-24",
+    readTime: "6 min read",
+    image: images.blogGuides.healthyEating,
+    imageAlt:
+      "Colorful healthy grain and vegetable bowl with fresh produce",
+    category: "Families",
+    body: [
+      {
+        type: "p",
+        text: "In independent living, meals are supposed to be one of the easier parts of the day: a dining room, a menu, neighbors at the table. Then something shifts. Your parent skips breakfast. They say they’re “not hungry.” The fridge in the apartment holds little more than crackers. Clothes fit looser. Families often treat food as a private preference—until nutrition becomes the quiet reason energy, mood, and independence start to slip.",
+      },
+      {
+        type: "p",
+        text: "Healthy eating later in life is less about perfect plates and more about steady routines: enough protein, enough fluids, and enough company that showing up for a meal still feels worthwhile. You don’t need to become a dietitian overnight. You do need a clear eye—and a plan when appetite or mobility makes dining harder.",
+      },
+      {
+        type: "h2",
+        text: "What “healthy eating” usually means for older adults",
+      },
+      {
+        type: "p",
+        text: "Needs change with age. Many people benefit from more protein to protect strength, colorful produce for fiber and vitamins, and fewer empty calories that fill them up without fueling the day. Taste and smell can dull. Dentures, dry mouth, or medications can make chewing and swallowing less pleasant. That doesn’t mean the answer is only soft, bland food—it means the path to a good meal may need a little more support.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Protein at most meals: eggs, fish, chicken, beans, yogurt, or fortified options the community offers",
+          "Produce that is easy to eat: soft fruit, cooked vegetables, soups, and salads they actually like",
+          "Hydration across the day—not only a glass at dinner",
+          "Familiar favorites mixed with healthier choices so the plate still feels like theirs",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Warning signs families notice first",
+      },
+      {
+        type: "ul",
+        items: [
+          "Skipping meals, especially breakfast or the main dining sitting",
+          "Unintentional weight loss—or clothes and belts that suddenly fit differently",
+          "Living on tea, toast, sweets, or delivery that never includes a real meal",
+          "Avoiding the dining room because walking there feels hard or lonely",
+          "Confusion around meal times after illness, a hospital stay, or a medication change",
+        ],
+      },
+      {
+        type: "p",
+        text: "One quiet week isn’t a crisis. A pattern lasting more than a couple of weeks deserves a conversation with your loved one, the community wellness team, and their physician if weight or energy is changing.",
+      },
+      {
+        type: "h2",
+        text: "Make the dining routine easier—not stricter",
+      },
+      {
+        type: "p",
+        text: "Lecturing rarely restores appetite. Removing friction does.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Ask which meal they enjoy most and protect that sitting first.",
+          "Pair food with people: a friend at the table, a family FaceTime during lunch, or a short companionship visit.",
+          "After a rough morning, help with getting ready so they don’t miss dining because dressing took too long.",
+          "Keep simple, approved snacks in the apartment for between meals—especially if dinner is early.",
+          "Tell dining or wellness staff what “a good plate” looks like for your loved one, including allergies and strong dislikes.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "When short CareNow visits help at mealtime",
+      },
+      {
+        type: "p",
+        text: "Sometimes the barrier isn’t the food—it’s the day around the food. A shaky walk to dining. No energy to get dressed. Loneliness that makes the dining room feel loud. After illness, appetite can lag while fatigue stays high.",
+      },
+      {
+        type: "p",
+        text: "In communities that use TLC CareNow, families and staff can book short visits for exactly those moments: help getting ready before a meal, an escort to dining, or companionship so eating doesn’t feel solitary. Visits are timed and confirmed—so you’re not hoping someone “stops by.” That kind of practical support protects nutrition without turning every meal into a clinical event.",
+      },
+      {
+        type: "h2",
+        text: "Questions worth asking the community",
+      },
+      {
+        type: "ul",
+        items: [
+          "Can residents get lighter plates, smaller portions, or alternatives if appetite is low?",
+          "Who notices when someone stops coming to dining—and how are families told?",
+          "Is TLC CareNow (or similar on-demand help) available for mealtime escorts and companionship?",
+          "How should we coordinate after a hospital stay when eating and energy are unpredictable?",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Food is fuel for independence",
+      },
+      {
+        type: "p",
+        text: "Healthy eating won’t solve every health challenge. It does give your loved one a better shot at strength, clearer days, and staying proud in the life they chose. Watch for patterns, make mealtime easier, loop in the community early—and use short, bookable help when the barrier is getting to the table, not choosing what’s on it.",
+      },
+      {
+        type: "p",
+        text: "If your community offers CareNow, sign in at app.tlccarenow.com to schedule mealtime support. For questions about whether CareNow is available in their building, ask the community office or reach us through our contact page.",
+      },
+    ],
+  },
+  {
+    slug: "after-a-hospital-stay-in-independent-living",
+    title:
+      "After a Hospital Stay: How to Support Your Loved One Back in Independent Living",
+    description:
+      "A practical family guide to the first week home after the hospital—short visits, recovery routines, and how TLC CareNow helps without agency minimums.",
+    excerpt:
+      "Discharge day is not the finish line. Here is how families and communities use short, on-demand visits to steady the first week back in independent living.",
+    author: "TLC CareNow",
+    date: "Jul 10, 2026",
+    publishedAt: "2026-07-10",
+    readTime: "6 min read",
+    image: images.blogGuides.afterHospital,
+    imageAlt:
+      "Caregiver helping a senior with recovery exercises after returning home",
+    category: "Families",
+    body: [
+      {
+        type: "p",
+        text: "The hospital discharge papers are signed. Someone drives your parent back to their apartment. Relieved neighbors text “welcome home.” Then evening comes—and the real work starts. Medications feel confusing. A shower feels risky. Dinner in the dining room feels like too much. Independent living is still the right place—but the first week after a hospital stay is when small gaps turn into big setbacks.",
+      },
+      {
+        type: "p",
+        text: "Families often assume the community will “handle it,” or that one long agency visit will cover everything. What usually works better is a short, honest plan: the right help, on the right days, in amounts that match recovery—not a four-hour block your loved one doesn’t want or need.",
+      },
+      {
+        type: "h2",
+        text: "Why the first week home matters so much",
+      },
+      {
+        type: "p",
+        text: "After illness, surgery, or an ER visit, energy is low and confidence drops. Routines that felt automatic—bathing, dressing, walking to dining—suddenly take more effort. Out-of-town family can’t see the apartment. Staff may not know what “normal” looked like before. Without a plan, people stretch themselves until something breaks: a fall, skipped meals, missed meds, or a rushed move to a higher level of care.",
+      },
+      {
+        type: "h2",
+        text: "What help is actually useful after discharge",
+      },
+      {
+        type: "ul",
+        items: [
+          "Morning and evening readiness: bathing, dressing, and a calm start or wind-down",
+          "Escort support: a steady walk to dining, activities, or the lobby for pickup",
+          "Companionship and check-ins: especially if family lives far away",
+          "Light apartment help: tidy-up, laundry, settling after appointments",
+          "A few planned visits across several days—not one oversized block on day one",
+        ],
+      },
+      {
+        type: "p",
+        text: "This is non-clinical, day-to-day support. It does not replace nursing orders, therapy, or what the physician recommended. It fills the gap between “medically cleared to go home” and “actually able to live the day with dignity.”",
+      },
+      {
+        type: "h2",
+        text: "A simple recovery pattern families can book",
+      },
+      {
+        type: "p",
+        text: "Think in patterns, not panic. For many people, a light week looks like morning help for a few days, plus an evening check-in after a tough appointment. Adjust based on how your loved one feels—not on what an agency minimum forces you to buy.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Day of return: help settling in, a shower if needed, and company at the first meal back",
+          "Days 2–4: short morning visits so routines restart without white-knuckling",
+          "Midweek: escort to any follow-up appointment and help afterward",
+          "Toward day 7: taper as strength returns—keep one optional visit on the calendar just in case",
+        ],
+      },
+      {
+        type: "h2",
+        text: "How TLC CareNow fits",
+      },
+      {
+        type: "p",
+        text: "In communities that partner with CareNow, residents and families book short visits in the TLC CareNow app. Staff can also book on a resident’s behalf when someone is exhausted or overwhelmed. You see timing and confirmation—so you’re not relying on a vague promise that “someone will stop by.” Same-day help may depend on staffing; asking earlier in the day improves the odds.",
+      },
+      {
+        type: "p",
+        text: "That flexibility is the point. Recovery is uneven. Some mornings are fine. Some evenings aren’t. On-demand visits let you match the day instead of overbuying hours or waiting until a crisis forces everyone’s hand.",
+      },
+      {
+        type: "h2",
+        text: "Talk with the community before discharge if you can",
+      },
+      {
+        type: "ul",
+        items: [
+          "Tell wellness or nursing the discharge date and what the hospital recommended for the first week.",
+          "Ask who books day-to-day help on campus—and whether TLC CareNow is available.",
+          "Share one other family contact so updates don’t depend on a single person.",
+          "Separate urgent clinical questions from routine visit booking so the right team handles each.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Coming home should feel like progress",
+      },
+      {
+        type: "p",
+        text: "A hospital stay is hard enough. The goal afterward is not perfection—it’s a steadier return to the life your loved one already chose. Short, reliable help protects pride, reduces family stress, and gives independent living a fair chance to work the way it should.",
+      },
+      {
+        type: "p",
+        text: "If your community offers CareNow, sign in at app.tlccarenow.com and set up a light recovery week before you need it in a rush. If you’re not sure CareNow is available in their building, ask the community office or reach us through our contact page.",
+      },
+    ],
+  },
+  {
+    slug: "how-tlc-carenow-helps-loved-ones-stay-independent-longer",
+    title:
+      "How TLC CareNow Helps Your Loved One Stay Independent Longer",
+    description:
+      "How on-demand care with TLC CareNow supports the everyday help that helps aging loved ones stay safer, more engaged, and living the life they chose—longer.",
+    excerpt:
+      "Extending a loved one’s independence isn’t about one big intervention. It’s the small visits that keep them steady, social, and home in the community they chose.",
+    author: "TLC CareNow",
+    date: "Jun 26, 2026",
+    publishedAt: "2026-06-26",
+    readTime: "6 min read",
+    image: images.blogGuides.stayIndependent,
+    imageAlt:
+      "Adult daughter and senior mother smiling together outdoors with a phone",
+    category: "Families",
+    body: [
+      {
+        type: "p",
+        text: "When families talk about “extending” a loved one’s life, they rarely mean a miracle. They mean more good days. More mornings they can get ready with dignity. More dinners in the dining room instead of alone. More months—or years—in the independent living community they chose, before anyone has to talk about a higher level of care.",
+      },
+      {
+        type: "p",
+        text: "That kind of longer, fuller life is built from everyday support. TLC CareNow is designed for exactly those moments: short, on-demand visits that meet a real need today—without waiting for a crisis, and without a four-hour agency minimum that makes help feel out of reach.",
+      },
+      {
+        type: "h2",
+        text: "Independence lasts longer when help arrives early",
+      },
+      {
+        type: "p",
+        text: "Many move-outs don’t start with a dramatic event. They start with stretch: skipped showers, missed meals, fewer activities, a fall that “almost” happened, a hospital return with no plan for the first week home. Families sense it on the phone. Staff see it in the hallways. By the time everyone names the problem, options feel limited.",
+      },
+      {
+        type: "p",
+        text: "On-demand care flips that timeline. When your loved one—or you, or a trusted staff member—can book a shower assist, a companionship visit, or an escort to dining in minutes, small needs stay small. Help shows up while your parent still feels like themselves.",
+      },
+      {
+        type: "h2",
+        text: "What “more life” looks like day to day",
+      },
+      {
+        type: "ul",
+        items: [
+          "Safer routines: bathing, dressing, and getting ready without white-knuckling it alone",
+          "Better days after appointments or illness: short visits stacked across a week of recovery",
+          "Connection: mealtime company or a check-in when you’re out of town",
+          "Confidence for families: you can see what was booked instead of guessing from a phone call",
+          "Dignity: asking for forty-five minutes of help—not a half-day block that feels like “needing too much”",
+        ],
+      },
+      {
+        type: "h2",
+        text: "How TLC CareNow makes that possible",
+      },
+      {
+        type: "p",
+        text: "In communities that partner with CareNow, residents and families book through the TLC CareNow app. Staff can also book on a resident’s behalf when someone is shy, tired, or overwhelmed. Visits are confirmed and timed. Care is on campus and available around the clock in partner communities—so support lives where your loved one already lives.",
+      },
+      {
+        type: "p",
+        text: "That matters for length of stay. Communities that can offer flexible, visible help give families a reason to keep hoping in independent living—not to rush the next move. Residents get the backup that protects pride. Operators get a calmer path than informal favors and last-minute agency calls.",
+      },
+      {
+        type: "h2",
+        text: "What families can do this week",
+      },
+      {
+        type: "ul",
+        items: [
+          "Ask whether your community offers TLC CareNow—and who can help you set up a login.",
+          "Book one practical visit before it’s an emergency (for example, help after a tough appointment).",
+          "Share access with one other family member so support doesn’t depend on a single person.",
+          "After any hospital stay or illness, plan a light pattern of short visits instead of waiting to “see how it goes.”",
+          "Tell the community what “a good day” looks like for your loved one—so staff know what to reinforce.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Love, made practical",
+      },
+      {
+        type: "p",
+        text: "You can’t control every health outcome. You can make it easier for your loved one to eat, bathe, move, and connect—the building blocks of a life that still feels like theirs. TLC CareNow turns that love into something bookable: care that arrives on time, on campus, in the amounts that actually fit the day.",
+      },
+      {
+        type: "p",
+        text: "If your community already uses CareNow, sign in at app.tlccarenow.com to book support. If you’re not sure whether CareNow is available in their building, ask the community office or reach us through our contact page—we’re glad to help you find the next step.",
+      },
+    ],
+  },
+  {
+    slug: "helping-seniors-with-day-to-day-living-in-communities",
+    title:
+      "How Senior Living Communities Can Help Residents With Day-to-Day Living",
+    description:
+      "A practical guide for senior living operators: everyday support residents need, why help often arrives late, and how to make short visits easy to book.",
+    excerpt:
+      "From morning routines to companionship after appointments—here is how communities can deliver day-to-day help without agency minimums or last-minute scrambling.",
+    author: "TLC CareNow",
+    date: "Jun 12, 2026",
+    publishedAt: "2026-06-12",
+    readTime: "7 min read",
+    image: images.blogGuides.dayToDay,
+    imageAlt:
+      "Caregiver walking with a senior resident and offering everyday support",
+    category: "Communities",
+    body: [
+      {
+        type: "p",
+        text: "Picture a resident who is mostly fine on her own—until she isn’t. A shaky morning. A shower that suddenly feels risky. An afternoon appointment that leaves her worn out and alone in her apartment. She does not need assisted living. She needs forty-five minutes of the right help, today. That is day-to-day living support—and it is where many senior living communities still fall short.",
+      },
+      {
+        type: "p",
+        text: "Residents choose independent living for dignity and choice. Families expect the community to notice small needs before they become crises. Staff want a clear way to help without turning every request into a four-hour agency visit or an off-the-books favor. Getting day-to-day support right protects all three.",
+      },
+      {
+        type: "h2",
+        text: "What day-to-day help really means",
+      },
+      {
+        type: "p",
+        text: "Day-to-day help is short, non-clinical support with the routines that keep someone steady, presentable, and connected. It sits between “I’m fully independent” and “I need a higher level of care.” Think of it as backup for real life—not a permanent care plan.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Getting ready: bathing, dressing, grooming, and a calm start to the day",
+          "Staying mobile: a steady arm to dining, activities, or the salon",
+          "Keeping the apartment livable: light tidy-up, laundry help, simple organizing",
+          "Feeling less alone: companionship, mealtime company, or a check-in when family is traveling",
+          "Hard days: help packing for an appointment, waiting with someone, or settling back in afterward",
+        ],
+      },
+      {
+        type: "p",
+        text: "These moments rarely need a half-day block. They need reliability, a familiar face when possible, and a booking path that does not embarrass the resident for asking.",
+      },
+      {
+        type: "h2",
+        text: "Where communities get stuck",
+      },
+      {
+        type: "p",
+        text: "Most operators already care deeply. The problem is the system around the help.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Agency minimums make a 30-minute need feel too expensive to request.",
+          "Informal favors burn out staff and leave no record for families or leadership.",
+          "Residents wait until needs pile up because asking feels like “becoming a problem.”",
+          "Families call the front desk again and again because they cannot see what was booked.",
+          "Supervisors only learn the full story after a fall, a complaint, or a move-out talk.",
+        ],
+      },
+      {
+        type: "p",
+        text: "When help is hard to get, people stretch themselves. Stretching works—until it doesn’t. Then everyone is reacting instead of supporting.",
+      },
+      {
+        type: "h2",
+        text: "A simple operating model that works",
+      },
+      {
+        type: "p",
+        text: "Communities that handle day-to-day living well usually share the same habits:",
+      },
+      {
+        type: "ul",
+        items: [
+          "Name the help in plain language. “Shower assist,” “companionship,” “escort to dining”—not jargon residents have to decode.",
+          "Make booking easy for more than one person. Residents, families, and trusted staff should all be able to schedule when needed.",
+          "Use short visits on purpose. Stack what the day actually requires instead of forcing unused hours.",
+          "Keep one shared view of demand. Leadership should see patterns across the week, not only last night’s emergency.",
+        ],
+      },
+      {
+        type: "p",
+        text: "TLC CareNow is built around that model: on-campus, on-demand visits residents and families can book in the app, staff who can book on someone’s behalf, and a clear schedule your team can run without guessing. Help shows up as a real visit—confirmed, timed, and visible—not a vague promise that someone will stop by.",
+      },
+      {
+        type: "h2",
+        text: "Five moves your team can make this month",
+      },
+      {
+        type: "ul",
+        items: [
+          "Write a one-page “everyday help” menu with typical visit lengths and who can book.",
+          "Coach front desk and wellness staff to offer help early—after a hospital return, a rough week, or a lonely stretch—not only when a resident asks.",
+          "Tell families: after illness, book a light pattern (for example, morning and evening for a few days) instead of one oversized block.",
+          "Review last week’s requests by type. Staff to real demand, not assumptions.",
+          "Draw a bright line between routine day-to-day booking and urgent clinical escalation so nobody confuses the two.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Why this protects independence—and length of stay",
+      },
+      {
+        type: "p",
+        text: "Day-to-day support is not “extra fluff.” It is how independent living keeps its promise. Residents stay proud of managing their own lives. Families stay calmer because help is bookable and visible. Staff stop improvising under pressure. Small needs get met while they are still small—before they harden into a higher level of care, or a move-out conversation nobody wanted.",
+      },
+      {
+        type: "p",
+        text: "If your community wants a clearer path for everyday support, explore TeamLife Campus Care or request a short walkthrough on our contact page. We can show how partner communities schedule short visits, keep families in the loop, and keep operations simple for the team on site.",
+      },
+    ],
+  },
+  {
     slug: "schedule-extra-care-without-agency-minimums",
     title:
       "How Independent Living Communities Schedule Extra Care Without Agency Minimums",
@@ -33,12 +583,12 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Traditional home-care minimums do not fit independent living. Here is how operators schedule extra help by the visit instead of by the half-day block.",
     author: "TLC CareNow",
-    date: "Jun 3, 2026",
-    publishedAt: "2026-06-03",
+    date: "May 29, 2026",
+    publishedAt: "2026-05-29",
     readTime: "6 min read",
-    image: images.blogGuides.communities,
+    image: images.blogGuides.scheduling,
     imageAlt:
-      "Staff reviewing care schedules on a tablet in a senior living community",
+      "Care team member reviewing schedules on a tablet in a senior living community",
     category: "Communities",
     body: [
       {
@@ -105,12 +655,12 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "On-demand care is not the same as moving to assisted living. Here is how families request help inside a senior living community and what good communication looks like.",
     author: "TLC CareNow",
-    date: "Jun 3, 2026",
-    publishedAt: "2026-06-03",
+    date: "May 15, 2026",
+    publishedAt: "2026-05-15",
     readTime: "5 min read",
-    image: images.blogGuides.families,
+    image: images.blogGuides.onDemandFamilies,
     imageAlt:
-      "Family member spending time with a loved one in a senior living setting",
+      "Adult daughter helping her senior mother use a tablet in a sunny park",
     category: "Families",
     body: [
       {
@@ -173,28 +723,83 @@ export const blogPosts: BlogPost[] = [
     title:
       "Depression in Elderly People: Tips for Helping Your Aging Loved One",
     description:
-      "Recognizing depression in older adults and practical ways families can support an aging loved one.",
+      "How to spot depression in older adults, what families often miss, and practical ways to support an aging loved one—with compassion and the right help.",
     excerpt:
-      "Changes in mood, appetite, or isolation can signal depression in older adults. Here is what families can watch for and when to seek help.",
+      "Weight loss, skipping baths, and pulling away from people can be more than “just getting older.” Here is what to watch for and how to help.",
     author: "Stephanie Stewart",
-    date: "Mar 31, 2021",
-    publishedAt: "2021-03-31",
-    readTime: "3 min read",
-    image: images.blogGuides.caregiving,
-    imageAlt: "Caregiver supporting an older adult at home",
+    date: "May 1, 2026",
+    publishedAt: "2026-05-01",
+    readTime: "6 min read",
+    image: images.blogGuides.depression,
+    imageAlt:
+      "Younger family member holding an older loved one’s hand in quiet support",
     category: "Families",
     body: [
       {
         type: "p",
-        text: "Melissa* could tell that her father was suffering. He'd dropped several pounds in the last few months, was reluctant to bathe and kept to himself more than usual.",
+        text: "Melissa could tell that her father was suffering. He’d dropped several pounds in the last few months, was reluctant to bathe, and kept to himself more than usual. At first she told herself it was aging, or a rough winter, or missing mom. Then a neighbor mentioned he had stopped coming to coffee in the lobby—and Melissa realized how long it had been since he sounded like himself on the phone.",
       },
       {
         type: "p",
-        text: "Depression in older adults is common and often overlooked. Changes in health, mobility, or social connection can contribute to feelings of sadness or withdrawal.",
+        text: "Depression in older adults is common and often overlooked. Families and even professionals sometimes mistake it for “normal aging,” dementia, or just a bad week. It isn’t a personality flaw, and it isn’t something people should have to tough out alone. With the right support—medical care, social connection, and compassionate day-to-day help—many older adults feel better.",
+      },
+      {
+        type: "h2",
+        text: "Why depression looks different later in life",
       },
       {
         type: "p",
-        text: "If you notice persistent changes in mood, appetite, sleep, or interest in activities, talk with their physician. Professional support, social engagement, and compassionate daily care can make a meaningful difference.",
+        text: "Older adults may not say “I feel depressed.” They may talk about being tired, useless, or “done.” Changes in health, mobility, hearing, eyesight, grief, retirement, or losing friends can all chip away at energy and hope. In independent living or senior communities, someone can be surrounded by people and still feel deeply alone—especially if getting to activities takes more effort than it used to.",
+      },
+      {
+        type: "h2",
+        text: "Signs families often notice first",
+      },
+      {
+        type: "p",
+        text: "You know your loved one’s baseline. Trust patterns that last more than a couple of weeks:",
+      },
+      {
+        type: "ul",
+        items: [
+          "Losing interest in meals, hobbies, or visits they used to enjoy",
+          "Weight loss or gain, or a sudden change in appetite",
+          "Skipping bathing, laundry, or keeping the apartment tidy",
+          "Sleeping much more—or hardly sleeping at all",
+          "Pulling away from friends, dining, or community events",
+          "Irritability, tearfulness, or talking about being a burden",
+          "Trouble concentrating, or seeming slowed down and flat",
+        ],
+      },
+      {
+        type: "p",
+        text: "One off day is human. A stretch of days where the person you love seems smaller, quieter, or less present is worth taking seriously.",
+      },
+      {
+        type: "h2",
+        text: "What to do when you’re worried",
+      },
+      {
+        type: "ul",
+        items: [
+          "Start with a gentle conversation. Try “I’ve noticed you’ve seemed quieter lately—how are you really doing?” instead of “You seem depressed.”",
+          "Call their physician. Ask for a checkup that includes mood, medications, sleep, hearing, and pain—physical issues can look like depression, and depression deserves clinical attention.",
+          "Loop in the community. If they live in senior living, tell wellness or nursing what you’re seeing so staff can watch for isolation and offer support.",
+          "Remove barriers to showing up. A short companionship visit, help getting ready for dining, or an escort to an activity can make connection feel possible again.",
+          "Don’t go it alone. Share the load with a sibling, spouse, or trusted friend so follow-ups don’t depend on one exhausted person.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "How day-to-day care can help",
+      },
+      {
+        type: "p",
+        text: "Professional treatment matters—therapy, medication when appropriate, and guidance from a doctor. Alongside that, compassionate daily care can restore rhythm: help bathing when motivation is low, company at mealtime, a familiar voice checking in, or support after a hard appointment. In communities that use TLC CareNow, families and staff can book short visits for exactly those moments—so help is planned, not improvised in a panic.",
+      },
+      {
+        type: "p",
+        text: "Melissa’s story is a reminder many families need: small changes can be a loud signal. Persistent shifts in mood, appetite, sleep, or interest in activities deserve a conversation with a physician—and a circle of support that includes family, community staff, and, when needed, on-demand care that helps your loved one feel human again.",
       },
     ],
   },

@@ -49,6 +49,12 @@ export function Header() {
                   fullLabel="Enterprise Solutions"
                   className="header-enterprise-link"
                 />
+                <HeaderPillLink
+                  href="/blog"
+                  shortLabel="Blog"
+                  fullLabel="Blog"
+                  className="header-blog-link"
+                />
                 <TrackedOutboundLink
                   href={site.appLoginUrl}
                   clickId="book_carenow_header"
