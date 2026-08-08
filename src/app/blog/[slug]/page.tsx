@@ -89,19 +89,14 @@ export default async function BlogPostPage({ params }: Props) {
             <footer className="blog-article-footer">
               <p className="blog-article-footer-title">Explore {site.name}</p>
               <p className="blog-article-footer-lead">
-                Book care, see operator tools, or get in touch with our team.
+                Questions about CareNow in your community? Get in touch with our
+                team.
               </p>
               <div className="blog-article-cta-grid">
                 <Link
-                  href="/enterprise"
+                  href="/contact"
                   className="blog-article-cta blog-article-cta--primary"
                 >
-                  Enterprise Solutions
-                </Link>
-                <Link href="/book-carenow" className="blog-article-cta">
-                  Book CareNow
-                </Link>
-                <Link href="/contact" className="blog-article-cta">
                   Contact
                 </Link>
               </div>

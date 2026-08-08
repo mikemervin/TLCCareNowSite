@@ -25,6 +25,103 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "how-tlc-carenow-is-changing-lives-in-independent-senior-communities",
+    title:
+      "How TLC CareNow Is Changing Lives in Independent Senior Communities",
+    description:
+      "How on-demand CareNow visits are changing daily life in independent living—for residents, families, and the teams who keep communities running.",
+    excerpt:
+      "The biggest changes in independent living rarely look dramatic. They look like breakfast eaten, a shower taken, a family who can sleep, and a community that can say yes to help.",
+    author: "TLC CareNow",
+    date: "Aug 8, 2026",
+    publishedAt: "2026-08-08",
+    readTime: "7 min read",
+    image: images.blogGuides.changingLives,
+    imageAlt:
+      "Caregiver and senior resident talking together in a bright independent living community",
+    category: "Communities",
+    body: [
+      {
+        type: "p",
+        text: "Independent living is supposed to feel like home with neighbors nearby: a dining room, activities down the hall, staff who know your name. What it is not supposed to feel like is a waiting room for the next level of care. Yet that is how many families describe the stretch when a loved one is “mostly fine”—until mornings get harder, showers get skipped, and everyone starts wondering how long the apartment can still work.",
+      },
+      {
+        type: "p",
+        text: "TLC CareNow was built for that stretch. In partner communities, residents and families book short, on-demand visits on campus—help getting ready, an escort to dining, companionship after an appointment—without a four-hour agency minimum and without hoping someone “stops by.” The change is not one miracle visit. It is a different rhythm: help that arrives when the day needs it.",
+      },
+      {
+        type: "h2",
+        text: "What “changing a life” looks like on a Tuesday",
+      },
+      {
+        type: "p",
+        text: "Lives change in ordinary hours. A resident who used to skip breakfast because dressing took too long makes it to the dining room. A daughter who lives two hours away books a shower assist before a work trip instead of canceling the trip. A wellness director stops playing dispatcher for last-minute favors and can point families to a visit they can actually schedule.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Residents keep more of the life they chose: meals with neighbors, activities they enjoy, pride in their own apartment",
+          "Families get a plan they can see—confirmed times instead of guessing from a phone call",
+          "Communities offer real backup for everyday needs without turning independent living into assisted living",
+          "Staff spend less time scrambling for informal help and more time on the work only they can do",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Why independent living needed a different model",
+      },
+      {
+        type: "p",
+        text: "Traditional home care often arrives in blocks that do not match campus life. A resident may need thirty minutes before breakfast—not a four-hour shift. Families delay asking because the minimum feels like “too much.” Staff fill gaps with kindness until they cannot. By the time help is official, the conversation has already shifted toward a move.",
+      },
+      {
+        type: "p",
+        text: "On-demand visits flip that timeline. When help is bookable in the amounts that fit the day, small needs stay small. Dignity stays intact. Independent living gets a better chance to keep working—the way it was designed to.",
+      },
+      {
+        type: "h2",
+        text: "Three lives, one campus",
+      },
+      {
+        type: "p",
+        text: "The resident: After a hospital stay, walking to dining felt uncertain. Short escorts and morning help meant meals and people again—not a week of toast in the apartment.",
+      },
+      {
+        type: "p",
+        text: "The family: A son who used to call the front desk in a panic now books a companionship visit when he cannot be there. He still worries. He does not have to invent a care team from scratch every time.",
+      },
+      {
+        type: "p",
+        text: "The community: Operators can say yes to extra support without rewriting the whole care model. Families see a partner that takes independence seriously—and has a practical answer when independence needs a boost.",
+      },
+      {
+        type: "h2",
+        text: "What makes CareNow different on campus",
+      },
+      {
+        type: "ul",
+        items: [
+          "Visits are timed and confirmed in the TLC CareNow app—residents, families, and staff can stay aligned",
+          "Help is on campus in partner communities, available around the clock when the building uses CareNow",
+          "Staff can book on a resident’s behalf when someone is shy, tired, or overwhelmed",
+          "You book the visit you need—not a half-day block that makes asking feel like giving up independence",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Changing lives is a team sport",
+      },
+      {
+        type: "p",
+        text: "CareNow does not replace physicians, community wellness teams, or family love. It gives those people a tool that matches real days: short, visible, bookable help. That is how lives change in independent senior communities—not with a slogan, but with a morning that works, a meal that happens, and another month in the home someone already chose.",
+      },
+      {
+        type: "p",
+        text: "If your community already uses CareNow, sign in at app.tlccarenow.com to book support. If you’re not sure whether CareNow is available in a building, ask the community office or reach us through our contact page—we’re glad to help you find the next step.",
+      },
+    ],
+  },
+  {
     slug: "how-tlc-carenow-helped-helen-stay-in-her-community",
     title:
       "How TLC CareNow Helped Helen Stay in the Community She Chose",
@@ -33,8 +130,8 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Helen’s family almost started looking at assisted living. Short, on-demand CareNow visits gave her enough support to keep the apartment—and the neighbors—she already loved.",
     author: "TLC CareNow",
-    date: "Aug 7, 2026",
-    publishedAt: "2026-08-07",
+    date: "Jul 25, 2026",
+    publishedAt: "2026-07-25",
     readTime: "6 min read",
     image: images.blogGuides.stayInCommunity,
     imageAlt:
@@ -128,8 +225,8 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Staying active in independent living is less about gym memberships and more about steady, safe movement. Here is how families help keep momentum without pushing too hard.",
     author: "TLC CareNow",
-    date: "Jul 24, 2026",
-    publishedAt: "2026-07-24",
+    date: "Jul 11, 2026",
+    publishedAt: "2026-07-11",
     readTime: "6 min read",
     image: images.blogGuides.physicalActivity,
     imageAlt:
@@ -245,8 +342,8 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Good nutrition in independent living is about more than the menu. Here is how families notice changes early and make mealtime easier to keep.",
     author: "TLC CareNow",
-    date: "Jul 10, 2026",
-    publishedAt: "2026-07-10",
+    date: "Jun 27, 2026",
+    publishedAt: "2026-06-27",
     readTime: "6 min read",
     image: images.blogGuides.healthyEating,
     imageAlt:
@@ -362,8 +459,8 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Discharge day is not the finish line. Here is how families and communities use short, on-demand visits to steady the first week back in independent living.",
     author: "TLC CareNow",
-    date: "Jun 26, 2026",
-    publishedAt: "2026-06-26",
+    date: "Jun 13, 2026",
+    publishedAt: "2026-06-13",
     readTime: "6 min read",
     image: images.blogGuides.afterHospital,
     imageAlt:
@@ -469,8 +566,8 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Extending a loved one’s independence isn’t about one big intervention. It’s the small visits that keep them steady, social, and home in the community they chose.",
     author: "TLC CareNow",
-    date: "Jun 12, 2026",
-    publishedAt: "2026-06-12",
+    date: "May 30, 2026",
+    publishedAt: "2026-05-30",
     readTime: "6 min read",
     image: images.blogGuides.stayIndependent,
     imageAlt:
@@ -560,8 +657,8 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "From morning routines to companionship after appointments—here is how communities can deliver day-to-day help without agency minimums or last-minute scrambling.",
     author: "TLC CareNow",
-    date: "May 29, 2026",
-    publishedAt: "2026-05-29",
+    date: "May 16, 2026",
+    publishedAt: "2026-05-16",
     readTime: "7 min read",
     image: images.blogGuides.dayToDay,
     imageAlt:
@@ -678,8 +775,8 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Traditional home-care minimums do not fit independent living. Here is how operators schedule extra help by the visit instead of by the half-day block.",
     author: "TLC CareNow",
-    date: "May 15, 2026",
-    publishedAt: "2026-05-15",
+    date: "May 2, 2026",
+    publishedAt: "2026-05-02",
     readTime: "6 min read",
     image: images.blogGuides.scheduling,
     imageAlt:
@@ -737,7 +834,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "If you operate multiple sites or want a walkthrough of dashboards and booking workflows, see Enterprise Solutions or request a demo through our contact page.",
+        text: "If you operate multiple sites or want a walkthrough of dashboards and booking workflows, request a demo through our contact page.",
       },
     ],
   },
@@ -750,8 +847,8 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "On-demand care is not the same as moving to assisted living. Here is how families request help inside a senior living community and what good communication looks like.",
     author: "TLC CareNow",
-    date: "May 1, 2026",
-    publishedAt: "2026-05-01",
+    date: "Apr 18, 2026",
+    publishedAt: "2026-04-18",
     readTime: "5 min read",
     image: images.blogGuides.onDemandFamilies,
     imageAlt:
@@ -822,8 +919,8 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Weight loss, skipping baths, and pulling away from people can be more than “just getting older.” Here is what to watch for and how to help.",
     author: "Stephanie Stewart",
-    date: "Apr 17, 2026",
-    publishedAt: "2026-04-17",
+    date: "Apr 4, 2026",
+    publishedAt: "2026-04-04",
     readTime: "6 min read",
     image: images.blogGuides.depression,
     imageAlt:

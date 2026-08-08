@@ -29,7 +29,7 @@ export function Footer() {
   return (
     <footer className="site-footer mt-auto">
       <div className="site-footer-inner">
-        <nav className="site-footer-grid" aria-label="Contact and social">
+        <nav className="site-footer-panel" aria-label="Contact and social">
           {contactItems.map((item) => (
             <div key={item.label} className="site-footer-col">
               <span className="site-footer-label">{item.label}</span>

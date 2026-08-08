@@ -53,6 +53,12 @@ export function Header() {
               <div className="header-pill-bar">
                 <HeaderHomePillLink />
                 <HeaderPillLink
+                  href="/blog"
+                  shortLabel="TLC Blog"
+                  fullLabel="TLC Blog"
+                  className="header-blog-link"
+                />
+                <HeaderPillLink
                   href="/campus-care"
                   shortLabel="Campus Care"
                   fullLabel="TeamLife Campus Care"
@@ -63,12 +69,6 @@ export function Header() {
                   shortLabel="Enterprise"
                   fullLabel="Enterprise Solutions"
                   className="header-enterprise-link"
-                />
-                <HeaderPillLink
-                  href="/blog"
-                  shortLabel="Blog"
-                  fullLabel="Blog"
-                  className="header-blog-link"
                 />
                 <TrackedOutboundLink
                   href={site.appLoginUrl}

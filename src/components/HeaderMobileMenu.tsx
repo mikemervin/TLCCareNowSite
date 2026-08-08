@@ -109,14 +109,14 @@ export function HeaderMobileMenu() {
           <MenuLink href="/" onClick={close}>
             TLC CareNow
           </MenuLink>
+          <MenuLink href="/blog" onClick={close}>
+            TLC Blog
+          </MenuLink>
           <MenuLink href="/campus-care" onClick={close}>
             TeamLife Campus Care
           </MenuLink>
           <MenuLink href="/enterprise" onClick={close}>
             Enterprise Solutions
-          </MenuLink>
-          <MenuLink href="/blog" onClick={close}>
-            Blog
           </MenuLink>
         </div>
       ) : null}
