@@ -1442,9 +1442,9 @@ a {
 .features-section {
   background: linear-gradient(
     180deg,
-    #f3f8f1 0%,
-    var(--tlc-green-light) 55%,
-    #e2efe4 100%
+    #fff 0%,
+    var(--tlc-cream) 40%,
+    var(--tlc-cream) 100%
   );
 }
 
