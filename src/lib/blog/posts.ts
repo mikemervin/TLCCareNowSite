@@ -25,6 +25,95 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "peace-of-mind-for-families-far-from-independent-living",
+    title:
+      "Peace of Mind for Families Who Live Far From Independent Living",
+    description:
+      "How long-distance families stay close when a loved one lives in independent living—and how short CareNow visits create real peace of mind between trips.",
+    excerpt:
+      "You can love someone from miles away and still feel close. Here is how families stay connected—and sleep better—when a parent lives in independent living.",
+    author: "TLC CareNow",
+    date: "Aug 14, 2026",
+    publishedAt: "2026-08-14",
+    readTime: "6 min read",
+    image: images.blogGuides.stayConnected,
+    imageAlt:
+      "Senior woman walking arm-in-arm with a caregiver in a bright independent living community",
+    category: "Families",
+    body: [
+      {
+        type: "p",
+        text: "Plenty of adult children do not live near their parent’s independent living community. Work, kids, and geography get in the way. That does not mean love is missing. It does mean the quiet stretch between visits can feel heavy: Did Mom eat today? Is Dad going to the lobby? Who is there if the afternoon feels long?",
+      },
+      {
+        type: "p",
+        text: "Peace of mind is not the same as being in the building every day. It is knowing that help can show up when you cannot—and that your loved one’s week still has people, plans, and dignity in it. Families who use TLC CareNow often describe that feeling as the difference between worrying in the dark and staying connected with a plan.",
+      },
+      {
+        type: "h2",
+        text: "What long-distance love actually needs",
+      },
+      {
+        type: "p",
+        text: "Weekend trips matter. So do phone calls. What many families also need is a third thing: a way to support the ordinary Tuesday when they are three states away. Not a crisis call. Not a guilt spiral. Just a reliable way to make sure the day still works.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Visibility: knowing help was booked and confirmed—not guessing from a short phone call",
+          "Flexibility: support sized to the moment, not a half-day block that feels like overkill",
+          "Partnership: community staff who can book on a resident’s behalf when needed",
+          "Quality time later: when you do visit, you can be family—not the only unpaid care team",
+        ],
+      },
+      {
+        type: "h2",
+        text: "How CareNow helps when you cannot be there",
+      },
+      {
+        type: "p",
+        text: "In partner communities, families sign in at app.tlccarenow.com and book short visits from wherever they are. A morning assist before breakfast. Company for an afternoon that tends to feel lonely. Help after an appointment day. Staff can also book when your loved one is tired of asking. Visits are timed and confirmed, so you are not waiting for a vague “someone will stop by.”",
+      },
+      {
+        type: "p",
+        text: "That structure is what creates peace of mind. You still call. You still visit when you can. Between trips, you are not inventing a care plan from a group text.",
+      },
+      {
+        type: "h2",
+        text: "What changes for families",
+      },
+      {
+        type: "ul",
+        items: [
+          "Fewer 10 p.m. worry loops about whether the day went okay",
+          "Shared access so siblings can take turns booking instead of one person carrying it alone",
+          "Better visits in person—because chores and catch-up care are not the only agenda",
+          "A calmer relationship with the community: you are collaborating, not only calling when something is wrong",
+        ],
+      },
+      {
+        type: "h2",
+        text: "What changes for your loved one",
+      },
+      {
+        type: "p",
+        text: "Independence stays theirs. They are not “being managed from afar.” They are getting practical help that protects the life they chose—while knowing their family is still in the loop. Many residents like that the visit is scheduled and clear. It feels respectful, not like a surprise inspection.",
+      },
+      {
+        type: "h2",
+        text: "Love that travels well",
+      },
+      {
+        type: "p",
+        text: "Living far away does not make you a less devoted son or daughter. It just means closeness needs tools. Short, bookable CareNow visits are one of those tools: a way to show up on hard Tuesdays, keep your loved one’s week fuller, and give yourself permission to sleep.",
+      },
+      {
+        type: "p",
+        text: "If their community already uses CareNow, sign in at app.tlccarenow.com to set up access and book support. If you’re not sure whether CareNow is available in their building, ask the community office or reach us through our contact page—we’re glad to help you find the next step.",
+      },
+    ],
+  },
+  {
     slug: "how-tlc-carenow-is-changing-lives-in-independent-senior-communities",
     title:
       "How TLC CareNow Is Changing Lives in Independent Senior Communities",
