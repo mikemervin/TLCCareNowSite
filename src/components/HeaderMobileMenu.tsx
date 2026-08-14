@@ -113,10 +113,10 @@ export function HeaderMobileMenu() {
             TLC Blog
           </MenuLink>
           <MenuLink href="/campus-care" onClick={close}>
-            TeamLife Campus Care
+            Campus Care
           </MenuLink>
           <MenuLink href="/enterprise" onClick={close}>
-            Enterprise Solutions
+            Enterprise
           </MenuLink>
         </div>
       ) : null}

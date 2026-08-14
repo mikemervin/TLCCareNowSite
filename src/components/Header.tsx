@@ -1,17 +1,19 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HeaderHomePillLink } from "@/components/HeaderHomePillLink";
-import { HeaderMobileMenu } from "@/components/HeaderMobileMenu";
-import { BrandMark } from "@/components/BrandMark";
 import { TrackedOutboundLink } from "@/components/TrackedOutboundLink";
+import {
+  APP_BRAND_DISPLAY_NAME,
+  APP_BRAND_POWERED_BY,
+} from "@/lib/app-brand";
 import { site } from "@/lib/site";
 
-type HeaderPillLinkProps = {
+type HeaderSubnavLinkProps = {
   href: string;
-  shortLabel: string;
-  fullLabel: string;
+  label: string;
   className?: string;
 };
 
@@ -20,23 +22,21 @@ function isActivePath(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-function HeaderPillLink({
+function HeaderSubnavLink({
   href,
-  shortLabel,
-  fullLabel,
+  label,
   className = "",
-}: HeaderPillLinkProps) {
+}: HeaderSubnavLinkProps) {
   const pathname = usePathname();
   const active = isActivePath(pathname, href);
 
   return (
     <Link
       href={href}
-      className={`header-pill-item${active ? " is-active" : ""} ${className}`.trim()}
+      className={`header-subnav-link${active ? " is-active" : ""} ${className}`.trim()}
       aria-current={active ? "page" : undefined}
     >
-      <span className="header-pill-item__short">{shortLabel}</span>
-      <span className="header-pill-item__full">{fullLabel}</span>
+      {label}
     </Link>
   );
 }
@@ -44,48 +44,53 @@ function HeaderPillLink({
 export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full">
-      <div className="w-full border-b border-tlc-border/80 bg-white/90 shadow-[0_1px_0_rgb(45_45_45/4%),0_4px_24px_rgb(45_45_45/4%)] backdrop-blur-lg backdrop-saturate-150">
-        <div className="tlc-header-container h-[68px] sm:h-[76px]">
-          <BrandMark compact className="tlc-header-brand" />
+      <div className="tlc-header-shell">
+        <div className="tlc-header-main">
+          <div className="tlc-header-container tlc-header-main-inner">
+            <Link
+              href="/"
+              className="tlc-header-logo"
+              aria-label={APP_BRAND_DISPLAY_NAME}
+            >
+              <Image
+                src="/logo.svg"
+                alt=""
+                width={44}
+                height={44}
+                priority
+                className="tlc-header-logo-img"
+              />
+            </Link>
 
-          <nav className="tlc-header-actions" aria-label="Primary actions">
-            <div className="header-mobile-cluster">
-              <div className="header-pill-bar">
-                <HeaderHomePillLink />
-                <HeaderPillLink
-                  href="/blog"
-                  shortLabel="TLC Blog"
-                  fullLabel="TLC Blog"
-                  className="header-blog-link"
-                />
-                <HeaderPillLink
-                  href="/campus-care"
-                  shortLabel="Campus Care"
-                  fullLabel="TeamLife Campus Care"
-                  className="header-campus-link"
-                />
-                <HeaderPillLink
-                  href="/enterprise"
-                  shortLabel="Enterprise"
-                  fullLabel="Enterprise Solutions"
-                  className="header-enterprise-link"
-                />
-                <TrackedOutboundLink
-                  href={site.appLoginUrl}
-                  clickId="book_carenow_header"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="header-pill-item header-pill-item--book"
-                >
-                  <span className="header-pill-item__short">Book CareNow</span>
-                  <span className="header-pill-item__full">Book CareNow</span>
-                </TrackedOutboundLink>
-              </div>
-
-              <HeaderMobileMenu />
+            <div className="tlc-header-brand-text">
+              <Link href="/" className="tlc-header-brand-title">
+                {APP_BRAND_DISPLAY_NAME}
+              </Link>
+              <p className="tlc-header-brand-tagline">{APP_BRAND_POWERED_BY}</p>
             </div>
-          </nav>
+
+            <nav className="tlc-header-actions" aria-label="Primary actions">
+              <TrackedOutboundLink
+                href={site.appLoginUrl}
+                clickId="book_carenow_header"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="header-book-cta"
+              >
+                Book CareNow
+              </TrackedOutboundLink>
+            </nav>
+          </div>
         </div>
+
+        <nav className="tlc-header-subnav" aria-label="Primary">
+          <div className="tlc-header-container tlc-header-subnav-inner">
+            <HeaderHomePillLink />
+            <HeaderSubnavLink href="/blog" label="TLC Blog" />
+            <HeaderSubnavLink href="/campus-care" label="Campus Care" />
+            <HeaderSubnavLink href="/enterprise" label="Enterprise" />
+          </div>
+        </nav>
       </div>
     </header>
   );

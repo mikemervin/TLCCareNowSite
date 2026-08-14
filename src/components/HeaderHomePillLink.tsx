@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { site } from "@/lib/site";
 
 function isActivePath(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -16,11 +15,10 @@ export function HeaderHomePillLink() {
   return (
     <Link
       href="/"
-      className={`header-pill-item header-home-link${active ? " is-active" : ""}`}
+      className={`header-subnav-link${active ? " is-active" : ""}`}
       aria-current={active ? "page" : undefined}
     >
-      <span className="header-pill-item__short">CareNow</span>
-      <span className="header-pill-item__full">{site.name}</span>
+      TLC CareNow
     </Link>
   );
 }

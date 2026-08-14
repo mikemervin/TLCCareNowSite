@@ -45,14 +45,14 @@ export function BrandMark({
         <Link
           href="/"
           className={`${APP_BRAND_HEADER_TITLE_CLASS} ${
-            compact ? "truncate text-lg sm:max-w-none sm:text-xl" : ""
+            compact ? "truncate text-lg sm:text-xl" : ""
           } transition-colors hover:text-[#2d6b2f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tlc-green`}
         >
           {APP_BRAND_DISPLAY_NAME}
         </Link>
         <p
-          className={`${APP_BRAND_HEADER_TAGLINE_CLASS} mt-1 ${
-            compact ? "hidden min-[400px]:block" : ""
+          className={`${APP_BRAND_HEADER_TAGLINE_CLASS} brand-mark-tagline mt-1 ${
+            compact ? "hidden sm:block" : ""
           }`}
         >
           {APP_BRAND_POWERED_BY}
