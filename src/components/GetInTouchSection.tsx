@@ -30,9 +30,9 @@ export function GetInTouchSection({ className = "" }: GetInTouchSectionProps) {
         <SectionHeading
           align="center"
           className="get-in-touch-heading"
-          subtitle="Tell us about your community anywhere in America, or ask a question about TLC CareNow—we'll get back to you soon."
+          subtitle="Ask about CareNow for your community—or anything else. We’ll reply within one business day."
         >
-          Get In Touch
+          Get in touch
         </SectionHeading>
 
         <div className="get-in-touch-card">
@@ -41,10 +41,9 @@ export function GetInTouchSection({ className = "" }: GetInTouchSectionProps) {
               <ContactFormIcon />
             </span>
             <div className="get-in-touch-panel-head">
-              <h3 className="get-in-touch-form-title">Send us a message</h3>
+              <h3 className="get-in-touch-form-title">Send a message</h3>
               <p className="get-in-touch-form-lead">
-                We usually reply within one business day. Name and email are
-                required.
+                Name and email required. Everything else is optional.
               </p>
             </div>
           </header>

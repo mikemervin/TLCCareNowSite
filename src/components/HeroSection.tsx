@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { TrackedOutboundLink } from "@/components/TrackedOutboundLink";
+import { ButtonLink } from "@/components/ui/Button";
 import { images } from "@/lib/images";
 import { site } from "@/lib/site";
 
@@ -13,27 +15,35 @@ export function HeroSection() {
 
         <span className="tlc-accent-line hero-accent" aria-hidden />
 
-        <div className="hero-prose">
-          <p className="hero-lead">
-            Care built for independent living—schedule the visits you need,
-            when you need them, without a full-day agency minimum.
-          </p>
-          <p className="hero-body">
-            Book same-day or short-term help through the TLC CareNow app. Our
-            team is <strong>on site 24/7</strong> to support residents and
-            families at communities across America.
-          </p>
+        <p className="hero-lead">
+          Care built for independent living—book the visits you need, when you
+          need them, without a full-day agency minimum.
+        </p>
+
+        <div className="hero-actions">
+          <TrackedOutboundLink
+            href={site.appLoginUrl}
+            clickId="book_carenow_hero"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hero-action hero-action--primary"
+          >
+            Book CareNow
+          </TrackedOutboundLink>
+          <ButtonLink
+            href="/contact"
+            variant="secondary"
+            size="md"
+            className="hero-action hero-action--secondary"
+          >
+            Contact us
+          </ButtonLink>
         </div>
 
-        <div className="hero-community">
-          <p className="hero-community-question">CareNow in your community?</p>
-          <p className="hero-community-sub">
-            Have questions? We&apos;re here to help.
-          </p>
-          <a href={`mailto:${site.email}`} className="hero-community-email">
-            {site.email}
-          </a>
-        </div>
+        <p className="hero-support">
+          Our team is on site 24/7 to support residents and families at
+          communities across America.
+        </p>
       </div>
 
       <div className="hero-media">

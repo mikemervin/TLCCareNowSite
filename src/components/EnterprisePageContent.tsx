@@ -12,7 +12,7 @@ const bookingHighlights = {
   eyebrow: "Supervisors & front desk",
   title: "Book for any resident in seconds",
   summary:
-    "Book and rebook on behalf of anyone—fill a day or a full week in minutes, then pay now or pay later when it works for the resident.",
+    "Book and rebook on behalf—fill a day or a week in minutes, then pay now or later.",
   points: [
     {
       title: "Book on behalf",
@@ -27,17 +27,17 @@ const bookingHighlights = {
       description: "Stack as many bookings as you need, any day.",
     },
     {
-      title: "Pay now or pay later",
-      description:
-        "Lock in the schedule—charge when you book, or pay later when it works for the resident.",
+      title: "Pay now or later",
+      description: "Charge at booking, or when it works for the resident.",
     },
   ],
 } as const;
 
 const rolesAndPermissions = {
+  eyebrow: "Access by role",
   title: "Roles & permissions",
   summary:
-    "Every role gets its own dashboard—the right tools for that job, without clutter from everything else.",
+    "Each role gets its own dashboard—the right tools for the job, without the clutter.",
   roles: [
     {
       id: "resident",
@@ -46,19 +46,19 @@ const rolesAndPermissions = {
       permissions: [
         "Book visits",
         "Pay in the app",
-        "See their own schedule",
-        "Add care plans",
+        "See their schedule",
+        "View care plans",
       ],
     },
     {
       id: "care-pro",
       name: "Care professionals",
-      dashboard: "Care professional dashboard",
+      dashboard: "Care pro dashboard",
       permissions: [
         "View assignments",
         "Punch in and out",
-        "Oversee their schedule",
-        "Add care notes after each visit",
+        "Manage their schedule",
+        "Add care notes",
       ],
     },
     {
@@ -66,10 +66,10 @@ const rolesAndPermissions = {
       name: "Supervisors",
       dashboard: "Supervisor dashboard",
       permissions: [
-        "Book and rebook on behalf",
-        "Assign visits and manage the day",
-        "Manage care professionals",
-        "Manage community staff schedules",
+        "Book and rebook",
+        "Assign visits",
+        "Manage care pros",
+        "Staff schedules",
       ],
     },
     {
@@ -77,9 +77,9 @@ const rolesAndPermissions = {
       name: "Admins",
       dashboard: "Admin dashboard",
       permissions: [
-        "Services and pricing",
+        "Services & pricing",
         "Community settings",
-        "Users and permissions",
+        "Users & permissions",
         "Payments",
       ],
     },
@@ -88,84 +88,82 @@ const rolesAndPermissions = {
       name: "Owners",
       dashboard: "Owner dashboard",
       permissions: [
-        "Dashboards and snapshots across locations",
-        "Payroll and performance reports",
+        "Multi-site snapshots",
+        "Payroll & reports",
         "Client scheduling",
-        "Full access when they need it",
+        "Full access when needed",
       ],
     },
   ],
 } as const;
 
 const careNotesFlow = {
+  eyebrow: "Documentation",
   title: "Care notes after every visit",
   summary:
-    "Care pros start and finish each in-progress booking with timestamps—documentation stays with the visit from the floor to end-of-shift sign-off.",
+    "Timestamps and notes stay with the visit—from the floor to end-of-shift sign-off.",
   steps: [
     {
-      title: "Start the visit",
-      description:
-        "The care professional starts the in-progress booking; a timestamp records when care begins.",
+      title: "Start",
+      description: "Open the booking; a timestamp records when care begins.",
     },
     {
-      title: "Finish the visit",
-      description:
-        "They complete the visit when done; the finish timestamp closes the record and helps prevent time leakage.",
+      title: "Finish",
+      description: "Close the visit when done—the finish time locks the record.",
     },
     {
-      title: "After each service",
-      description:
-        "Care notes are captured when the service is completed, so nothing is left undocumented.",
+      title: "Note the service",
+      description: "Capture notes when each service is completed.",
     },
     {
       title: "End of shift",
-      description:
-        "All care notes from the shift are compiled in one place for review.",
+      description: "All notes from the shift compile in one place.",
     },
     {
-      title: "Care pro sign-off",
-      description:
-        "The care professional signs off on the shift\u2019s notes before handoff is complete.",
+      title: "Sign off",
+      description: "The care pro signs off before handoff is complete.",
     },
   ],
 } as const;
 
 const carePlans = {
-  title: "Care plans clients can access—and your team can act on",
+  eyebrow: "Care plans",
+  title: "Plans clients can see—and your team can act on",
   summary:
-    "Care plans stay easy to find, easy to update, and easy to see in the field when something changes.",
+    "Easy to find, easy to update, and visible on the floor when something changes.",
   points: [
     {
-      title: "Accessible for clients",
-      description:
-        "Clients can view care plans in the app without hunting through paperwork or phone calls.",
+      title: "In the app for clients",
+      description: "Residents and families view plans without paperwork or phone tag.",
     },
     {
-      title: "Easy to edit",
-      description:
-        "Admins update care plans in detail when needs change—without a separate system.",
+      title: "Simple for admins",
+      description: "Update plans in detail when needs change—no second system.",
     },
     {
-      title: "Visible in the field",
-      description:
-        "Care pros and supervisors see new care plan changes so everyone out on the floor is working from the latest plan.",
+      title: "Live in the field",
+      description: "Care pros and supervisors work from the latest plan.",
     },
   ],
 } as const;
 
 const adminSetup = {
+  eyebrow: "Admin tools",
   title: "Configure your community",
   summary:
-    "Admins manage setup, branding, and day-to-day controls from one place—no separate tools for each job.",
-  modulesTitle: "Admin dashboard modules",
+    "Setup, branding, and day-to-day controls in one admin dashboard—no separate tools for each job.",
+  modulesTitle: "What admins manage",
   modules: [
-    "Communities",
-    "Products",
-    "News & Events",
-    "Documents",
-    "Team Members",
-    "Clients",
+    { name: "Communities", detail: "Sites & settings" },
+    { name: "Products", detail: "Services & pricing" },
+    { name: "News & Events", detail: "Campus updates" },
+    { name: "Documents", detail: "Shared files" },
+    { name: "Team Members", detail: "Staff & roles" },
+    { name: "Clients", detail: "Residents & families" },
   ],
+  branding: {
+    title: "Your brand, in the app",
+  },
 } as const;
 
 export function EnterprisePageContent() {
@@ -173,19 +171,16 @@ export function EnterprisePageContent() {
     <article className="enterprise-page">
       <section className="enterprise-hero">
         <div className="enterprise-hero-copy">
-          <p className="enterprise-eyebrow">
-            Designed for residents, owners, admins, and care teams
-          </p>
+          <p className="enterprise-eyebrow">For operators &amp; multi-site teams</p>
           <h1 className="enterprise-title">
             Run your community&apos;s care from one place
           </h1>
           <span className="tlc-accent-line enterprise-accent" aria-hidden />
           <p className="enterprise-lead">
-            TLC CareNow is transparent operator software built for everyday
-            use—straightforward to learn, with clear visibility into care, not a
-            complicated platform your community has to work around. Residents,
-            supervisors, admins, and owners each get a role-based dashboard so
-            bookings, schedules, and payroll are easy to see and easy to trust.
+            Transparent operator software for everyday use—bookings, schedules,
+            and payroll in clear view. Residents, supervisors, admins, and owners
+            each get a role-based dashboard that&apos;s easy to learn and easy to
+            trust.
           </p>
           <div className="enterprise-hero-actions">
             <ButtonLink
@@ -195,7 +190,14 @@ export function EnterprisePageContent() {
             >
               Request a free demo
             </ButtonLink>
+            <Link href="/" className="enterprise-hero-secondary-link">
+              See the resident experience
+            </Link>
           </div>
+          <p className="enterprise-hero-support">
+            Built for operators—bookings, schedules, payroll, and role-based
+            dashboards in one platform.
+          </p>
         </div>
 
         <div className="enterprise-hero-media">
@@ -225,19 +227,16 @@ export function EnterprisePageContent() {
               />
               <p className="enterprise-intro-lead">
                 <strong className="enterprise-intro-strong">Your team</strong>{" "}
-                runs operations in {site.name};{" "}
+                runs operations in {site.name}.{" "}
                 <strong className="enterprise-intro-strong">
-                  residents and families
+                  Residents and families
                 </strong>{" "}
-                use the same platform to book and stay informed.
+                use the same platform to book care and stay informed.
               </p>
               <div className="enterprise-intro-cta">
                 <Link href="/" className="enterprise-intro-link">
-                  See the home page
+                  View the home page
                 </Link>
-                <span className="enterprise-intro-cta-note">
-                  for the resident experience
-                </span>
               </div>
             </aside>
 
@@ -287,6 +286,7 @@ export function EnterprisePageContent() {
             aria-labelledby="enterprise-platform-heading"
           >
             <header className="enterprise-block-header">
+              <p className="enterprise-block-eyebrow">Operations</p>
               <h2
                 id="enterprise-platform-heading"
                 className="enterprise-block-title"
@@ -321,6 +321,9 @@ export function EnterprisePageContent() {
             aria-labelledby="enterprise-roles-heading"
           >
             <header className="enterprise-block-header">
+              <p className="enterprise-block-eyebrow">
+                {rolesAndPermissions.eyebrow}
+              </p>
               <h2
                 id="enterprise-roles-heading"
                 className="enterprise-block-title"
@@ -366,7 +369,8 @@ export function EnterprisePageContent() {
               className="enterprise-care-plans"
               aria-labelledby="enterprise-care-plans-heading"
             >
-              <header className="enterprise-block-header enterprise-block-header--light">
+              <header className="enterprise-block-header">
+                <p className="enterprise-block-eyebrow">{carePlans.eyebrow}</p>
                 <h2
                   id="enterprise-care-plans-heading"
                   className="enterprise-block-title"
@@ -394,7 +398,10 @@ export function EnterprisePageContent() {
               className="enterprise-care-notes"
               aria-labelledby="enterprise-care-notes-heading"
             >
-              <header className="enterprise-block-header enterprise-block-header--light">
+              <header className="enterprise-block-header">
+                <p className="enterprise-block-eyebrow">
+                  {careNotesFlow.eyebrow}
+                </p>
                 <h2
                   id="enterprise-care-notes-heading"
                   className="enterprise-block-title"
@@ -405,14 +412,19 @@ export function EnterprisePageContent() {
                 <p className="enterprise-block-lead">{careNotesFlow.summary}</p>
               </header>
               <ol className="enterprise-care-notes-steps">
-                {careNotesFlow.steps.map((step) => (
+                {careNotesFlow.steps.map((step, index) => (
                   <li key={step.title} className="enterprise-care-notes-step">
-                    <h3 className="enterprise-care-notes-step-title">
-                      {step.title}
-                    </h3>
-                    <p className="enterprise-care-notes-step-text">
-                      {step.description}
-                    </p>
+                    <span className="enterprise-care-notes-step-num" aria-hidden>
+                      {index + 1}
+                    </span>
+                    <div className="enterprise-care-notes-step-body">
+                      <h3 className="enterprise-care-notes-step-title">
+                        {step.title}
+                      </h3>
+                      <p className="enterprise-care-notes-step-text">
+                        {step.description}
+                      </p>
+                    </div>
                   </li>
                 ))}
               </ol>
@@ -424,6 +436,7 @@ export function EnterprisePageContent() {
             aria-labelledby="enterprise-admin-setup-heading"
           >
             <header className="enterprise-block-header">
+              <p className="enterprise-block-eyebrow">{adminSetup.eyebrow}</p>
               <h2
                 id="enterprise-admin-setup-heading"
                 className="enterprise-block-title"
@@ -438,8 +451,13 @@ export function EnterprisePageContent() {
             </h3>
             <ul className="enterprise-admin-modules-grid">
               {adminSetup.modules.map((module) => (
-                <li key={module} className="enterprise-admin-modules-item">
-                  {module}
+                <li key={module.name} className="enterprise-admin-modules-item">
+                  <span className="enterprise-admin-modules-name">
+                    {module.name}
+                  </span>
+                  <span className="enterprise-admin-modules-detail">
+                    {module.detail}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -451,12 +469,11 @@ export function EnterprisePageContent() {
                 id="enterprise-branding-heading"
                 className="enterprise-branding-title"
               >
-                Manage your own branding
+                {adminSetup.branding.title}
               </h3>
               <p className="enterprise-branding-text">
-                Your community&apos;s app experience can reflect your brand—not
-                a generic template. Admins configure how {site.name} looks and
-                feels for residents and staff.
+                Residents and staff see your community—not a generic template.
+                Admins set how {site.name} looks and feels for your campuses.
               </p>
             </div>
           </section>
@@ -465,25 +482,22 @@ export function EnterprisePageContent() {
             className="enterprise-closing"
             aria-labelledby="enterprise-closing-heading"
           >
+            <p className="enterprise-closing-eyebrow">Next step</p>
             <h2
               id="enterprise-closing-heading"
               className="enterprise-closing-title"
             >
-              Free demo &amp; pricing
+              See it live—then we&apos;ll price for your campuses
             </h2>
             <span
               className="tlc-accent-line enterprise-closing-accent"
               aria-hidden
             />
             <p className="enterprise-closing-lead">
-              Every community is different. We&apos;ll walk your team through a
-              complimentary demo and put together pricing for your campuses.
+              A complimentary demo for your leadership and supervisors, focused
+              on day-to-day operations. Pricing is custom for single sites and
+              multi-site groups.
             </p>
-            <ul className="enterprise-closing-list">
-              <li>Hands-on demo for leadership and supervisors</li>
-              <li>Focused on operations—not just the resident app</li>
-              <li>Custom pricing for single sites and multi-site groups</li>
-            </ul>
             <div className="enterprise-closing-actions">
               <ButtonLink
                 href="/contact"
@@ -492,20 +506,15 @@ export function EnterprisePageContent() {
               >
                 Request a free demo
               </ButtonLink>
-              <ButtonLink href="/contact" variant="secondary" size="md">
-                Contact us for pricing
-              </ButtonLink>
-            </div>
-            <p className="enterprise-closing-contact">
               <a
                 href={`tel:${site.phoneHeader.replace(/-/g, "")}`}
                 className="enterprise-closing-phone tabular-nums"
               >
                 {site.phoneHeader}
               </a>
-              <span className="enterprise-closing-sep" aria-hidden>
-                ·
-              </span>
+            </div>
+            <p className="enterprise-closing-contact">
+              Or email{" "}
               <a
                 href={`mailto:${site.email}`}
                 className="enterprise-inline-link"

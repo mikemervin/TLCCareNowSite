@@ -14,7 +14,7 @@ const fields = [
     label: "Full name",
     type: "text" as const,
     required: true,
-    placeholder: "Jane Smith",
+    placeholder: "Your name",
     autoComplete: "name",
   },
   {
@@ -22,7 +22,7 @@ const fields = [
     label: "Email",
     type: "email" as const,
     required: true,
-    placeholder: "jane@community.org",
+    placeholder: "you@email.com",
     autoComplete: "email",
   },
   {
@@ -48,7 +48,7 @@ const fields = [
     label: "Subject",
     type: "text" as const,
     required: false,
-    placeholder: "Campus partnership, pricing, support…",
+    placeholder: "Partnership, pricing, support…",
     autoComplete: "off",
     fullWidth: true,
     optional: true,
@@ -175,8 +175,8 @@ export function ContactForm() {
         <textarea
           id="contact-message"
           name="message"
-          rows={5}
-          placeholder="Tell us how we can help—community name, timeline, or questions."
+          rows={4}
+          placeholder="Community name, timeline, or your question…"
           className="contact-form-input contact-form-input--textarea"
           disabled={status === "submitting"}
           onChange={(event) => trackField("message", event.currentTarget.value)}
@@ -206,7 +206,7 @@ export function ContactForm() {
           {status === "submitting" ? "Sending…" : "Send message"}
         </Button>
         <p className="contact-form-alt">
-          Prefer email?{" "}
+          Or email{" "}
           <a href={`mailto:${site.email}`} className="contact-form-alt-link">
             {site.email}
           </a>

@@ -7,11 +7,14 @@ export function HowItWorks() {
     <section className="how-it-works tlc-section" id="how-it-works">
       <div className="tlc-container">
         <header className="how-it-works-header">
+          <p className="tlc-audience-eyebrow">For residents &amp; families</p>
           <h2 className="how-it-works-title">How it works</h2>
           <span className="tlc-accent-line mx-auto" aria-hidden />
           <p className="how-it-works-intro">
-            Use TLC CareNow on your phone or computer—sign in, book care, and pay
-            in a few simple steps.
+            TLC CareNow is the app residents and families use to book on-demand
+            care at their independent living community. Sign in on your phone or
+            computer, choose the visits you need, pay securely, and track
+            everything in one place—in a few simple steps.
           </p>
         </header>
 

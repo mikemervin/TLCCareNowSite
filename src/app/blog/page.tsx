@@ -34,7 +34,7 @@ function PostCard({
             alt={post.imageAlt}
             fill
             priority={featured}
-            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.035]"
+            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
             sizes={
               featured
                 ? "(max-width: 768px) 100vw, 900px"
@@ -54,14 +54,12 @@ function PostCard({
           <p className="blog-index-card-excerpt">{post.excerpt}</p>
           <div className="blog-index-card-footer">
             <p className="blog-index-card-meta">
-              <span>{post.author}</span>
-              <span aria-hidden>·</span>
               <span>{post.date}</span>
               <span aria-hidden>·</span>
               <span>{post.readTime}</span>
             </p>
             <span className="blog-index-card-read">
-              Read article
+              Read
               <span aria-hidden>→</span>
             </span>
           </div>
@@ -80,19 +78,13 @@ export default function BlogPage() {
       <section className="blog-index">
         <div className="tlc-container blog-index-inner">
           <header className="blog-index-header">
-            <div className="blog-index-header-panel">
-              <p className="blog-index-eyebrow">TLC CareNow</p>
-              <h1 className="blog-index-title">Blog</h1>
-              <p className="blog-index-subtitle">
-                For communities &amp; families
-              </p>
-              <span className="tlc-accent-line blog-index-accent" aria-hidden />
-              <p className="blog-index-lead">
-                Practical articles on independent living, senior living
-                operations, and booking care—written for operators and families
-                who use TLC CareNow.
-              </p>
-            </div>
+            <p className="blog-index-eyebrow">TLC CareNow</p>
+            <h1 className="blog-index-title">Blog</h1>
+            <span className="tlc-accent-line blog-index-accent" aria-hidden />
+            <p className="blog-index-lead">
+              Practical guides for independent living communities and families—on
+              booking care, staying connected, and using TLC CareNow.
+            </p>
           </header>
 
           {featured ? (

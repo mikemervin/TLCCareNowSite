@@ -15,7 +15,7 @@ export const howItWorksSteps: ReadonlyArray<{
     icon: "signin",
     title: "Sign in",
     description:
-      "Log in with your phone and a secure code. New users set up a short profile for their community.",
+      "Log in with your phone and a one-time code—no password needed. New users add a short profile and choose their community.",
     image: "/how-it-works-sign-in.png",
     imageAlt: "TLC CareNow sign-in screen showing phone number login",
   },
@@ -24,29 +24,29 @@ export const howItWorksSteps: ReadonlyArray<{
     icon: "book",
     title: "Book a visit",
     description:
-      "Choose the care you need, pick a date and time, and add visits to your cart.",
+      "Choose the care you need—like a wellness check or companionship—pick a time, and add visits to your cart.",
     image: "/how-it-works-book.png",
     imageAlt:
       "TLC CareNow services screen showing wellness and care service options",
   },
   {
     step: "3",
-    icon: "pay",
-    title: "Pay securely",
-    description:
-      "Check out in the app and save a payment method for future visits.",
-    image: "/how-it-works-pay.png",
-    imageAlt: "TLC CareNow secure card checkout screen powered by Stripe",
-  },
-  {
-    step: "4",
     icon: "updates",
     title: "Stay updated",
     description:
-      "See upcoming and past visits on your home screen.",
+      "See upcoming and past visits on your home screen, so residents and families always know what’s next.",
     image: "/how-it-works-updates.png",
     imageAlt:
       "TLC CareNow home screen showing upcoming services and visit schedule",
+  },
+  {
+    step: "4",
+    icon: "pay",
+    title: "Pay securely",
+    description:
+      "Check out in the app and save a payment method for faster rebooking next time.",
+    image: "/how-it-works-pay.png",
+    imageAlt: "TLC CareNow secure card checkout screen powered by Stripe",
   },
 ];
 
@@ -75,31 +75,31 @@ export const featureHighlights: ReadonlyArray<{
 }> = [
   {
     icon: "ondemand",
-    title: "On-Demand Care Services at Your Fingertips",
+    title: "On-demand care when you need it",
     shortLabel: "On-demand care",
     description:
-      "Scheduling care has never been easier. The TLC CareNow app empowers residents and their loved ones to schedule caregiving services effortlessly. Whether it's a quick 15-minute wellness check, a 30-minute morning readiness routine, or a full hour of companionship, care is just a tap away.",
+      "Book 15-, 30-, or 60-minute visits—plus escorts, pickups, and custom-length services—available 24/7. Get the help you need without a full-day agency minimum.",
   },
   {
     icon: "plans",
-    title: "Personalized Care Plans",
+    title: "Care plans built around each resident",
     shortLabel: "Care plans",
     description:
-      "Every resident is unique, and TLC CareNow ensures that care services are tailored to each individual, promoting a sense of independence and dignity. The app allows for quick scheduling of immediate care needs, providing residents with the support they need, when they need it most.",
+      "Set up a care plan for each resident and keep it updated as needs change. Staff stay informed, and residents get the independent, personalized support that fits them.",
   },
   {
     icon: "family",
-    title: "Peace of Mind for Families",
+    title: "Peace of mind for families",
     shortLabel: "Family updates",
     description:
-      "Stay connected with loved ones and their care plans. Families can easily monitor scheduled services and receive updates, ensuring everyone stays informed and involved in the care process. With real-time updates and scheduling notifications, they can rest assured knowing that their family members are receiving the attention they need.",
+      "See what’s booked, what’s completed, and what’s coming next—so families stay in the loop without phone tag, even from far away.",
   },
   {
     icon: "communication",
-    title: "Seamless Communication",
+    title: "Clear communication with the care team",
     shortLabel: "Communication",
     description:
-      "The TLC CareNow app facilitates open communication between caregivers and residents, ensuring that any changes in health or preferences are promptly addressed. Share feedback, ask questions, and stay informed about care progress with ease.",
+      "Ask questions, share preferences, and pass along updates in the app—so residents, families, and staff stay aligned when something changes.",
   },
 ];
 
@@ -111,32 +111,38 @@ export const residentFeatures: ReadonlyArray<{
   {
     icon: "calendar",
     title: "Same-day scheduling",
-    description: "Book short visits when you need them—no 4-hour agency minimums.",
+    description:
+      "Book short visits when you need them—15, 30, 60 minutes, or custom lengths, without a full-day agency minimum.",
   },
   {
     icon: "community",
     title: "Clear service choices",
-    description: "Wellness checks, readiness help, companionship, and more—clear before you book.",
+    description:
+      "Wellness checks, readiness help, companionship, escorts, pickups, and more—see what’s included before you book.",
   },
   {
     icon: "cart",
     title: "Cart & secure payments",
-    description: "Add visits to your cart, pay once, and review billing anytime.",
+    description:
+      "Add visits to your cart, pay securely in one checkout, and save a card for faster booking next time.",
   },
   {
     icon: "history",
     title: "Visit history",
-    description: "Upcoming and completed visits on your home screen.",
+    description:
+      "Upcoming and completed visits stay on your home screen, so residents and families always know what’s next.",
   },
   {
     icon: "news",
     title: "News & events",
-    description: "Community news and announcements in the app.",
+    description:
+      "Community news and announcements in the app, so campus updates are easy to find.",
   },
   {
     icon: "team",
     title: "Your care team",
-    description: "See who’s on your visits and how to reach support.",
+    description:
+      "See who’s supporting each visit and how to reach the team when you need help.",
   },
 ];
 
@@ -155,24 +161,24 @@ export const communityFeatures: ReadonlyArray<{
     icon: "workbasket",
     title: "Workbasket & assignments",
     summary:
-      "New bookings land in one live queue. Supervisors assign care pros and update visits in the app—not in spreadsheets or phone tag.",
+      "New bookings land in one live queue. Assign care pros and update visits in the app—not in spreadsheets.",
   },
   {
     icon: "schedule",
     title: "Schedules & punch",
     summary:
-      "Shared calendars and shift planning for your team. Punch in/out with location checks so supervisors know who is on site and when.",
+      "Shared calendars and shift planning. Punch in/out with location checks so you know who's on site.",
   },
   {
     icon: "messages",
     title: "Messages & reminders",
     summary:
-      "Team messaging in the app, plus scheduled reminders for visits and handoffs—so follow-ups do not get lost between shifts.",
+      "Team messaging plus visit and handoff reminders—so follow-ups don't get lost between shifts.",
   },
   {
     icon: "insights",
     title: "Reports & insights",
     summary:
-      "Dashboards and community snapshots show how care is running. Payroll and pricing tools give operators a clear view across locations.",
+      "Dashboards and snapshots show how care is running. Payroll and pricing stay clear across locations.",
   },
 ];

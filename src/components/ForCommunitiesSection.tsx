@@ -1,71 +1,35 @@
 import Link from "next/link";
-import { CommunityFeatureIcon } from "@/components/CommunityFeatureIcon";
 import { ButtonLink } from "@/components/ui/Button";
-import { communityFeatures } from "@/lib/product";
 
 export function ForCommunitiesSection() {
   return (
     <section className="communities-section tlc-section" id="for-communities">
       <div className="communities-section-glow" aria-hidden />
-      <div className="tlc-container communities-inner">
+      <div className="tlc-container communities-inner communities-inner--band">
         <header className="communities-hero">
-          <p className="communities-eyebrow">For operators &amp; care teams</p>
+          <p className="communities-eyebrow">For communities</p>
           <h2 className="communities-title">
-            One app for the teams who run care
+            Partner with CareNow on your campus
           </h2>
           <span className="tlc-accent-line communities-accent" aria-hidden />
           <p className="communities-intro">
-            When a resident books, your team sees it right away. Assign visits,
-            manage schedules, message staff, and run reports from one app—no
-            spreadsheets or scattered tools.
+            Offer residents and families flexible, on-demand care—while our team
+            manages visits, schedules, and staffing in one place. A modern
+            alternative to outside agencies and scattered spreadsheets.
           </p>
         </header>
 
-        <div className="communities-capabilities">
-          <h3 className="communities-capabilities-heading">
-            What your team can do
-          </h3>
-          <p className="communities-capabilities-lead">
-            Four core tools—each built for day-to-day operations.
-          </p>
-          <ul className="communities-grid">
-            {communityFeatures.map((feature) => (
-              <li key={feature.title}>
-                <article className="communities-card">
-                  <span className="communities-card-icon" aria-hidden>
-                    <CommunityFeatureIcon icon={feature.icon} />
-                  </span>
-                  <h4 className="communities-card-title">{feature.title}</h4>
-                  <p className="communities-card-text">{feature.summary}</p>
-                </article>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="communities-enterprise">
-          <h3 className="communities-enterprise-section-title">
-            Multiple communities
-          </h3>
-          <aside className="communities-enterprise-band">
-            <div className="communities-enterprise-copy">
-              <h4 className="communities-enterprise-title">Enterprise Solutions</h4>
-              <p className="communities-enterprise-text">
-                Screenshots, dashboards, and how to{" "}
-                <Link href="/enterprise" className="communities-enterprise-link">
-                  request a demo
-                </Link>
-                .
-              </p>
-            </div>
-            <ButtonLink
-              href="/enterprise"
-              size="md"
-              className="communities-cta-btn"
-            >
-              View Enterprise Solutions
-            </ButtonLink>
-          </aside>
+        <div className="communities-band-actions">
+          <ButtonLink
+            href="/contact"
+            size="md"
+            className="communities-cta-btn"
+          >
+            Talk with our team
+          </ButtonLink>
+          <Link href="/enterprise" className="communities-band-link">
+            See Enterprise Solutions
+          </Link>
         </div>
       </div>
     </section>

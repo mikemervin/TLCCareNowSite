@@ -5,28 +5,35 @@ import { residentFeatures } from "@/lib/product";
 
 export function FeaturesSection() {
   return (
-    <section className="features-section tlc-section" id="features">
-      <div className="tlc-container">
-        <SectionHeading
-          align="center"
-          className="features-header"
-          subtitle="Book care, pay securely, and stay connected—all in the TLC CareNow app."
-        >
-          Features
-        </SectionHeading>
+    <>
+      <section className="features-section tlc-section" id="features">
+        <div className="tlc-container">
+          <p className="tlc-audience-eyebrow tlc-audience-eyebrow--center">
+            For residents &amp; families
+          </p>
+          <SectionHeading
+            align="center"
+            className="features-header"
+            subtitle="Everything residents and families need to book visits, pay, and stay in the loop—right in TLC CareNow."
+          >
+            What you can do in the app
+          </SectionHeading>
 
-        <FeaturesCarousel />
+          <FeaturesCarousel />
+        </div>
+      </section>
 
-        <div className="features-tools-block">
+      <section className="features-tools-section tlc-section" aria-labelledby="day-to-day-tools-heading">
+        <div className="tlc-container">
           <SectionHeading
             align="center"
             className="features-tools-header"
-            subtitle="Scheduling, payments, visits, and community updates in one place."
+            as="h2"
+            subtitle="The everyday pieces that make booking and following care simple—from the first visit to the next one."
           >
-            Day-to-day tools
+            <span id="day-to-day-tools-heading">Day-to-day tools</span>
           </SectionHeading>
 
-          <div className="features-quick-panel">
           <ul className="features-quick-grid">
             {residentFeatures.map((feature) => (
               <li key={feature.title}>
@@ -35,16 +42,15 @@ export function FeaturesSection() {
                     <FeatureIcon icon={feature.icon} />
                   </span>
                   <div className="features-quick-body">
-                    <h4 className="features-quick-title">{feature.title}</h4>
+                    <h3 className="features-quick-title">{feature.title}</h3>
                     <p className="features-quick-text">{feature.description}</p>
                   </div>
                 </article>
               </li>
             ))}
           </ul>
-          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

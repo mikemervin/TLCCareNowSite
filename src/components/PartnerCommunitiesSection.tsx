@@ -31,14 +31,20 @@ export function PartnerCommunitiesSection() {
       <div className="tlc-container partner-communities-inner">
         <header className="partner-communities-header">
           <p className="partner-communities-eyebrow">Partner communities</p>
-          <span className="tlc-accent-line partner-communities-accent" aria-hidden />
-          <h2 id="partner-communities-title" className="partner-communities-title">
+          <h2
+            id="partner-communities-title"
+            className="partner-communities-title"
+          >
             Serving communities nationwide
           </h2>
+          <span
+            className="tlc-accent-line partner-communities-accent"
+            aria-hidden
+          />
           <p className="partner-communities-intro">
-            TLC CareNow partners with independent living communities across the
-            country. Residents at participating locations—including these Solstice
-            communities—can book on-demand care through the app.
+            Residents at participating independent living communities—including
+            these Solstice campuses—can book on-demand care in the TLC CareNow
+            app.
           </p>
         </header>
 
@@ -51,9 +57,10 @@ export function PartnerCommunitiesSection() {
                     src={community.image}
                     alt={community.imageAlt}
                     fill
-                    sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 320px"
+                    sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 280px"
                     className="partner-communities-img"
                   />
+                  <div className="partner-communities-scrim" aria-hidden />
                 </div>
                 <div className="partner-communities-body">
                   <h3 className="partner-communities-name">{community.name}</h3>
@@ -67,13 +74,15 @@ export function PartnerCommunitiesSection() {
           ))}
         </ul>
 
-        <p className="partner-communities-footnote">
-          Don&apos;t see your community?{" "}
-          <Link href="/contact" className="partner-communities-link">
-            Contact us
-          </Link>{" "}
-          about bringing CareNow to your campus anywhere in the U.S.
-        </p>
+        <div className="partner-communities-cta">
+          <p className="partner-communities-footnote">
+            Your community isn&apos;t listed? We bring CareNow to campuses
+            nationwide.
+          </p>
+          <Link href="/contact" className="partner-communities-cta-link">
+            Ask about your campus
+          </Link>
+        </div>
       </div>
     </section>
   );

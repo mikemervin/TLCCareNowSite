@@ -47,6 +47,7 @@ const EVENT_LABELS: Record<string, string> = {
   enterprise_lead_submitted: "Sent enterprise demo form",
   enterprise_lead_submit: "Sent enterprise demo form",
   outbound_book_carenow_header: "Book CareNow (header)",
+  outbound_book_carenow_hero: "Book CareNow (hero)",
   outbound_book_carenow_footer: "Book care online (footer)",
   outbound_app_book_page_open: "Open TLC CareNow (book page)",
   outbound_app_book_page_login: "Resident login (book page)",

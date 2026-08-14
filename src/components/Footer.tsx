@@ -7,7 +7,7 @@ import { site } from "@/lib/site";
 
 const contactItems = [
   {
-    label: "Book care online",
+    label: "Book care",
     value: "app.tlccarenow.com",
     href: site.appUrl,
     external: true,
@@ -60,31 +60,31 @@ export function Footer() {
           </div>
         </nav>
 
-        <div className="site-footer-divider" aria-hidden />
+        <div className="site-footer-bottom">
+          <nav className="site-footer-legal" aria-label="Legal">
+            {footerLegalLinks.map((link, index) => (
+              <span key={link.href} className="site-footer-legal-item">
+                {index > 0 ? (
+                  <span className="site-footer-legal-sep" aria-hidden>
+                    ·
+                  </span>
+                ) : null}
+                <Link href={link.href} className="site-footer-legal-link">
+                  {link.label}
+                </Link>
+              </span>
+            ))}
+          </nav>
 
-        <nav className="site-footer-legal" aria-label="Legal">
-          {footerLegalLinks.map((link, index) => (
-            <span key={link.href} className="site-footer-legal-item">
-              {index > 0 ? (
-                <span className="site-footer-legal-sep" aria-hidden>
-                  ·
-                </span>
-              ) : null}
-              <Link href={link.href} className="site-footer-legal-link">
-                {link.label}
-              </Link>
-            </span>
-          ))}
-        </nav>
-
-        <a
-          href={site.teamLifeUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="site-footer-powered"
-        >
-          {APP_BRAND_POWERED_BY}
-        </a>
+          <a
+            href={site.teamLifeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="site-footer-powered"
+          >
+            {APP_BRAND_POWERED_BY}
+          </a>
+        </div>
       </div>
     </footer>
   );

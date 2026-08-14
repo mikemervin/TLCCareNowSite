@@ -66,8 +66,12 @@ export function EnterpriseScreenshots() {
         </h2>
         <span className="tlc-accent-line" aria-hidden />
         <p className="enterprise-block-lead">
-          Real screens from the {site.name} admin experience—use the arrows or
-          dots to browse.
+          Sample screens from the {site.name} admin experience—not a complete
+          product walkthrough.{" "}
+          <a href="/contact" className="enterprise-inline-link">
+            Request a free demo
+          </a>{" "}
+          for a live look at the platform.
         </p>
       </header>
 

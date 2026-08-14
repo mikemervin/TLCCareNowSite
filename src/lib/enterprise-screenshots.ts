@@ -25,14 +25,14 @@ export const enterpriseScreenshots: readonly EnterpriseScreenshot[] = [
     alt: "Workbasket schedule with client visits, care notes, and visit status",
     caption: "Workbasket",
     width: 1024,
-    height: 796,
+    height: 558,
   },
   {
     src: "/enterprise/admin-dashboard.png",
     alt: "Admin dashboard with staff online, metrics, bookings, and revenue",
     caption: "Admin dashboard",
     width: 1024,
-    height: 853,
+    height: 576,
   },
   {
     src: "/enterprise/stripe-transactions.png",
@@ -46,14 +46,14 @@ export const enterpriseScreenshots: readonly EnterpriseScreenshot[] = [
     alt: "Client search page with community filter and client cards",
     caption: "Client search",
     width: 1024,
-    height: 696,
+    height: 576,
   },
   {
     src: "/enterprise/client-details.png",
     alt: "Client details modal with contact, care plan, and medical information",
     caption: "Client details",
     width: 1024,
-    height: 654,
+    height: 576,
   },
   {
     src: "/enterprise/staff-scheduling.png",
@@ -71,9 +71,9 @@ export const enterpriseScreenshots: readonly EnterpriseScreenshot[] = [
   },
   {
     src: "/enterprise/carepro-login.png",
-    alt: "CarePro log in page with email and password sign-in",
+    alt: "CarePro log in page with phone number and email sign-in",
     caption: "CarePro login",
     width: 1024,
-    height: 720,
+    height: 576,
   },
 ];

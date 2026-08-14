@@ -10,36 +10,32 @@ const highlights = [
   {
     title: "Wellness on site",
     description:
-      "Programs and support designed for independent living campuses—not a replacement for clinical care, but a partner in daily wellbeing.",
+      "Engagement and wellbeing support designed for independent living campuses—alongside daily life, not clinical care.",
   },
   {
     title: "Built for your campus",
     description:
-      "We work with operators and care teams to align services with how your community already runs day to day.",
+      "We partner with operators so programs fit how your community already runs day to day.",
   },
   {
-    title: "Separate from CareNow booking",
+    title: "Separate from CareNow",
     description:
-      "TeamLife Campus Care is its own wellness offering. Residents still use the TLC CareNow app to schedule and pay for visits.",
+      "Campus Care is its own wellness offering. Residents still book and pay for visits in the TLC CareNow app.",
   },
 ] as const;
 
 export function CampusCarePageContent() {
   return (
     <article className="campus-care-page">
+      {/* 1. Hero */}
       <section className="campus-care-hero">
         <div className="campus-care-hero-copy">
           <p className="campus-care-eyebrow">TeamLife Health Group</p>
           <h1 className="campus-care-title">TeamLife Campus Care</h1>
           <span className="tlc-accent-line campus-care-accent" aria-hidden />
           <p className="campus-care-lead">
-            A wellness program for senior living campuses—supporting residents
-            on site, alongside the TLC CareNow booking experience.
-          </p>
-          <p className="campus-care-body">
-            Campus Care focuses on engagement, wellbeing, and consistent presence
-            from our team. It is separate from the CareNow app, where residents
-            book and pay for scheduled care visits.
+            On-site wellness for senior living campuses—supporting residents
+            every day, alongside TLC CareNow booking.
           </p>
           <div className="campus-care-hero-actions">
             <ButtonLink
@@ -47,15 +43,16 @@ export function CampusCarePageContent() {
               size="md"
               className="campus-care-contact-btn"
             >
-              Contact us
+              Talk with our team
             </ButtonLink>
-            <a
-              href={`mailto:${site.email}`}
-              className="campus-care-hero-link"
-            >
-              {site.email}
-            </a>
+            <Link href="/" className="campus-care-hero-link">
+              Explore TLC CareNow
+            </Link>
           </div>
+          <p className="campus-care-support">
+            Campus Care focuses on engagement, wellbeing, and a consistent team
+            presence. Visit booking stays in the CareNow app.
+          </p>
         </div>
 
         <div className="campus-care-hero-media">
@@ -71,31 +68,43 @@ export function CampusCarePageContent() {
         </div>
       </section>
 
+      {/* 2. Highlights */}
       <section className="campus-care-main tlc-section">
         <div className="tlc-container campus-care-main-inner">
+          <header className="campus-care-section-header">
+            <p className="campus-care-section-eyebrow">What Campus Care offers</p>
+            <h2 className="campus-care-section-title">Built for campus life</h2>
+            <span
+              className="tlc-accent-line campus-care-section-accent"
+              aria-hidden
+            />
+          </header>
+
           <ul className="campus-care-highlights">
             {highlights.map((item) => (
               <li key={item.title} className="campus-care-highlight-card">
-                <h2 className="campus-care-highlight-title">{item.title}</h2>
+                <h3 className="campus-care-highlight-title">{item.title}</h3>
                 <p className="campus-care-highlight-text">{item.description}</p>
               </li>
             ))}
           </ul>
 
+          {/* 3. Compare */}
           <div className="campus-care-compare">
             <div className="campus-care-compare-col">
+              <p className="campus-care-compare-eyebrow">Program</p>
               <h3 className="campus-care-compare-label">TeamLife Campus Care</h3>
               <p className="campus-care-compare-text">
-                Campus wellness partnership, on-site support, and programs tailored
+                Campus wellness partnership—on-site support and programs tailored
                 to your community.
               </p>
             </div>
             <div className="campus-care-compare-divider" aria-hidden />
             <div className="campus-care-compare-col">
-              <h3 className="campus-care-compare-label">TLC CareNow app</h3>
+              <p className="campus-care-compare-eyebrow">App</p>
+              <h3 className="campus-care-compare-label">TLC CareNow</h3>
               <p className="campus-care-compare-text">
-                Residents book visits, pay securely, and track care from their
-                phone—visit{" "}
+                Residents book visits, pay securely, and track care at{" "}
                 <TrackedOutboundLink
                   href={site.appUrl}
                   clickId="app_campus_care_inline"
@@ -110,14 +119,15 @@ export function CampusCarePageContent() {
             </div>
           </div>
 
+          {/* 4. CTA */}
           <div className="campus-care-cta">
-            <h2 className="campus-care-cta-title">Learn more</h2>
+            <h2 className="campus-care-cta-title">Bring Campus Care to your community</h2>
             <p className="campus-care-cta-text">
-              Questions about bringing Campus Care or CareNow to your community?
-              We&apos;re happy to walk you through both programs.
+              Questions about Campus Care or CareNow? We&apos;ll walk you through
+              both programs.
             </p>
             <div className="campus-care-cta-actions">
-              <ButtonLink href="/contact" variant="secondary" size="md">
+              <ButtonLink href="/contact" size="md" className="campus-care-contact-btn">
                 Get in touch
               </ButtonLink>
               <a
@@ -128,13 +138,11 @@ export function CampusCarePageContent() {
               </a>
             </div>
             <p className="campus-care-cta-org">
-              Visit{" "}
-              <TeamLifeWebsiteLink showExternalIcon={false} /> for more about
-              TeamLife Health Group, or explore{" "}
+              More about{" "}
+              <TeamLifeWebsiteLink showExternalIcon={false} /> ·{" "}
               <Link href="/" className="campus-care-inline-link">
-                TLC CareNow
-              </Link>{" "}
-              on this site.
+                TLC CareNow home
+              </Link>
             </p>
           </div>
         </div>
