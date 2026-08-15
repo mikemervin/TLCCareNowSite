@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BlogAdSlot } from "@/components/BlogAdSlot";
 import { BlogBreadcrumbs } from "@/components/BlogBreadcrumbs";
 import { BlogPostBody } from "@/components/BlogPostBody";
 import { PageShell } from "@/components/PageShell";
@@ -114,9 +115,13 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
             </header>
 
+            <BlogAdSlot className="blog-ad--article" />
+
             <div className="blog-article-content">
               <BlogPostBody blocks={post.body} />
             </div>
+
+            <BlogAdSlot className="blog-ad--article" />
 
             <footer className="blog-article-footer">
               <p className="blog-article-footer-title">Explore {site.name}</p>
