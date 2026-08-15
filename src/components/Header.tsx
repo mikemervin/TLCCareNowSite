@@ -77,7 +77,12 @@ export function Header() {
                 rel="noopener noreferrer"
                 className="header-book-cta"
               >
-                Book CareNow
+                <span className="header-book-cta-label header-book-cta-label--full">
+                  Book CareNow
+                </span>
+                <span className="header-book-cta-label header-book-cta-label--short">
+                  Book
+                </span>
               </TrackedOutboundLink>
             </nav>
           </div>

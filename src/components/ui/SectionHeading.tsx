@@ -17,13 +17,13 @@ export function SectionHeading({
 
   return (
     <header className={`flex flex-col ${alignClass} ${className}`}>
-      <Tag className="tlc-heading-green text-3xl sm:text-4xl md:text-[2.75rem]">
+      <Tag className="tlc-heading-green text-[1.625rem] leading-tight sm:text-3xl md:text-4xl lg:text-[2.75rem]">
         {children}
       </Tag>
       <span className={`tlc-accent-line ${align === "center" ? "mx-auto" : ""}`} />
       {subtitle ? (
         <p
-          className={`mt-5 max-w-2xl text-lg leading-relaxed text-tlc-text-muted ${
+          className={`mt-3 max-w-2xl text-base leading-relaxed text-tlc-text-muted sm:mt-5 sm:text-lg ${
             align === "center" ? "mx-auto text-center" : ""
           }`}
         >

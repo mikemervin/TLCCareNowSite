@@ -94,6 +94,17 @@ export type TodayStats = {
   appClicks: number;
 };
 
+/** Compact daily rollup for the past-week table (oldest → today). */
+export type DayBriefStats = {
+  dateKey: string;
+  dateLabel: string;
+  isToday: boolean;
+  visitors: number;
+  pageviews: number;
+  formActions: number;
+  appClicks: number;
+};
+
 export type ActiveNowStats = {
   count: number;
   windowMinutes: number;
@@ -105,6 +116,8 @@ export type AnalyticsSummary = {
   excludedAdminViews: number;
   activeNow: ActiveNowStats;
   today: TodayStats;
+  /** Last 7 site-calendar days, oldest first, ending with today. */
+  pastWeek: DayBriefStats[];
   totalEvents: number;
   pageviews: number;
   customEvents: number;

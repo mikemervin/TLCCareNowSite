@@ -1,9 +1,11 @@
 import { AppLink } from "@/components/AppLink";
+import { JsonLd } from "@/components/JsonLd";
 import { PageShell } from "@/components/PageShell";
 import { TeamLifeWebsiteLink } from "@/components/TeamLifeWebsiteLink";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/lib/site";
 import { pageMetadata } from "@/lib/page-metadata";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "About TLC CareNow",
@@ -15,6 +17,12 @@ export const metadata = pageMetadata({
 export default function AboutPage() {
   return (
     <PageShell>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ])}
+      />
       <section className="tlc-section bg-tlc-cream">
         <div className="tlc-container mx-auto max-w-2xl">
           <SectionHeading subtitle={site.tagline}>About</SectionHeading>

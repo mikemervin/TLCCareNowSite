@@ -1,6 +1,8 @@
 import { GetInTouchSection } from "@/components/GetInTouchSection";
+import { JsonLd } from "@/components/JsonLd";
 import { PageShell } from "@/components/PageShell";
 import { pageMetadata } from "@/lib/page-metadata";
+import { breadcrumbJsonLd, contactPageJsonLd } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Contact TLC CareNow",
@@ -12,6 +14,15 @@ export const metadata = pageMetadata({
 export default function ContactPage() {
   return (
     <PageShell>
+      <JsonLd
+        data={[
+          contactPageJsonLd(),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Contact", path: "/contact" },
+          ]),
+        ]}
+      />
       <GetInTouchSection />
     </PageShell>
   );

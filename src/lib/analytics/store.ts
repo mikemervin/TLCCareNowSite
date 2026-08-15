@@ -21,7 +21,11 @@ import {
 } from "@/lib/analytics/event-catalog";
 import { buildFormEntrySnapshots } from "@/lib/analytics/form-snapshots";
 import { buildActiveNowStats, isPresenceEvent } from "@/lib/analytics/active-now";
-import { buildTodayStats, eventSiteDateKey } from "@/lib/analytics/today";
+import {
+  buildPastWeekDays,
+  buildTodayStats,
+  eventSiteDateKey,
+} from "@/lib/analytics/today";
 import { formatLocation, formatReferrer } from "@/lib/analytics/format";
 import {
   buildDeviceBreakdown,
@@ -210,6 +214,7 @@ export function buildAnalyticsSummary(
     excludedAdminViews,
     activeNow: buildActiveNowStats(events),
     today: buildTodayStats(marketing),
+    pastWeek: buildPastWeekDays(marketing),
     totalEvents: signals.length,
     pageviews: pageviews.length,
     customEvents: customEvents.length,

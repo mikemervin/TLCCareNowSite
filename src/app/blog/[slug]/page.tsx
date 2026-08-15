@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BlogBreadcrumbs } from "@/components/BlogBreadcrumbs";
 import { BlogPostBody } from "@/components/BlogPostBody";
 import { PageShell } from "@/components/PageShell";
 import {
@@ -9,11 +10,16 @@ import {
 } from "@/lib/blog/ctas";
 import { getAllBlogSlugs, getBlogPost } from "@/lib/blog/posts";
 import { JsonLd } from "@/components/JsonLd";
-import { articleJsonLd, pageMetadata } from "@/lib/seo";
+import { articleJsonLd, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 import type { Metadata } from "next";
 
 type Props = { params: Promise<{ slug: string }> };
+
+function truncateTitle(title: string, max = 48): string {
+  if (title.length <= max) return title;
+  return `${title.slice(0, max - 1).trimEnd()}…`;
+}
 
 export function generateStaticParams() {
   return getAllBlogSlugs().map((slug) => ({ slug }));
@@ -40,21 +46,36 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   const ctas = getBlogArticleCtas(post);
+  const crumbs = [
+    { name: "Home", path: "/" },
+    { name: "Blog", path: "/blog" },
+    { name: post.title, path: `/blog/${post.slug}` },
+  ];
 
   return (
     <PageShell>
       <JsonLd
-        data={articleJsonLd({
-          title: post.title,
-          description: post.description,
-          publishedAt: post.publishedAt,
-          slug: post.slug,
-          image: post.image,
-          author: post.author,
-        })}
+        data={[
+          articleJsonLd({
+            title: post.title,
+            description: post.description,
+            publishedAt: post.publishedAt,
+            slug: post.slug,
+            image: post.image,
+            author: post.author,
+          }),
+          breadcrumbJsonLd(crumbs),
+        ]}
       />
       <article className="blog-article">
         <div className="tlc-container blog-article-layout">
+          <BlogBreadcrumbs
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Blog", href: "/blog" },
+              { label: truncateTitle(post.title) },
+            ]}
+          />
           <Link href="/blog" className="blog-article-back">
             <span className="blog-article-back-icon" aria-hidden>
               ←

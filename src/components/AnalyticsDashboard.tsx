@@ -717,6 +717,10 @@ export function AnalyticsDashboard({
     ...summary.eventsByDay.map((d) => d.count),
     1,
   );
+  const maxWeekVisitors = Math.max(
+    ...summary.pastWeek.map((d) => d.visitors),
+    1,
+  );
 
   const topPaths = aggregatePathRows(summary.topPaths);
   const maxAggregatedPathCount = topPaths[0]?.count ?? 1;
@@ -954,9 +958,94 @@ export function AnalyticsDashboard({
         ) : null}
       </section>
 
+      <section
+        id="analytics-week"
+        className="analytics-week-block analytics-surface"
+      >
+        <header className="analytics-surface-head">
+          <h2 className="analytics-today-heading">
+            <span className="analytics-section-step" aria-hidden>
+              2
+            </span>
+            <span className="analytics-today-label">Past week</span>
+          </h2>
+          <p className="analytics-surface-note">
+            One row per day · oldest first · today at the bottom
+          </p>
+        </header>
+
+        <div className="analytics-week-table-wrap">
+          <table className="analytics-week-table">
+            <thead>
+              <tr>
+                <th scope="col">Day</th>
+                <th scope="col" className="analytics-week-num">
+                  People
+                </th>
+                <th scope="col" className="analytics-week-num">
+                  Pages
+                </th>
+                <th scope="col" className="analytics-week-num">
+                  Forms
+                </th>
+                <th scope="col" className="analytics-week-num">
+                  App clicks
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {summary.pastWeek.map((day) => {
+                const peopleShare =
+                  maxWeekVisitors > 0
+                    ? (day.visitors / maxWeekVisitors) * 100
+                    : 0;
+                return (
+                  <tr
+                    key={day.dateKey}
+                    className={
+                      day.isToday ? "analytics-week-row--today" : undefined
+                    }
+                  >
+                    <th scope="row" className="analytics-week-day">
+                      <span className="analytics-week-day-label">
+                        {day.dateLabel}
+                      </span>
+                      {day.isToday ? (
+                        <span className="analytics-week-today-badge">Today</span>
+                      ) : null}
+                      <span
+                        className="analytics-week-people-track"
+                        aria-hidden
+                      >
+                        <span
+                          className="analytics-week-people-fill"
+                          style={{ width: `${peopleShare}%` }}
+                        />
+                      </span>
+                    </th>
+                    <td className="analytics-week-num tabular-nums">
+                      {day.visitors}
+                    </td>
+                    <td className="analytics-week-num tabular-nums">
+                      {day.pageviews}
+                    </td>
+                    <td className="analytics-week-num tabular-nums">
+                      {day.formActions}
+                    </td>
+                    <td className="analytics-week-num tabular-nums">
+                      {day.appClicks}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <SectionGroup
         id="analytics-leads"
-        step="2"
+        step="3"
         title="Leads & forms"
         lead="The money section—real inquiries first, spam tucked away."
         tone="leads"
@@ -988,7 +1077,7 @@ export function AnalyticsDashboard({
 
       <SectionGroup
         id="analytics-live"
-        step="3"
+        step="4"
         title="Live feed"
         lead="Newest activity first. Bot and 404 hits stay muted."
         tone="live"
@@ -1000,7 +1089,7 @@ export function AnalyticsDashboard({
 
       <SectionGroup
         id="analytics-traffic"
-        step="4"
+        step="5"
         title="Traffic highlights"
         lead="All-time winners—what people open, how they find you, and Book CareNow clicks."
       >
@@ -1077,7 +1166,7 @@ export function AnalyticsDashboard({
       <details id="analytics-more" className="analytics-advanced">
         <summary className="analytics-advanced-summary">
           <span className="analytics-section-step analytics-section-step--inline" aria-hidden>
-            5
+            6
           </span>
           More detail (devices, hours, bots, tech)
         </summary>
@@ -1159,7 +1248,7 @@ export function AnalyticsDashboard({
             </article>
           </div>
 
-          <Panel title="Last 14 days">
+          <Panel title="Last 14 days (all signals)">
             {summary.eventsByDay.length === 0 ? (
               <p className="analytics-panel-empty">No daily data yet.</p>
             ) : (

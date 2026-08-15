@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PageShell } from "@/components/PageShell";
+import { JsonLd } from "@/components/JsonLd";
 import { getBlogPostsForIndex, type BlogPost } from "@/lib/blog/posts";
 import { pageMetadata } from "@/lib/page-metadata";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Blog — Independent Living & Senior Care",
@@ -75,6 +77,12 @@ export default function BlogPage() {
 
   return (
     <PageShell>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/blog" },
+        ])}
+      />
       <section className="blog-index">
         <div className="tlc-container blog-index-inner">
           <header className="blog-index-header">

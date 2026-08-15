@@ -1,6 +1,8 @@
 import { CampusCarePageContent } from "@/components/CampusCarePageContent";
+import { JsonLd } from "@/components/JsonLd";
 import { PageShell } from "@/components/PageShell";
 import { pageMetadata } from "@/lib/page-metadata";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "TeamLife Campus Care — Senior Living Wellness",
@@ -12,6 +14,12 @@ export const metadata = pageMetadata({
 export default function CampusCarePage() {
   return (
     <PageShell>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Campus Care", path: "/campus-care" },
+        ])}
+      />
       <CampusCarePageContent />
     </PageShell>
   );

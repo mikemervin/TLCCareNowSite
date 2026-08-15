@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { site } from "@/lib/site";
+import { site, socialLinks } from "@/lib/site";
 import { getSiteUrl } from "@/lib/site-url";
 
 /** Turn a site path or absolute URL into an absolute https URL. */
@@ -8,6 +8,10 @@ export function absoluteUrl(path: string): string {
   const base = getSiteUrl();
   if (path === "/" || path === "") return base;
   return `${base}${path.startsWith("/") ? path : `/${path}`}`;
+}
+
+export function organizationId(): string {
+  return `${getSiteUrl()}/#organization`;
 }
 
 type PageMetadataOptions = {
@@ -58,7 +62,7 @@ export function pageMetadata({
     ...(title !== undefined ? { title } : {}),
     description: desc,
     alternates: {
-      canonical: path,
+      canonical: url,
     },
     openGraph,
     twitter: {
@@ -75,11 +79,23 @@ export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": organizationId(),
     name: site.name,
     url,
     logo: `${url}/logo.svg`,
     email: site.email,
     telephone: site.phoneHeader,
+    sameAs: socialLinks.map((link) => link.href),
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: site.phoneHeader,
+        email: site.email,
+        contactType: "customer service",
+        areaServed: "US",
+        availableLanguage: "English",
+      },
+    ],
     parentOrganization: {
       "@type": "Organization",
       name: "TeamLife Health Group",
@@ -93,12 +109,13 @@ export function websiteJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${url}/#website`,
     name: site.name,
     url,
     description: site.description,
+    inLanguage: "en-US",
     publisher: {
-      "@type": "Organization",
-      name: site.name,
+      "@id": organizationId(),
     },
   };
 }
@@ -117,6 +134,67 @@ export function faqPageJsonLd(
         text: item.answer,
       },
     })),
+  };
+}
+
+export type BreadcrumbItem = {
+  name: string;
+  path: string;
+};
+
+export function breadcrumbJsonLd(items: BreadcrumbItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl(item.path),
+    })),
+  };
+}
+
+export function contactPageJsonLd() {
+  const url = absoluteUrl("/contact");
+  return {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "@id": `${url}#contactpage`,
+    name: `Contact ${site.name}`,
+    description:
+      "Contact TeamLife for TLC CareNow demos, community partnerships, and questions about care scheduling for independent living.",
+    url,
+    isPartOf: {
+      "@id": `${getSiteUrl()}/#website`,
+    },
+    about: {
+      "@id": organizationId(),
+    },
+  };
+}
+
+export function softwareApplicationJsonLd() {
+  const url = absoluteUrl("/enterprise");
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: `${site.name} Enterprise`,
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    description:
+      "Care scheduling and operations software for independent living and senior living operators—visit-based booking, role-based dashboards, and payroll visibility.",
+    url,
+    provider: {
+      "@id": organizationId(),
+    },
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      description: "Custom pricing — request a demo",
+      url: absoluteUrl("/contact"),
+    },
   };
 }
 
@@ -146,6 +224,7 @@ export function articleJsonLd(post: {
     },
     publisher: {
       "@type": "Organization",
+      "@id": organizationId(),
       name: site.name,
       logo: {
         "@type": "ImageObject",
