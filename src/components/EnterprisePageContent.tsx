@@ -3,9 +3,13 @@ import Link from "next/link";
 import { CommunityFeatureIcon } from "@/components/CommunityFeatureIcon";
 import { EnterpriseLeadCapture } from "@/components/EnterpriseLeadCapture";
 import { EnterpriseScreenshots } from "@/components/EnterpriseScreenshots";
+import { FaqSection } from "@/components/FaqSection";
+import { JsonLd } from "@/components/JsonLd";
 import { ButtonLink } from "@/components/ui/Button";
 import { communityFeatures } from "@/lib/product";
+import { enterpriseFaqs } from "@/lib/faq";
 import { images } from "@/lib/images";
+import { faqPageJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 const bookingHighlights = {
@@ -169,6 +173,7 @@ const adminSetup = {
 export function EnterprisePageContent() {
   return (
     <article className="enterprise-page">
+      <JsonLd data={faqPageJsonLd(enterpriseFaqs)} />
       <section className="enterprise-hero">
         <div className="enterprise-hero-copy">
           <p className="enterprise-eyebrow">For operators &amp; multi-site teams</p>
@@ -525,6 +530,14 @@ export function EnterprisePageContent() {
           </section>
         </div>
       </section>
+
+      <FaqSection
+        items={enterpriseFaqs}
+        id="enterprise-faq"
+        title="Operator questions"
+        subtitle="Scheduling software, visit-based care, roles, and how demos work for senior living teams."
+        className="enterprise-faq"
+      />
 
       <EnterpriseLeadCapture />
     </article>

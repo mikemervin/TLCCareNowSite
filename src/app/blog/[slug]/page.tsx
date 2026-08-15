@@ -3,6 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BlogPostBody } from "@/components/BlogPostBody";
 import { PageShell } from "@/components/PageShell";
+import {
+  getBlogArticleCtaLead,
+  getBlogArticleCtas,
+} from "@/lib/blog/ctas";
 import { getAllBlogSlugs, getBlogPost } from "@/lib/blog/posts";
 import { JsonLd } from "@/components/JsonLd";
 import { articleJsonLd, pageMetadata } from "@/lib/seo";
@@ -34,6 +38,8 @@ export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const post = getBlogPost(slug);
   if (!post) notFound();
+
+  const ctas = getBlogArticleCtas(post);
 
   return (
     <PageShell>
@@ -94,16 +100,22 @@ export default async function BlogPostPage({ params }: Props) {
             <footer className="blog-article-footer">
               <p className="blog-article-footer-title">Explore {site.name}</p>
               <p className="blog-article-footer-lead">
-                Questions about CareNow in your community? Get in touch with our
-                team.
+                {getBlogArticleCtaLead(post)}
               </p>
               <div className="blog-article-cta-grid">
-                <Link
-                  href="/contact"
-                  className="blog-article-cta blog-article-cta--primary"
-                >
-                  Contact
-                </Link>
+                {ctas.map((cta) => (
+                  <Link
+                    key={`${cta.href}-${cta.label}`}
+                    href={cta.href}
+                    className={
+                      cta.primary
+                        ? "blog-article-cta blog-article-cta--primary"
+                        : "blog-article-cta"
+                    }
+                  >
+                    {cta.label}
+                  </Link>
+                ))}
               </div>
             </footer>
           </div>

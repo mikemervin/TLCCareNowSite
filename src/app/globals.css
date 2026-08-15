@@ -7191,6 +7191,147 @@ a {
   color: #fff;
 }
 
+.faq-section {
+  scroll-margin-top: 7.5rem;
+  background: linear-gradient(
+    180deg,
+    #fff 0%,
+    var(--tlc-cream) 42%,
+    var(--tlc-cream) 100%
+  );
+}
+
+.faq-section-inner {
+  max-width: 40rem;
+}
+
+.faq-section-header {
+  max-width: 36rem;
+  margin: 0 auto 2.25rem;
+  text-align: center;
+}
+
+.faq-section-title {
+  margin: 0;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tlc-primary);
+  line-height: 1.2;
+}
+
+.faq-section-intro {
+  margin: 1.25rem 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--tlc-text-muted);
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  border: 1px solid rgb(40 101 43 / 10%);
+  background: #fff;
+  box-shadow: var(--tlc-shadow-sm);
+}
+
+.faq-item {
+  border-bottom: 1px solid rgb(40 101 43 / 10%);
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+.faq-summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.125rem 1.25rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--tlc-brand);
+  transition: background 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .faq-summary {
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+.faq-summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-summary:hover {
+  background: rgb(40 101 43 / 3%);
+}
+
+.faq-summary:focus-visible {
+  outline: 2px solid var(--tlc-primary);
+  outline-offset: -2px;
+}
+
+.faq-summary-text {
+  text-align: left;
+}
+
+.faq-chevron {
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--tlc-primary);
+  transition: transform 0.2s ease;
+}
+
+.faq-item[open] > .faq-summary {
+  color: var(--tlc-primary);
+}
+
+.faq-item[open] > .faq-summary .faq-chevron {
+  transform: rotate(180deg);
+}
+
+.faq-answer-wrap {
+  padding: 0 1.25rem 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .faq-answer-wrap {
+    padding: 0 1.5rem 1.375rem;
+  }
+}
+
+.faq-answer {
+  margin: 0;
+  max-width: 36rem;
+  padding-top: 0.125rem;
+  font-size: 0.9875rem;
+  line-height: 1.7;
+  color: var(--tlc-text-muted);
+}
+
+.enterprise-faq {
+  background: linear-gradient(
+    180deg,
+    var(--tlc-cream) 0%,
+    #fff 45%,
+    #fff 100%
+  );
+}
+
+.enterprise-faq .faq-list {
+  box-shadow: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
