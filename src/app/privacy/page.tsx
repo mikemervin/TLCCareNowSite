@@ -28,6 +28,14 @@ const sections = [
     ],
   },
   {
+    id: "advertising",
+    title: "Advertising on blog pages",
+    paragraphs: [
+      `We may show Google AdSense ads on ${site.name} blog pages. Google may use cookies or similar technology to serve and measure ads. Ads do not appear on booking, contact, Campus Care, or Enterprise pages.`,
+      "You can manage Google ad settings at adssettings.google.com. See google.com/policies/privacy/partners for how Google uses data from partner sites.",
+    ],
+  },
+  {
     id: "use",
     title: "How we use it",
     paragraphs: [
@@ -47,7 +55,7 @@ const sections = [
     id: "choices",
     title: "Your choices",
     paragraphs: [
-      "You can choose what to include in the contact form, update account details in the app when available, and limit analytics tracking using browser or Google opt-out tools described above. Contact us with questions about your information. We may update this policy; the date at the top of the page will change when we do.",
+      "You can choose what to include in the contact form, update account details in the app when available, and limit analytics or ad tracking using browser tools, Google opt-out tools, or adssettings.google.com. Contact us with questions about your information. We may update this policy; the date at the top of the page will change when we do.",
     ],
   },
   {
