@@ -12,7 +12,7 @@ export const site = {
   email: "info@teamlifecares.com",
   phoneHeader: "312-428-1188",
   phoneContact: "872-335-9191",
-  copyright: "©2021 by TLC CareNow",
+  copyright: "©2026 TLC CareNow",
   poweredBy: "Powered by TeamLife Health Group",
 } as const;
 

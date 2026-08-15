@@ -23,6 +23,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: post.title,
     description: post.description,
     path: `/blog/${slug}`,
+    openGraphType: "article",
+    publishedTime: post.publishedAt,
+    image: post.image,
+    authors: [post.author],
   });
 }
 
@@ -40,6 +44,7 @@ export default async function BlogPostPage({ params }: Props) {
           publishedAt: post.publishedAt,
           slug: post.slug,
           image: post.image,
+          author: post.author,
         })}
       />
       <article className="blog-article">

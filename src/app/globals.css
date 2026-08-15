@@ -4636,6 +4636,13 @@ a {
   border-radius: 2px;
 }
 
+.site-footer-copyright {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--tlc-text-muted);
+}
+
 .site-footer-powered {
   font-size: 0.6875rem;
   font-weight: 600;

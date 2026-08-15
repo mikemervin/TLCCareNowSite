@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { site } from "@/lib/site";
 import { getSiteUrl } from "@/lib/site-url";
 
-function absoluteUrl(path: string): string {
+/** Turn a site path or absolute URL into an absolute https URL. */
+export function absoluteUrl(path: string): string {
+  if (/^https?:\/\//i.test(path)) return path;
   const base = getSiteUrl();
   if (path === "/" || path === "") return base;
   return `${base}${path.startsWith("/") ? path : `/${path}`}`;
@@ -15,6 +17,10 @@ type PageMetadataOptions = {
   openGraphType?: "website" | "article";
   /** ISO date for article pages. */
   publishedTime?: string;
+  /** Relative path or absolute URL for OG / Twitter / social previews. */
+  image?: string;
+  /** Article authors (names). */
+  authors?: string[];
 };
 
 /** Page-level SEO: title, description, canonical, Open Graph, and Twitter. */
@@ -24,10 +30,13 @@ export function pageMetadata({
   path,
   openGraphType = "website",
   publishedTime,
+  image,
+  authors,
 }: PageMetadataOptions): Metadata {
   const desc = description ?? site.description;
   const ogTitle = title ?? site.name;
   const url = absoluteUrl(path);
+  const ogImage = image ? absoluteUrl(image) : undefined;
 
   const openGraph: NonNullable<Metadata["openGraph"]> = {
     type: openGraphType,
@@ -36,8 +45,12 @@ export function pageMetadata({
     description: desc,
     siteName: site.name,
     locale: "en_US",
-    ...(openGraphType === "article" && publishedTime
-      ? { publishedTime }
+    ...(ogImage ? { images: [{ url: ogImage }] } : {}),
+    ...(openGraphType === "article"
+      ? {
+          ...(publishedTime ? { publishedTime } : {}),
+          ...(authors?.length ? { authors } : {}),
+        }
       : {}),
   };
 
@@ -52,6 +65,7 @@ export function pageMetadata({
       card: "summary_large_image",
       title: ogTitle,
       description: desc,
+      ...(ogImage ? { images: [ogImage] } : {}),
     },
   };
 }
@@ -95,8 +109,12 @@ export function articleJsonLd(post: {
   publishedAt: string;
   slug: string;
   image?: string;
+  author?: string;
 }) {
   const url = getSiteUrl();
+  const imageUrl = post.image ? absoluteUrl(post.image) : undefined;
+  const authorName = post.author?.trim() || site.name;
+
   return {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -106,7 +124,7 @@ export function articleJsonLd(post: {
     dateModified: post.publishedAt,
     author: {
       "@type": "Organization",
-      name: site.name,
+      name: authorName,
       url,
     },
     publisher: {
@@ -121,6 +139,6 @@ export function articleJsonLd(post: {
       "@type": "WebPage",
       "@id": `${url}/blog/${post.slug}`,
     },
-    ...(post.image ? { image: [post.image] } : {}),
+    ...(imageUrl ? { image: [imageUrl] } : {}),
   };
 }

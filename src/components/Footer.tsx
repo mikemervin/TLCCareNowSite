@@ -76,6 +76,8 @@ export function Footer() {
             ))}
           </nav>
 
+          <p className="site-footer-copyright">{site.copyright}</p>
+
           <a
             href={site.teamLifeUrl}
             target="_blank"
