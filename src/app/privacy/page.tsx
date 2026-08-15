@@ -29,9 +29,9 @@ const sections = [
   },
   {
     id: "advertising",
-    title: "Advertising on blog pages",
+    title: "Advertising",
     paragraphs: [
-      `We may show Google AdSense ads on ${site.name} blog pages. Google may use cookies or similar technology to serve and measure ads. Ads do not appear on booking, contact, Campus Care, or Enterprise pages.`,
+      `We may show Google AdSense ads at the bottom of public ${site.name} pages. Google may use cookies or similar technology to serve and measure ads. Ads do not appear on the private analytics admin pages.`,
       "You can manage Google ad settings at adssettings.google.com. See google.com/policies/privacy/partners for how Google uses data from partner sites.",
     ],
   },

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BlogAdSlot } from "@/components/BlogAdSlot";
 import { PageShell } from "@/components/PageShell";
 import { JsonLd } from "@/components/JsonLd";
 import { getBlogPostsForIndex, type BlogPost } from "@/lib/blog/posts";
@@ -95,8 +94,6 @@ export default function BlogPage() {
               booking care, staying connected, and using TLC CareNow.
             </p>
           </header>
-
-          <BlogAdSlot className="blog-ad--index" />
 
           {featured ? (
             <div className="blog-index-featured">
