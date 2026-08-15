@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
+import { BlogAdSense, ADSENSE_PUBLISHER_ID } from "@/components/BlogAdSense";
 import { SiteAnalytics } from "@/components/SiteAnalytics";
 import { SiteJsonLd } from "@/components/SiteJsonLd";
 import { getSiteUrl } from "@/lib/site-url";
@@ -36,6 +37,9 @@ export const metadata: Metadata = {
       { url: "/logo.svg", type: "image/svg+xml" },
     ],
   },
+  other: {
+    "google-adsense-account": ADSENSE_PUBLISHER_ID,
+  },
 };
 
 export const viewport: Viewport = {
@@ -52,6 +56,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={roboto.variable}>
       <body className="flex min-h-screen flex-col antialiased">
+        <BlogAdSense />
         <SiteJsonLd />
         <SiteAnalytics />
         <AnalyticsProvider />
