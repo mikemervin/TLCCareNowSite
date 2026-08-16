@@ -4952,7 +4952,7 @@ a {
 /* Footer */
 .site-footer {
   border-top: 1px solid rgb(40 101 43 / 10%);
-  background: linear-gradient(180deg, #fff 0%, var(--tlc-cream) 55%, #f0eee9 100%);
+  background: linear-gradient(180deg, var(--tlc-cream) 0%, var(--tlc-cream) 55%, #f0eee9 100%);
 }
 
 .site-footer-inner {
@@ -7843,8 +7843,8 @@ a {
 
 .blog-ad--page-bottom {
   padding: 1rem 1rem 1.25rem;
-  background: #fff;
-  border-top: 1px solid rgb(43 108 176 / 10%);
+  background: var(--tlc-cream);
+  border-top: none;
 }
 
 .blog-ad-label {
