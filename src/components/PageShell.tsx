@@ -1,6 +1,5 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { BlogAdSlot } from "@/components/BlogAdSlot";
 
 type PageShellProps = {
   children: React.ReactNode;
@@ -25,7 +24,7 @@ export function PageShell({ children, variant = "default" }: PageShellProps) {
     <>
       <Header />
       <main className="flex-1">{children}</main>
-      <BlogAdSlot className="blog-ad--page-bottom" />
+      {/* AdSense unit hidden until Google starts filling ads */}
       <Footer />
     </>
   );
