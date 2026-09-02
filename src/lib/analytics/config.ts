@@ -49,7 +49,7 @@ export function analyticsStorageBackend(): AnalyticsStorageBackend {
 
 export function analyticsAdminSecret(): string | undefined {
   const secret = process.env.ANALYTICS_ADMIN_SECRET?.trim();
-  return secret && secret.length >= 16 ? secret : undefined;
+  return secret || undefined;
 }
 
 export const ANALYTICS_MAX_BODY_BYTES = 2048;

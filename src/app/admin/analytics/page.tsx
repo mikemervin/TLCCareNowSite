@@ -46,7 +46,7 @@ export default async function AdminAnalyticsPage({ searchParams }: PageProps) {
                 <p className="analytics-unlock-text">
                   Add{" "}
                   <code className="analytics-unlock-code">ANALYTICS_ADMIN_SECRET</code>{" "}
-                  (16+ characters) to your environment, then restart or redeploy.
+                  to your environment, then restart or redeploy.
                 </p>
               </div>
             </div>
