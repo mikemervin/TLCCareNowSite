@@ -741,11 +741,7 @@ export function AnalyticsDashboard({
           </form>
         </div>
         <div className="analytics-dashboard-hero-main">
-          <h1 className="analytics-dashboard-title">Site pulse</h1>
-          <span
-            className="tlc-accent-line analytics-dashboard-accent"
-            aria-hidden
-          />
+          <h1 className="analytics-dashboard-title">Analytics</h1>
           <p className="analytics-dashboard-lead">
             Who showed up today, what they clicked, and whether anyone reached
             out—plain English, newest first.

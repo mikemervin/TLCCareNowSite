@@ -12,10 +12,9 @@ export function AnalyticsUnlockForm() {
     <div className="analytics-unlock-wrap">
       <div className="analytics-unlock-card">
         <p className="analytics-unlock-eyebrow">Private</p>
-        <h1 className="analytics-unlock-title">Site analytics</h1>
-        <span className="tlc-accent-line analytics-unlock-accent" aria-hidden />
+        <h1 className="analytics-unlock-title">Analytics login</h1>
         <p className="analytics-unlock-text">
-          Enter your admin password to view site traffic and forms.
+          Sign in to view TLC CareNow website analytics.
         </p>
 
         {state.error ? (

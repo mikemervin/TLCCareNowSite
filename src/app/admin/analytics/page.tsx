@@ -39,10 +39,6 @@ export default async function AdminAnalyticsPage({ searchParams }: PageProps) {
             <div className="analytics-unlock-wrap">
               <div className="analytics-unlock-card">
                 <h1 className="analytics-unlock-title">Analytics not set up</h1>
-                <span
-                  className="tlc-accent-line analytics-unlock-accent"
-                  aria-hidden
-                />
                 <p className="analytics-unlock-text">
                   Add{" "}
                   <code className="analytics-unlock-code">ANALYTICS_ADMIN_SECRET</code>{" "}
